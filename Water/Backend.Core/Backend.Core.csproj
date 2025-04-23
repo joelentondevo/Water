@@ -42,10 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\BaseBO.cs" />
+    <Compile Include="BusinessObjects\StoreBO.cs" />
     <Compile Include="DatabaseObjects\BaseDO.cs" />
     <Compile Include="DatabaseObjects\StoreDO.cs" />
     <Compile Include="DatabaseObjects\SocialDO.cs" />
     <Compile Include="EntityObjects\BaseEO.cs" />
+    <Compile Include="EntityObjects\ProductEO.cs" />
+    <Compile Include="EntityObjects\ProductListingEO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
