@@ -14,7 +14,7 @@ namespace Backend.Core.DatabaseObjects
 
         internal BaseDO()
         {
-            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\joele\\Documents\\Water_Store.mdf;Integrated Security=True;Connect Timeout=30;";
+            connectionString = "###";
         }
 
         public DataSet RunSP_DS(string storedProcedure, params (string, object)[] parameters)
