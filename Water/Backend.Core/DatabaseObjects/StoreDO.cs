@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Backend.Core.DatabaseObjects
 {
@@ -13,7 +14,7 @@ namespace Backend.Core.DatabaseObjects
         internal List<ProductListingEO> GetStoreListings()
         {
             List<ProductListingEO> productList = new List<ProductListingEO>();
-            DataSet productRecords = RunSP_DS("p_GetMenu_f");
+            DataSet productRecords = RunSP_DS("p_GetAllStoreItems_f");
             foreach (DataRow row in productRecords.Tables[0].Rows)
             {
                 productList.Add(new ProductListingEO

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.EntityObjects
 {
-    internal class ProductEO
+    public class ProductEO
     {
         public ProductEO(int id, string name, int type)
         {

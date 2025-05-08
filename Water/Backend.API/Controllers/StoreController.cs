@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Backend.Core.EntityObjects;
+using Backend.Core.BusinessObjects;
 
 namespace Backend.API.Controllers
 {
@@ -8,9 +10,9 @@ namespace Backend.API.Controllers
     public class StoreController : ControllerBase
     {
         [HttpGet(Name = "GetGames")]
-        public String Get()
+        public List<ProductListingEO> GetAllProductListings()
         {
-            return ("Gametitle");
+            return new StoreBO().GetFullProductList();
         }
     }
 }

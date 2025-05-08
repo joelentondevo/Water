@@ -8,9 +8,9 @@ using Backend.Core.DatabaseObjects;
 
 namespace Backend.Core.BusinessObjects
 {
-    internal class StoreBO
+    public class StoreBO
     {
-        List<ProductListingEO> GetFullProductList()
+        public List<ProductListingEO> GetFullProductList()
         {
             List<ProductListingEO> productList = new StoreDO().GetStoreListings();
             return productList;

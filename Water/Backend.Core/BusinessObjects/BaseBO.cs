@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.BusinessObjects
 {
-    internal class BaseBO
+    public class BaseBO
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.EntityObjects
 {
-    internal class ProductListingEO
+    public class ProductListingEO
     {
         public int Id { get; set; }
         public ProductEO Product {  get; set; }
