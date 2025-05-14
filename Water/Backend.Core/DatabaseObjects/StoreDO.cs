@@ -1,4 +1,5 @@
 ﻿using Backend.Core.EntityObjects;
+using Backend.Core.DatabaseObjects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,25 +10,28 @@ using System.Data.SqlClient;
 
 namespace Backend.Core.DatabaseObjects
 {
-    internal class StoreDO : BaseDO
+    public class StoreDO : BaseDO, IStoreDO
     {
-        internal List<ProductListingEO> GetStoreListings()
+        public List<ProductListingEO> GetStoreListings()
         {
             List<ProductListingEO> productList = new List<ProductListingEO>();
             DataSet productRecords = RunSP_DS("p_GetAllStoreItems_f");
-            foreach (DataRow row in productRecords.Tables[0].Rows)
+
+            if (productRecords != null && productRecords.Tables.Count > 0 && productRecords.Tables[0].Rows.Count > 0)
             {
-                productList.Add(new ProductListingEO
+                foreach (DataRow row in productRecords.Tables[0].Rows)
                 {
-                    Id = (int)row["ID"],
-                    Product = new ProductEO((int)row["ProductID"],
-                                             null,
-                                             (int)0),
-                    Price = (decimal)row["Price"],
-                    StartTime = (DateTime)row["StartTime"],
-                    EndTime = (DateTime)row["EndTime"],
-                });
+                    productList.Add(new ProductListingEO
+                    {
+                        Id = row.Field<int>("ID"),
+                        Product = new ProductEO(row.Field<int>("ProductID"), null, 0),
+                        Price = row.Field<decimal>("Price"),
+                        StartTime = row.Field<DateTime>("StartTime"),
+                        EndTime = row.Field<DateTime>("EndTime"),
+                    });
+                }
             }
+
             return productList;
         }
     }

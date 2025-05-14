@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.DatabaseObjects
 {
-    internal class BaseDO
+    public class BaseDO
     {
         private readonly string connectionString;
 
