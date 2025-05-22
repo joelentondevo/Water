@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace Backend.Core.DatabaseObjects
 {
-    public class StoreDO : BaseDO, IStoreDO
+    internal class StoreDO : BaseDO, IStoreDO
     {
         public List<ProductListingEO> GetStoreListings()
         {

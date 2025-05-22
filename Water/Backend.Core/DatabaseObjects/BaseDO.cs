@@ -5,18 +5,20 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Backend.Core.ConfigurationObjects;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace Backend.Core.DatabaseObjects
 {
-    public class BaseDO
+    internal class BaseDO
     {
         private readonly string connectionString;
 
         internal BaseDO()
         {
-            connectionString = "###";
+            connectionString = new BackendCoreConfiguration().GetConfig().GetConnectionString("Backend");
         }
-
         public DataSet RunSP_DS(string storedProcedure, params (string, object)[] parameters)
         {
             ;

@@ -11,9 +11,13 @@ namespace Backend.Core.BusinessObjects
 {
     public class StoreBO 
     {
+        IDOFactory _doFactory;
         IStoreDO _storeDO;
 
-        public StoreBO(IStoreDO storeDO) => _storeDO = storeDO;
+        public StoreBO() {
+            _doFactory = new DOFactory();
+            _storeDO = _doFactory.CreateStoreDO();
+        }
         public List<ProductListingEO> GetFullProductList()
         {
             List<ProductListingEO> productList = _storeDO.GetStoreListings();
