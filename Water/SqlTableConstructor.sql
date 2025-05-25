@@ -11,3 +11,9 @@ CREATE TABLE ProductListing (
 	StartTime DateTime,
 	EndTime DateTime
 	)
+
+CREATE TABLE UserAuthentication (
+	ID int NOT NULL PRIMARY KEY,
+	Username varchar(50) NOT NULL,
+	Password varchar(50) NOT NULL
+)
