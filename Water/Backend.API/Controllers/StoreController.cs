@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Backend.Core;
 using Backend.Core.EntityObjects;
 using Backend.Core.BusinessObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
@@ -10,7 +11,7 @@ namespace Backend.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class StoreController : ControllerBase
+    public class StoreController : Controller
     {
 
         [HttpGet(Name = "GetGames")]

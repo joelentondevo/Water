@@ -9,9 +9,13 @@ namespace Backend.Core.DatabaseObjects
 {
     internal class DOFactory : IDOFactory
     {
-           public IStoreDO CreateStoreDO()
+        public IStoreDO CreateStoreDO()
         {
             return new StoreDO();
+        }
+        public ISecurityDO CreateSecurityDO()
+        {
+            return new SecurityDO();
         }
     }
  }

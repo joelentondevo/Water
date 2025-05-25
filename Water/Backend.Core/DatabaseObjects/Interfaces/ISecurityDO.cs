@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.DatabaseObjects.Interfaces
 {
-    public interface IDOFactory
+    public interface ISecurityDO
     {
-        IStoreDO CreateStoreDO();
-        ISecurityDO CreateSecurityDO();
     }
 }
