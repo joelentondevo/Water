@@ -15,7 +15,7 @@ namespace Backend.Core.DatabaseObjects
         {
 
 
-            return false;
+            return null;
         }
 
         public bool RegisterUser(string username, string password, string email)
