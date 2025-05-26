@@ -20,5 +20,22 @@ namespace Backend.Core.BusinessObjects
             _securityDO = _dOFactory.CreateSecurityDO();    
         }
 
+        public bool ValidateUser(string username, string password)
+        {
+            var user = _securityDO.FetchUser(username, password);
+            if (user == null)
+            {
+                return false; // User not found
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool AddUser(string username, string password)
+        {
+            return _securityDO.RegisterUser(username, password);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Core.EntityObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface ISecurityDO
     {
+        AuthenticationDetailsEO FetchUser(string username, string password);
+
+        bool RegisterUser(string username, string password);
+
+        bool ChangePassword(string username, string oldPassword, string newPassword);
     }
 }
