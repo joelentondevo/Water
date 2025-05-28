@@ -35,11 +35,11 @@ namespace Backend.Core.DatabaseObjects
             }
         }
 
-        public bool RegisterUser(string username, string password, string email)
+        public bool AddAuthenticationDetails(string username, string password)
         {
             return RUNSP_Bool("p_RegisterUser_f",
-                ("@username", username),
-                ("@password", password));
+                ("@Username", username),
+                ("@Password", password));
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)

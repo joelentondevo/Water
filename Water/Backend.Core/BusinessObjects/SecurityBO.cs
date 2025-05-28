@@ -33,9 +33,9 @@ namespace Backend.Core.BusinessObjects
             }
         }
 
-        public bool AddUser(string username, string password)
+        public bool AddAuthenticationDetails(string username, string password)
         {
-            return _securityDO.RegisterUser(username, password);
+            return _securityDO.AddAuthenticationDetails(username, password);
         }
     }
 }

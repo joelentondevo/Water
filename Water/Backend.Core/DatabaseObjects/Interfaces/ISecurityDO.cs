@@ -11,7 +11,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
     {
         AuthenticationDetailsEO FetchUser(string username, string password);
 
-        bool RegisterUser(string username, string password);
+        bool AddAuthenticationDetails(string username, string password);
 
         bool ChangePassword(string username, string oldPassword, string newPassword);
     }
