@@ -20,27 +20,37 @@ namespace Backend.Core.BusinessObjects
             _securityDO = _dOFactory.CreateSecurityDO();    
         }
 
-        public bool ValidateAuthenticationDetails(string username, string password)
+        public bool LoginAttempt(string inputUsername, string inputPassword)
         {
-            var user = _securityDO.FetchAuthenticationDetails(username);
-            // todo - add password authentication using BCrypt
-            if (user == null)
+            return ValidateAuthenticationDetails(inputUsername, inputPassword);
+            // logic for storing credentials in session/token can be added here
+        }
+
+        public bool ValidateAuthenticationDetails(string inputUsername, string inputPassword)
+        {
+            var retrievedAuthenticationDetails = _securityDO.FetchAuthenticationDetails(inputUsername);
+            if (retrievedAuthenticationDetails == null)
             {
                 return false; // User not found
             }
             else
             {
-                return true;
+                return BCrypt.Net.BCrypt.Verify(inputPassword, retrievedAuthenticationDetails.Password);
             }
         }
 
-        public bool AddAuthenticationDetails(string username, string password)
+        public bool AddAuthenticationDetails(string inputUsername, string inputPassword)
         {
-            if (_securityDO.FetchAuthenticationDetails(username) != null)
+            if (_securityDO.FetchAuthenticationDetails(inputUsername) != null)
             {
                 return false; // User already exists
             }
-            return _securityDO.AddAuthenticationDetails(username, password);
+            else
+            {
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(inputPassword, workFactor: 12);
+                return _securityDO.AddAuthenticationDetails(inputUsername, hashedPassword);
+            }
+            
         }
     }
 }
