@@ -11,11 +11,10 @@ namespace Backend.Core.DatabaseObjects
 {
     internal class SecurityDO : BaseDO, ISecurityDO
     {
-        public AuthenticationDetailsEO FetchUser(string username, string password)
+        public AuthenticationDetailsEO FetchAuthenticationDetails(string username)
         {
             DataSet dataSet = RunSP_DS("p_FetchAuthenticationDetails_f", 
-                ("@username", username), 
-                ("@password", password));
+                ("@username", username));
 
             if (dataSet.Tables.Count == 1 && dataSet.Tables[0].Rows.Count ==1)
             {
@@ -37,7 +36,7 @@ namespace Backend.Core.DatabaseObjects
 
         public bool AddAuthenticationDetails(string username, string password)
         {
-            return RUNSP_Bool("p_RegisterUser_f",
+            return RUNSP_Bool("p_AddAuthenticationDetails_f",
                 ("@Username", username),
                 ("@Password", password));
         }

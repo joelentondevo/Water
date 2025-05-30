@@ -9,7 +9,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface ISecurityDO
     {
-        AuthenticationDetailsEO FetchUser(string username, string password);
+        AuthenticationDetailsEO FetchAuthenticationDetails(string username);
 
         bool AddAuthenticationDetails(string username, string password);
 

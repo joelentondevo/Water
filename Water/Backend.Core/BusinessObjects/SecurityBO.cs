@@ -20,9 +20,10 @@ namespace Backend.Core.BusinessObjects
             _securityDO = _dOFactory.CreateSecurityDO();    
         }
 
-        public bool ValidateUser(string username, string password)
+        public bool ValidateAuthenticationDetails(string username, string password)
         {
-            var user = _securityDO.FetchUser(username, password);
+            var user = _securityDO.FetchAuthenticationDetails(username);
+            // todo - add password authentication using BCrypt
             if (user == null)
             {
                 return false; // User not found
@@ -35,6 +36,10 @@ namespace Backend.Core.BusinessObjects
 
         public bool AddAuthenticationDetails(string username, string password)
         {
+            if (_securityDO.FetchAuthenticationDetails(username) != null)
+            {
+                return false; // User already exists
+            }
             return _securityDO.AddAuthenticationDetails(username, password);
         }
     }

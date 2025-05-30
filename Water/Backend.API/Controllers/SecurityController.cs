@@ -11,7 +11,7 @@ namespace Backend.API.Controllers
             
             public IActionResult AuthenticationAttempt(AuthenticationDetailsModel authenticationDetailsModel)
         {
-            bool isValidAttempt = new SecurityBO().ValidateUser(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            bool isValidAttempt = new SecurityBO().ValidateAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (isValidAttempt)
             {
                 return Ok("Authentication successful");
@@ -22,7 +22,7 @@ namespace Backend.API.Controllers
             }
         }
         [HttpPost("RegisterUser")]
-        public IActionResult AddAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel) 
+        public IActionResult RegisterAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel) 
         { 
             bool AuthenticationDetailsAdded = new SecurityBO().AddAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticationDetailsAdded)

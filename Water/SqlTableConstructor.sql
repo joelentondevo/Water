@@ -22,21 +22,21 @@ CREATE TABLE UserAuthentication (
 
 -- STORED PROCEDURES
 
---CREATE PROCEDURE p_GetAllStoreItems_f
---
---AS
---	SELECT * from  ProductListing
---
---CREATE PROCEDURE p_RegisterUser_f
---		@Username varchar(50),
---		@Password varchar(50)
---AS
---
---	INSERT INTO UserAuthentication (Username, Password)
---	VALUES (@Username, @Password)
---CREATE PROCEDURE p_FetchAuthenticationDetails_f
---		@Username varchar(50),
---		@Password varchar(50)
---AS
---	SELECT * FROM UserAuthentication
---	WHERE Username = @Username AND Password = @Password
+CREATE PROCEDURE p_GetAllStoreItems_f
+
+AS
+	SELECT * from  ProductListing
+
+CREATE PROCEDURE p_RegisterUser_f
+		@Username varchar(50),
+		@Password varchar(50)
+AS
+
+	INSERT INTO UserAuthentication (Username, Password)
+	VALUES (@Username, @Password)
+CREATE PROCEDURE p_FetchAuthenticationDetails_f
+		@Username varchar(50),
+		@Password varchar(50)
+AS
+	SELECT * FROM UserAuthentication
+	WHERE Username = @Username AND Password = @Password
