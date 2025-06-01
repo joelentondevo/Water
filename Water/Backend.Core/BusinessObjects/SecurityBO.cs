@@ -6,24 +6,39 @@ using System.Threading.Tasks;
 using Backend.Core.DatabaseObjects.Interfaces;
 using BCrypt.Net;
 using Backend.Core.DatabaseObjects;
+using System.IdentityModel.Tokens.Jwt;
+using Backend.Core.Services;
+using Backend.Core.Services.Interfaces;
 
 namespace Backend.Core.BusinessObjects
 {
     public class SecurityBO
     {
         IDOFactory _dOFactory;
-        ISecurityDO _securityDO;    
+        ISecurityDO _securityDO;
+        IServicesFactory _servicesFactory;
+        IJWTService _jwtService;
 
         public SecurityBO()
         {
             _dOFactory = new DOFactory();
-            _securityDO = _dOFactory.CreateSecurityDO();    
+            _servicesFactory = new ServicesFactory();
+            _securityDO = _dOFactory.CreateSecurityDO();
+            _jwtService =  _servicesFactory.CreateJWTService();
         }
 
-        public bool LoginAttempt(string inputUsername, string inputPassword)
+        public string LoginAttempt(string inputUsername, string inputPassword)
         {
-            return ValidateAuthenticationDetails(inputUsername, inputPassword);
-            // logic for storing credentials in session/token can be added here
+            if (ValidateAuthenticationDetails(inputUsername, inputPassword))
+            {
+                JwtSecurityToken jwtToken = _jwtService.GenerateJwtToken(inputUsername);
+                string tokenString = _jwtService.SerializeJwtToken(jwtToken);
+                return tokenString;
+            }
+            else
+            {
+                return null; // Return null if authentication fails
+            };
         }
 
         public bool ValidateAuthenticationDetails(string inputUsername, string inputPassword)

@@ -11,8 +11,8 @@ namespace Backend.API.Controllers
             
             public IActionResult AuthenticationAttempt(AuthenticationDetailsModel authenticationDetailsModel)
         {
-            bool isValidAttempt = new SecurityBO().LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
-            if (isValidAttempt)
+            string AuthenticatedTokenString = new SecurityBO().LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            if (AuthenticatedTokenString != null)
             {
                 return Ok("Authentication successful");
             }
