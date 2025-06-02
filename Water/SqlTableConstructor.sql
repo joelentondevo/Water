@@ -6,6 +6,17 @@ CREATE TABLE Product (
 	ProductType int NOT NULL
 )
 
+CREATE TABLE UserRole (
+	ID int NOT NULL PRIMARY KEY,
+	UserID int NOT NULL,
+	RoleID int NOT NULL
+)
+
+CREATE TABLE Roles (
+	ID int NOT NULL PRIMARY KEY,
+	RoleName varchar(100) NOT NULL
+)
+
 CREATE TABLE ProductListing (
 	ID int NOT NULL PRIMARY KEY,
 	ProductID int NOT NULL,
@@ -18,6 +29,20 @@ CREATE TABLE UserAuthentication (
 	ID int NOT NULL PRIMARY KEY,
 	Username varchar(100) NOT NULL,
 	Password varchar(100) NOT NULL
+)
+
+CREATE TABLE Basket (
+	ID int NOT NULL PRIMARY KEY,
+	UserID int NOT NULL,
+	BasketType int NOT NULL,
+)
+
+CREATE TABLE BasketItem (
+	ID int NOT NULL PRIMARY KEY,
+	BasketID int NOT NULL,
+	ProductID int NOT NULL,
+	Quantity int NOT NULL,
+	DateAdded DateTime NOT NULL
 )
 
 -- STORED PROCEDURES
