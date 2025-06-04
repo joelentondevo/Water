@@ -130,6 +130,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\BaseBO.cs" />
+    <Compile Include="BusinessObjects\BasketBO.cs" />
+    <Compile Include="DatabaseObjects\BasketDO.cs" />
+    <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
+    <Compile Include="EntityObjects\ProductInstanceEO.cs" />
     <Compile Include="Services\Interfaces\IJWTService.cs" />
     <Compile Include="Services\Interfaces\IServicesFactory.cs" />
     <Compile Include="Services\JWTService.cs" />

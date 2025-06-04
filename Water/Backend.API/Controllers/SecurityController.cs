@@ -5,6 +5,8 @@ using Backend.API.Models;
 
 namespace Backend.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SecurityController : Controller
     {
         [HttpPost("AuthenticationAttempt")]

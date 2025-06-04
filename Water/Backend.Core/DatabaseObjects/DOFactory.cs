@@ -17,6 +17,10 @@ namespace Backend.Core.DatabaseObjects
         {
             return new SecurityDO();
         }
+        public IBasketDO CreateBasketDO()
+        {
+            return new BasketDO();
+        }
     }
  }
 
