@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Core.BusinessObjects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.API.Controllers
 {
@@ -8,6 +9,7 @@ namespace Backend.API.Controllers
     [ApiController]
     public class BasketController : Controller
     {
+        [Authorize]
         [HttpGet(Name = "GetBasket")]
         public IActionResult GetBasket()
         {
@@ -15,6 +17,7 @@ namespace Backend.API.Controllers
             // For now, we will return a placeholder response.
             return Ok("This is a placeholder for the user's basket.");
         }
+        [Authorize]
         [HttpPost("AddToBasket")]
         public IActionResult AddToBasket(int productId)
         {
@@ -22,6 +25,7 @@ namespace Backend.API.Controllers
             // For now, we will return a placeholder response.
             return Ok($"Product with ID {productId} added to the basket.");
         }
+        [Authorize]
         [HttpDelete("RemoveFromBasket")]
         public IActionResult RemoveFromBasket(int productId)
         {
