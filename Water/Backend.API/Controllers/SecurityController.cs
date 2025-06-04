@@ -16,7 +16,7 @@ namespace Backend.API.Controllers
             string AuthenticatedTokenString = new SecurityBO().LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticatedTokenString != null)
             {
-                return Ok("Authentication successful");
+                return Ok(AuthenticatedTokenString);
             }
             else
             {
