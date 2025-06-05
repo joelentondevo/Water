@@ -2,6 +2,8 @@
 using Backend.Core.EntityObjects;
 using Microsoft.AspNetCore.Mvc;
 using Backend.API.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Backend.API.Controllers
 {
@@ -35,6 +37,13 @@ namespace Backend.API.Controllers
             {
                 return BadRequest("User registration failed");
             }
+        }
+        [Authorize]
+        [HttpGet("protected")]
+        public IActionResult GetProtectedData()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return Ok(new { Message = "Access granted!", UserId = userId });
         }
     }
 }

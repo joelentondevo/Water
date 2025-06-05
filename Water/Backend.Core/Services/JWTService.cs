@@ -25,7 +25,7 @@ namespace Backend.Core.Services
 
             return new JwtSecurityToken(
                 issuer: "Water",
-                audience: "WaterUser",
+                audience: "User",
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(60),
                 signingCredentials: credentials);
