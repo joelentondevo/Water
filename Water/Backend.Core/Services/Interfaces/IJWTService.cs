@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Backend.Core.EntityObjects;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +12,7 @@ namespace Backend.Core.Services.Interfaces
 {
     public interface IJWTService
     {
-        JwtSecurityToken GenerateJwtToken(string inputUsername);
+        JwtSecurityToken GenerateJwtToken(AuthenticationDetailsEO authenticationDetails);
 
         string SerializeJwtToken(JwtSecurityToken token);
 

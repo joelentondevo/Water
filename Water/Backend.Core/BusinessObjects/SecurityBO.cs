@@ -31,7 +31,7 @@ namespace Backend.Core.BusinessObjects
         {
             if (ValidateAuthenticationDetails(inputUsername, inputPassword))
             {
-                JwtSecurityToken jwtToken = _jwtService.GenerateJwtToken(inputUsername);
+                JwtSecurityToken jwtToken = _jwtService.GenerateJwtToken(_securityDO.FetchAuthenticationDetails(inputUsername));
                 string tokenString = _jwtService.SerializeJwtToken(jwtToken);
                 return tokenString;
             }

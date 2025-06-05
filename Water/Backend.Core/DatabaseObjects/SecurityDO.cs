@@ -19,7 +19,7 @@ namespace Backend.Core.DatabaseObjects
             if (dataSet.Tables.Count == 1 && dataSet.Tables[0].Rows.Count ==1)
             {
                 // Assuming the first row contains the user details
-                AuthenticationDetailsEO authenticationDetails = new AuthenticationDetailsEO(dataSet.Tables[0].Rows[0]["Username"].ToString(), dataSet.Tables[0].Rows[0]["Password"].ToString());
+                AuthenticationDetailsEO authenticationDetails = new AuthenticationDetailsEO((int)dataSet.Tables[0].Rows[0]["ID"], dataSet.Tables[0].Rows[0]["Username"].ToString(), dataSet.Tables[0].Rows[0]["Password"].ToString());
                 return authenticationDetails;
             }
             else if (dataSet.Tables.Count == 0 || dataSet.Tables[0].Rows.Count == 0)
