@@ -1,24 +1,24 @@
 ﻿-- TABLES
 
 CREATE TABLE Product (
-	ID int NOT NULL PRIMARY KEY,
+	ID int NOT NULL IDENTITY PRIMARY KEY,
 	ProductName varchar(100) NOT NULL,
 	ProductType int NOT NULL
 )
 
 CREATE TABLE UserRole (
-	ID int NOT NULL PRIMARY KEY,
+	ID int NOT NULL IDENTITY PRIMARY KEY,
 	UserID int NOT NULL,
 	RoleID int NOT NULL
 )
 
 CREATE TABLE Roles (
-	ID int NOT NULL PRIMARY KEY,
+	ID int NOT NULL IDENTITY PRIMARY KEY,
 	RoleName varchar(100) NOT NULL
 )
 
 CREATE TABLE ProductListing (
-	ID int NOT NULL PRIMARY KEY,
+	ID int NOT NULL IDENTITY PRIMARY KEY,
 	ProductID int NOT NULL,
 	Price Decimal NOT NULL,
 	StartTime DateTime,
@@ -26,19 +26,19 @@ CREATE TABLE ProductListing (
 	)
 
 CREATE TABLE UserAuthentication (
-	ID int NOT NULL PRIMARY KEY,
+	ID int NOT NULL IDENTITY PRIMARY KEY,
 	Username varchar(100) NOT NULL,
 	Password varchar(100) NOT NULL
 )
 
 CREATE TABLE Basket (
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY NOT NULL PRIMARY KEY,
 	UserID int NOT NULL,
 	BasketType int NOT NULL,
 )
 
 CREATE TABLE BasketItem (
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY NOT NULL PRIMARY KEY,
 	BasketID int NOT NULL,
 	ProductID int NOT NULL,
 	Quantity int NOT NULL,
