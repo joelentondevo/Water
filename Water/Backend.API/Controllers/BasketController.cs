@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Backend.Core.BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Backend.API.Controllers
 {
@@ -32,6 +33,22 @@ namespace Backend.API.Controllers
             // This method should remove a product from the user's basket.
             // For now, we will return a placeholder response.
             return Ok($"Product with ID {productId} removed from the basket.");
+        }
+        [Authorize]
+        [HttpPost("GenerateUserBasket")]
+        public IActionResult GenerateUserBasket()
+        {
+            var basketBO = new BasketBO();
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            if (userId != null)
+            {
+                basketBO.GenerateUserBasket(userId);
+                return Ok("User basket generated successfully.");
+            }
+            else
+            {
+                return BadRequest("User ID not found in the token.");
+            }
         }
     }
 }

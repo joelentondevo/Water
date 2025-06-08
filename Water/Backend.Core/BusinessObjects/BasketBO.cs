@@ -34,6 +34,11 @@ namespace Backend.Core.BusinessObjects
         {
         }
 
+        public void GenerateUserBasket(int userID)
+        {
+            _basketDO.GenerateUserBasket(userID);
+        }
+
 
 
     }

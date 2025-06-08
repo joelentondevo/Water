@@ -7,8 +7,11 @@ using Backend.Core.DatabaseObjects.Interfaces;
 
 namespace Backend.Core.DatabaseObjects
 {
-    internal class BasketDO : IBasketDO
+    internal class BasketDO : BaseDO, IBasketDO
     {
-
+        public bool GenerateUserBasket(int userID)
+        {
+            return RUNSP_Bool("p_GenerateUserBasket_f", ("@UserID", userID));
+        }
     }
 }

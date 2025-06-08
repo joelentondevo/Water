@@ -64,3 +64,18 @@ CREATE PROCEDURE p_FetchAuthenticationDetails_f
 AS
 	SELECT * FROM UserAuthentication
 	WHERE Username = @Username
+
+ALTER PROCEDURE p_GenerateUserBasket_f
+    @UserID INT
+AS
+BEGIN
+    -- Check if a basket already exists
+    IF NOT EXISTS (
+        SELECT 1 FROM Basket WHERE UserID = @UserID
+    )
+    BEGIN
+        -- Insert new basket only if none exists
+        INSERT INTO Basket (UserID, BasketType)
+        VALUES (@UserID, 1); -- Assuming 1 is the default basket type
+    END
+END;
