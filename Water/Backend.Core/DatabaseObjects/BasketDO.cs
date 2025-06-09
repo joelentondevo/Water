@@ -13,5 +13,23 @@ namespace Backend.Core.DatabaseObjects
         {
             return RUNSP_Bool("p_GenerateUserBasket_f", ("@UserID", userID));
         }
+
+        public bool AddProductToBasket(int userID, int productID, int quantity)
+        {
+            return RUNSP_Bool("p_AddProductToBasket_f",
+                ("@UserID", userID),
+                ("@ProductID", productID),
+                ("@Quantity", quantity));
+        }
+        public bool RemoveProductFromBasket(int userID, int productID)
+        {
+            return RUNSP_Bool("p_RemoveProductFromBasket_f",
+                ("@UserID", userID),
+                ("@ProductID", productID));
+        }
+        public bool ClearUserBasket(int userID)
+        {
+            return RUNSP_Bool("p_ClearUserBasket_f", ("@UserID", userID));
+        }
     }
 }

@@ -19,25 +19,32 @@ namespace Backend.Core.BusinessObjects
             _dOFactory = new DOFactory();
             _basketDO = _dOFactory.CreateBasketDO();
         }
-
-        public void AddItemToBasket(int itemId, int quantity)
-        {
-        }
-        public void RemoveItemFromBasket(int itemId)
-        {
-        }
-        public List<ProductInstanceEO> GetBasketItems()
-        {
-            return new List<ProductInstanceEO>();
-        }
-        public void ClearBasket()
-        {
-        }
-
         public void GenerateUserBasket(int userID)
         {
             _basketDO.GenerateUserBasket(userID);
         }
+
+        public bool AddProductToBasket(int userId, int itemId, int quantity)
+        {
+            return _basketDO.AddProductToBasket(userId, itemId, quantity);
+        }
+
+        public bool RemoveItemFromBasket(int userId, int itemId)
+        {
+            return _basketDO.RemoveProductFromBasket(userId, itemId);
+        }
+
+        public bool ClearUserBasket(int userId)
+        {
+            return _basketDO.ClearUserBasket(userId);
+        }
+
+        public List<ProductInstanceEO> GetBasketItems()
+        {
+            return new List<ProductInstanceEO>();
+        }
+
+
 
 
 

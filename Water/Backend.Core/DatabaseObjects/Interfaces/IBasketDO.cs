@@ -9,5 +9,9 @@ namespace Backend.Core.DatabaseObjects.Interfaces
     public interface IBasketDO
     {
         bool GenerateUserBasket(int UserID);
+
+        bool AddProductToBasket(int UserID, int ProductID, int Quantity);
+        bool RemoveProductFromBasket(int UserID, int ProductID);
+        bool ClearUserBasket(int UserID);
     }
 }

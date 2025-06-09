@@ -65,7 +65,7 @@ AS
 	SELECT * FROM UserAuthentication
 	WHERE Username = @Username
 
-ALTER PROCEDURE p_GenerateUserBasket_f
+CREATE PROCEDURE p_GenerateUserBasket_f
     @UserID INT
 AS
 BEGIN
@@ -79,3 +79,51 @@ BEGIN
         VALUES (@UserID, 1); -- Assuming 1 is the default basket type
     END
 END;
+
+CREATE PROCEDURE p_AddItemToBasket_f
+	@UserID INT,
+	@ProductID INT,
+	@Quantity INT
+	AS
+	INSERT INTO BasketItem (BasketID, ProductID, Quantity, DateAdded)
+	VALUES (
+		(SELECT ID FROM Basket WHERE UserID = @UserID),
+		@ProductID,
+		@Quantity,
+		GETDATE()
+	);
+
+CREATE PROCEDURE p_RemoveItemFromBasket_f
+    @UserID INT,
+    @ProductID INT
+AS
+BEGIN
+    DECLARE @CurrentQuantity INT;
+    
+    SELECT @CurrentQuantity = Quantity
+    FROM BasketItem
+    WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
+    AND ProductID = @ProductID;
+
+    IF @CurrentQuantity = 1
+    BEGIN
+        DELETE FROM BasketItem
+        WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
+        AND ProductID = @ProductID;
+    END
+    ELSE
+    BEGIN
+        UPDATE BasketItem
+        SET Quantity = Quantity - 1
+        WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
+        AND ProductID = @ProductID;
+    END
+END;
+
+CREATE PROCEDURE p_ClearBasket_f
+	@UserID INT
+AS
+    BEGIN
+        DELETE FROM BasketItem
+        WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
+    END
