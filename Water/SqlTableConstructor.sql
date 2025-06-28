@@ -81,17 +81,27 @@ BEGIN
 END;
 
 CREATE PROCEDURE p_AddItemToBasket_f
-	@UserID INT,
-	@ProductID INT,
-	@Quantity INT
+	@UserID int,
+	@ProductID int,
+	@Quantity int
 	AS
-	INSERT INTO BasketItem (BasketID, ProductID, Quantity, DateAdded)
-	VALUES (
-		(SELECT ID FROM Basket WHERE UserID = @UserID),
-		@ProductID,
-		@Quantity,
-		GETDATE()
-	);
+	BEGIN
+	Declare @BasketID int;
+
+	SELECT @BasketID = ID FROM Basket WHERE UserID = @UserID;
+
+	IF EXISTS (Select 1 From BasketItem Where BasketID = @BasketID And ProductID = @ProductID)
+	BEGIN
+		UPDATE BasketItem
+		SET Quantity = Quantity + @Quantity
+		WHERE BasketID = @BasketID AND ProductID = @ProductID;
+	END
+	ELSE
+	BEGIN
+		INSERT INTO BasketItem (BasketID, ProductID, Quantity, DateAdded)
+		VALUES (@BasketID, @ProductID, @Quantity, GETDATE());
+	END
+	END;
 
 CREATE PROCEDURE p_RemoveItemFromBasket_f
     @UserID INT,
@@ -127,3 +137,25 @@ AS
         DELETE FROM BasketItem
         WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
     END
+
+CREATE PROCEDURE p_GetStoreItem_f
+	@ProductID int
+	AS
+	SELECT * FROM ProductListing
+	WHERE ProductID = @ProductID;
+
+CREATE PROCEDURE p_GetBasketItems_f
+	@UserID int
+AS
+BEGIN
+	DECLARE @BasketID INT;
+	SELECT @BasketID = ID FROM Basket WHERE UserID = @UserID;
+	SELECT * FROM BasketItem
+	WHERE BasketID = @BasketID;
+END;
+
+CREATE PROCEDURE p_GetProduct_f
+	@ProductID int
+	AS
+	SELECT * FROM Product
+	WHERE ID = @ProductID;

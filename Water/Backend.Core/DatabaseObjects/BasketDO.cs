@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.EntityObjects;
 
 namespace Backend.Core.DatabaseObjects
 {
@@ -16,20 +18,32 @@ namespace Backend.Core.DatabaseObjects
 
         public bool AddProductToBasket(int userID, int productID, int quantity)
         {
-            return RUNSP_Bool("p_AddProductToBasket_f",
+            return RUNSP_Bool("p_AddItemToBasket_f",
                 ("@UserID", userID),
                 ("@ProductID", productID),
                 ("@Quantity", quantity));
         }
         public bool RemoveProductFromBasket(int userID, int productID)
         {
-            return RUNSP_Bool("p_RemoveProductFromBasket_f",
+            return RUNSP_Bool("p_RemoveItemFromBasket_f",
                 ("@UserID", userID),
                 ("@ProductID", productID));
         }
         public bool ClearUserBasket(int userID)
         {
             return RUNSP_Bool("p_ClearUserBasket_f", ("@UserID", userID));
+        }
+        public List<EntityObjects.BasketEntryEO> GetBasketItems(int userID)
+        {
+            DataSet ds = RunSP_DS("p_GetBasketItems_f", ("@UserID", userID));
+            List<EntityObjects.BasketEntryEO> items = new List<EntityObjects.BasketEntryEO>();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                    items.Add(new BasketEntryEO
+                        (row.Field<int>("ProductID"),row.Field<int>("Quantity")));
+            }
+            return items;
         }
     }
 }

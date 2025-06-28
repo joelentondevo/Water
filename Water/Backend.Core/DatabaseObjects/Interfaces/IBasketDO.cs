@@ -13,5 +13,6 @@ namespace Backend.Core.DatabaseObjects.Interfaces
         bool AddProductToBasket(int UserID, int ProductID, int Quantity);
         bool RemoveProductFromBasket(int UserID, int ProductID);
         bool ClearUserBasket(int UserID);
+        List<EntityObjects.BasketEntryEO> GetBasketItems(int UserID);
     }
 }

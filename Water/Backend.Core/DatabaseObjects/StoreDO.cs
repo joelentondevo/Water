@@ -24,7 +24,7 @@ namespace Backend.Core.DatabaseObjects
                     productList.Add(new ProductListingEO
                     {
                         Id = row.Field<int>("ID"),
-                        Product = new ProductEO(row.Field<int>("ProductID"), null, 0),
+                        Product = GetProduct(row.Field<int>("ProductID")),
                         Price = row.Field<decimal>("Price"),
                         StartTime = row.Field<DateTime>("StartTime"),
                         EndTime = row.Field<DateTime>("EndTime"),
@@ -33,6 +33,37 @@ namespace Backend.Core.DatabaseObjects
             }
 
             return productList;
+        }
+
+        public ProductListingEO GetProductListing(int productId)
+        {
+            ProductListingEO productListing = null;
+            DataSet productRecords = RunSP_DS("p_GetStoreItem_f", ("@productId", productId));
+            if (productRecords != null && productRecords.Tables.Count > 0 && productRecords.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = productRecords.Tables[0].Rows[0];
+                productListing = new ProductListingEO
+                {
+                    Id = row.Field<int>("ID"),
+                    Product = GetProduct(productId),
+                    Price = row.Field<decimal>("Price"),
+                    StartTime = row.Field<DateTime>("StartTime"),
+                    EndTime = row.Field<DateTime>("EndTime"),
+                };
+            }
+            return productListing;
+        }
+
+        public ProductEO GetProduct(int productID)
+        {
+            ProductEO product = null;
+            DataSet productRecord = RunSP_DS("p_GetProduct_f", ("@ProductID", productID));
+            if (productRecord != null && productRecord.Tables.Count > 0 && productRecord.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = productRecord.Tables[0].Rows[0];
+                product = new ProductEO(row.Field<int>("ID"), row.Field<string>("ProductName"), row.Field<int>("ProductType"));
+            }
+            return product;
         }
     }
 }

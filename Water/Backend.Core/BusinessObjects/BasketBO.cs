@@ -39,14 +39,23 @@ namespace Backend.Core.BusinessObjects
             return _basketDO.ClearUserBasket(userId);
         }
 
-        public List<ProductInstanceEO> GetBasketItems()
+        public List<BasketItemEO> GetBasketItems(int userId)
         {
-            return new List<ProductInstanceEO>();
+            List<BasketEntryEO> basketList = _basketDO.GetBasketItems(userId);
+            List<BasketItemEO> list = new List<BasketItemEO>();
+            StoreBO storeBO = new StoreBO();
+            foreach (var item in basketList)
+            {
+                ProductListingEO productListing = storeBO.GetProductListing(item.ProductID);
+                if (productListing == null)
+                {
+                    continue; // Skip if product listing is not found
+                } else
+                {
+                    list.Add(new BasketItemEO(productListing, item.Quantity));
+                }
+            }
+            return list;
         }
-
-
-
-
-
     }
 }

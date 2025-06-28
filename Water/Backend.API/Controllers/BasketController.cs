@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Core.BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Backend.Core.EntityObjects;
 
 namespace Backend.API.Controllers
 {
@@ -12,27 +13,41 @@ namespace Backend.API.Controllers
     {
         [Authorize]
         [HttpGet(Name = "GetBasket")]
-        public IActionResult GetBasket()
+        public List<BasketItemEO> GetBasket()
         {
-            // This method should return the current user's basket.
-            // For now, we will return a placeholder response.
-            return Ok("This is a placeholder for the user's basket.");
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var response = new BasketBO().GetBasketItems(int.Parse(userId));
+            return response;
         }
         [Authorize]
         [HttpPost("AddToBasket")]
-        public IActionResult AddToBasket(int productId)
+        public IActionResult AddToBasket(int productId, int quantity)
         {
-            // This method should add a product to the user's basket.
-            // For now, we will return a placeholder response.
-            return Ok($"Product with ID {productId} added to the basket.");
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var success = new BasketBO().AddProductToBasket(int.Parse(userId), productId, quantity);
+            if (success)
+            {
+                return Ok($"Product with ID {productId} added to the basket with quantity {quantity}.");
+            }
+            else
+            {
+                return BadRequest("Failed to add product to the basket.");
+            }
         }
         [Authorize]
         [HttpDelete("RemoveFromBasket")]
         public IActionResult RemoveFromBasket(int productId)
         {
-            // This method should remove a product from the user's basket.
-            // For now, we will return a placeholder response.
-            return Ok($"Product with ID {productId} removed from the basket.");
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var success = new BasketBO().RemoveItemFromBasket(int.Parse(userId), productId);
+            if (success)
+            {
+                return Ok($"Product with ID {productId} removed from the basket.");
+            }
+            else
+            {
+                return BadRequest("Failed to remove product from the basket.");
+            }
         }
         [Authorize]
         [HttpPost("GenerateUserBasket")]

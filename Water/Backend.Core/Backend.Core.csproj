@@ -133,6 +133,8 @@
     <Compile Include="BusinessObjects\BasketBO.cs" />
     <Compile Include="DatabaseObjects\BasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
+    <Compile Include="EntityObjects\BasketEntryEO.cs" />
+    <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />
     <Compile Include="Services\Interfaces\IJWTService.cs" />
     <Compile Include="Services\Interfaces\IServicesFactory.cs" />

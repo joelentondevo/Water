@@ -23,5 +23,9 @@ namespace Backend.Core.BusinessObjects
             List<ProductListingEO> productList = _storeDO.GetStoreListings();
             return productList;
         }
+        public ProductListingEO GetProductListing(int productId)
+        {  
+            return _storeDO.GetProductListing(productId);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace Backend.Core.DatabaseObjects.Interfaces
     public interface IStoreDO
     {
         List<ProductListingEO> GetStoreListings();
+        ProductListingEO GetProductListing(int productId);
     }
 }
