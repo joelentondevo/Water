@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Backend.Core.EntityObjects;
 using Backend.Core.DatabaseObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.Core.BusinessObjects
 {
-    public class StoreBO 
+    public class StoreBO : IStoreBO
     {
         IDOFactory _doFactory;
         IStoreDO _storeDO;

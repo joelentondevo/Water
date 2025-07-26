@@ -6,6 +6,8 @@ using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.DatabaseObjects;
 using Backend.Core.Services.Interfaces;
 using Backend.Core.Services;
+using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.BusinessObjects;
 
 
 
@@ -61,6 +63,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDOFactory, DOFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
+builder.Services.AddScoped<ISecurityBO, SecurityBO>();
+builder.Services.AddScoped<IBasketBO,  BasketBO>();
+builder.Services.AddScoped<IStoreBO, StoreBO>();
+
 
 
 var app = builder.Build();

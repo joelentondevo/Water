@@ -5,6 +5,7 @@ using Backend.Core.EntityObjects;
 using Backend.Core.BusinessObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.DatabaseObjects;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -13,10 +14,10 @@ namespace Backend.API.Controllers
     [ApiController]
     public class StoreController : Controller
     {
-        private readonly StoreBO _storeBO;
-        public StoreController(IDOFactory dOFactory)
+        private readonly IStoreBO _storeBO;
+        public StoreController(IStoreBO storeBO)
         {
-            _storeBO = new StoreBO(dOFactory);
+            _storeBO = storeBO;
         }
 
         [HttpGet(Name = "GetGames")]

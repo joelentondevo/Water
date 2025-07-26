@@ -8,6 +8,7 @@ using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.DatabaseObjects;
 using Backend.Core.Services;
 using Backend.Core.Services.Interfaces;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -15,10 +16,10 @@ namespace Backend.API.Controllers
     [ApiController]
     public class SecurityController : Controller
     {
-        private readonly SecurityBO _securityBO;
-        public SecurityController(IDOFactory dOFactory, IServicesFactory servicesFactory)
+        private readonly ISecurityBO _securityBO;
+        public SecurityController(ISecurityBO securityBO)
         {
-            _securityBO = new SecurityBO(dOFactory, servicesFactory);
+            _securityBO = securityBO;
         }
 
 

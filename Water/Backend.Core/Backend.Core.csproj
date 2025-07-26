@@ -131,6 +131,9 @@
   <ItemGroup>
     <Compile Include="BusinessObjects\BaseBO.cs" />
     <Compile Include="BusinessObjects\BasketBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\IBasketBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\ISecurityBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\IStoreBO.cs" />
     <Compile Include="DatabaseObjects\BasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
@@ -157,9 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServicesFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusinessObjects\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="AppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

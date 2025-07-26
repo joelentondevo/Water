@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Backend.Core.EntityObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -12,11 +13,11 @@ namespace Backend.API.Controllers
     [ApiController]
     public class BasketController : Controller
     {
-        private readonly BasketBO _basketBO;
+        private readonly IBasketBO _basketBO;
 
-        public BasketController(IDOFactory dOFactory)
+        public BasketController(IBasketBO basketBO)
         {
-            _basketBO = new BasketBO(dOFactory);
+            _basketBO = basketBO;
         }
 
         [Authorize]

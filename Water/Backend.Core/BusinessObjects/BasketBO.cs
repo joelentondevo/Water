@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.EntityObjects;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.Core.BusinessObjects
 {
-    public class BasketBO
+    public class BasketBO : IBasketBO
     {
         IDOFactory _dOFactory;
         IBasketDO _basketDO;

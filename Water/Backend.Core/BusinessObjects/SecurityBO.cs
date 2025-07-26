@@ -9,10 +9,11 @@ using Backend.Core.DatabaseObjects;
 using System.IdentityModel.Tokens.Jwt;
 using Backend.Core.Services;
 using Backend.Core.Services.Interfaces;
+using Backend.Core.BusinessObjects.Interfaces;
 
 namespace Backend.Core.BusinessObjects
 {
-    public class SecurityBO
+    public class SecurityBO : ISecurityBO 
     {
         IDOFactory _dOFactory;
         ISecurityDO _securityDO;
