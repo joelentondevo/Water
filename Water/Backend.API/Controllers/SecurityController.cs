@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.DatabaseObjects;
+using Backend.Core.Services;
+using Backend.Core.Services.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -11,11 +15,18 @@ namespace Backend.API.Controllers
     [ApiController]
     public class SecurityController : Controller
     {
+        private readonly SecurityBO _securityBO;
+        public SecurityController(IDOFactory dOFactory, IServicesFactory servicesFactory)
+        {
+            _securityBO = new SecurityBO(dOFactory, servicesFactory);
+        }
+
+
         [HttpPost("AuthenticationAttempt")]
             
             public IActionResult AuthenticationAttempt(AuthenticationDetailsModel authenticationDetailsModel)
         {
-            string AuthenticatedTokenString = new SecurityBO().LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            string AuthenticatedTokenString = _securityBO.LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticatedTokenString != null)
             {
                 return Ok(AuthenticatedTokenString);
@@ -28,7 +39,7 @@ namespace Backend.API.Controllers
         [HttpPost("RegisterUser")]
         public IActionResult RegisterAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel) 
         { 
-            bool AuthenticationDetailsAdded = new SecurityBO().AddAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            bool AuthenticationDetailsAdded = _securityBO.AddAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticationDetailsAdded)
             {
                 return Ok("User registered successfully");

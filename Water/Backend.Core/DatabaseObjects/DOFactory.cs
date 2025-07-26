@@ -7,7 +7,7 @@ using Backend.Core.DatabaseObjects.Interfaces;
 
 namespace Backend.Core.DatabaseObjects
 {
-    internal class DOFactory : IDOFactory
+    public class DOFactory : IDOFactory
     {
         public IStoreDO CreateStoreDO()
         {

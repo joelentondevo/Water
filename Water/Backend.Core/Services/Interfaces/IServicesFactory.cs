@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Core.Services.Interfaces
 {
-    internal interface IServicesFactory
+    public interface IServicesFactory
     {
         IJWTService CreateJWTService();
     }

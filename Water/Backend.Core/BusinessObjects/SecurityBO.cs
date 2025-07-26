@@ -19,10 +19,10 @@ namespace Backend.Core.BusinessObjects
         IServicesFactory _servicesFactory;
         IJWTService _jwtService;
 
-        public SecurityBO()
+        public SecurityBO(IDOFactory dOFactory, IServicesFactory servicesFactory)
         {
-            _dOFactory = new DOFactory();
-            _servicesFactory = new ServicesFactory();
+            _dOFactory = dOFactory;
+            _servicesFactory = servicesFactory;
             _securityDO = _dOFactory.CreateSecurityDO();
             _jwtService =  _servicesFactory.CreateJWTService();
         }

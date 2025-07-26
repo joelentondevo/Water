@@ -7,7 +7,7 @@ using Backend.Core.Services.Interfaces;
 
 namespace Backend.Core.Services
 {
-    internal class ServicesFactory : IServicesFactory
+    public class ServicesFactory : IServicesFactory
     {
         public IJWTService CreateJWTService()
         {
