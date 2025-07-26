@@ -4,6 +4,7 @@ using Backend.Core.BusinessObjects;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Backend.Core.EntityObjects;
+using Backend.Core.DatabaseObjects.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -11,12 +12,19 @@ namespace Backend.API.Controllers
     [ApiController]
     public class BasketController : Controller
     {
+        private readonly BasketBO _basketBO;
+
+        public BasketController(IDOFactory dOFactory)
+        {
+            _basketBO = new BasketBO(dOFactory);
+        }
+
         [Authorize]
         [HttpGet(Name = "GetBasket")]
         public List<BasketItemEO> GetBasket()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var response = new BasketBO().GetBasketItems(int.Parse(userId));
+            var response = _basketBO.GetBasketItems(int.Parse(userId));
             return response;
         }
         [Authorize]
@@ -24,7 +32,7 @@ namespace Backend.API.Controllers
         public IActionResult AddToBasket(int productId, int quantity)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var success = new BasketBO().AddProductToBasket(int.Parse(userId), productId, quantity);
+            var success = _basketBO.AddProductToBasket(int.Parse(userId), productId, quantity);
             if (success)
             {
                 return Ok($"Product with ID {productId} added to the basket with quantity {quantity}.");
@@ -39,7 +47,7 @@ namespace Backend.API.Controllers
         public IActionResult RemoveFromBasket(int productId)
         {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                var success = new BasketBO().RemoveItemFromBasket(int.Parse(userId), productId);
+                var success = _basketBO.RemoveItemFromBasket(int.Parse(userId), productId);
             if (success)
             {
                 return Ok($"Product with ID {productId} removed from the basket.");
@@ -53,11 +61,10 @@ namespace Backend.API.Controllers
         [HttpPost("GenerateUserBasket")]
         public IActionResult GenerateUserBasket()
         {
-            var basketBO = new BasketBO();
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             if (userId != null)
             {
-                basketBO.GenerateUserBasket(userId);
+                _basketBO.GenerateUserBasket(userId);
                 return Ok("User basket generated successfully.");
             }
             else

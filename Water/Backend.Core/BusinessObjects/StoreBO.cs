@@ -14,8 +14,8 @@ namespace Backend.Core.BusinessObjects
         IDOFactory _doFactory;
         IStoreDO _storeDO;
 
-        public StoreBO() {
-            _doFactory = new DOFactory();
+        public StoreBO(IDOFactory dOFactory) {
+            _doFactory = dOFactory;
             _storeDO = _doFactory.CreateStoreDO();
         }
         public List<ProductListingEO> GetFullProductList()

@@ -14,9 +14,9 @@ namespace Backend.Core.BusinessObjects
         IDOFactory _dOFactory;
         IBasketDO _basketDO;
 
-        public BasketBO()
+        public BasketBO(IDOFactory dOFactory)
         {
-            _dOFactory = new DOFactory();
+            _dOFactory = dOFactory;
             _basketDO = _dOFactory.CreateBasketDO();
         }
         public void GenerateUserBasket(int userID)
@@ -43,7 +43,7 @@ namespace Backend.Core.BusinessObjects
         {
             List<BasketEntryEO> basketList = _basketDO.GetBasketItems(userId);
             List<BasketItemEO> list = new List<BasketItemEO>();
-            StoreBO storeBO = new StoreBO();
+            StoreBO storeBO = new StoreBO(_dOFactory);
             foreach (var item in basketList)
             {
                 ProductListingEO productListing = storeBO.GetProductListing(item.ProductID);

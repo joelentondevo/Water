@@ -13,11 +13,16 @@ namespace Backend.API.Controllers
     [ApiController]
     public class StoreController : Controller
     {
+        private readonly StoreBO _storeBO;
+        public StoreController(IDOFactory dOFactory)
+        {
+            _storeBO = new StoreBO(dOFactory);
+        }
 
         [HttpGet(Name = "GetGames")]
         public List<ProductListingEO> GetAllProductListings()
         {
-            return new StoreBO().GetFullProductList();
+            return _storeBO.GetFullProductList();
         }
     }
 }
