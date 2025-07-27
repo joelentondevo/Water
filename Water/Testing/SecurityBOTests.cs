@@ -99,5 +99,36 @@ namespace Testing
             // Assert
             Assert.AreEqual(result, null);
         }
+
+        [Test]
+        public void AddAuthenticationDetails_UserDoesNotExist()
+        {
+            // Arrange
+            string username = "newuser";
+            string password = "newpassword";
+            _mockSecurityDO.Setup(s => s.FetchAuthenticationDetails(username))
+                           .Returns((AuthenticationDetailsEO)null);
+            _mockSecurityDO.Setup(s => s.AddAuthenticationDetails(username, It.IsAny<string>()))
+                           .Returns(true);
+            // Act
+            bool result = _securityBO.AddAuthenticationDetails(username, password);
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void AddAuthenticationDetails_UserAlreadyExists()
+        {
+            // Arrange
+            string username = "existinguser";
+            string password = "password";
+            AuthenticationDetailsEO existingUser = new AuthenticationDetailsEO(1, username, BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12));
+            _mockSecurityDO.Setup(s => s.FetchAuthenticationDetails(username))
+                           .Returns(existingUser);
+            // Act
+            bool result = _securityBO.AddAuthenticationDetails(username, password);
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }
