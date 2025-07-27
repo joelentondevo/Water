@@ -132,10 +132,14 @@
     <Compile Include="BusinessObjects\BaseBO.cs" />
     <Compile Include="BusinessObjects\BasketBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IBasketBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\ILibraryBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\ISecurityBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IStoreBO.cs" />
+    <Compile Include="BusinessObjects\LibraryBO.cs" />
     <Compile Include="DatabaseObjects\BasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
+    <Compile Include="DatabaseObjects\Interfaces\ILibraryDO.cs" />
+    <Compile Include="DatabaseObjects\LibraryDO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />

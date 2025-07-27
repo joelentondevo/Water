@@ -66,6 +66,7 @@ builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
 builder.Services.AddScoped<ISecurityBO, SecurityBO>();
 builder.Services.AddScoped<IBasketBO,  BasketBO>();
 builder.Services.AddScoped<IStoreBO, StoreBO>();
+builder.Services.AddScoped<ILibraryBO, LibraryBO>();
 
 
 

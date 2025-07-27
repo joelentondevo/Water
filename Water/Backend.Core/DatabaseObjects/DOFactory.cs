@@ -21,6 +21,10 @@ namespace Backend.Core.DatabaseObjects
         {
             return new BasketDO();
         }
+        public ILibraryDO CreateLibraryDO()
+        {
+            return new LibraryDO();
+        }
     }
  }
 
