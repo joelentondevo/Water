@@ -27,10 +27,10 @@ namespace Backend.API.Controllers
             
             public IActionResult AuthenticationAttempt(AuthenticationDetailsModel authenticationDetailsModel)
         {
-            string AuthenticatedTokenString = _securityBO.LoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
-            if (AuthenticatedTokenString != null)
+            string AuthenticationResponse = _securityBO.ValidateAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            if (AuthenticationResponse != null)
             {
-                return Ok(AuthenticatedTokenString);
+                return Ok(AuthenticationResponse);
             }
             else
             {

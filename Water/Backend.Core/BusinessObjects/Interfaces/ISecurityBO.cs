@@ -8,8 +8,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
 {
     public interface ISecurityBO
     {
-        string LoginAttempt(string inputUsername, string inputPassword);
-        bool ValidateAuthenticationDetails(string inputUsername, string inputPassword);
+        string ValidateAuthenticationDetails(string inputUsername, string inputPassword);
         bool AddAuthenticationDetails(string inputUsername, string inputPassword);
     }
 }
