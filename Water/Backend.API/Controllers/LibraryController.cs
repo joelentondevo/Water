@@ -15,6 +15,23 @@ namespace Backend.API.Controllers
             _libraryBO = libraryBO;
         }
 
+        //public IActionResult AddProductToUserLibrary()
+        //{
+        //    return Ok("Product Addded");
+        //}
+
+        //public IActionResult RemoveProductFromUserLibrary()
+        //{
+        //    return Ok("Product Removed");
+        //}
+
+        //public IActionResult GetLibraryProductsByUserId()
+        //{
+            
+        //    return Ok();
+        //}
+
+
 
     }
 }

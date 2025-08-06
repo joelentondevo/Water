@@ -44,7 +44,19 @@ CREATE TABLE BasketItem (
 	Quantity int NOT NULL,
 	DateAdded DateTime NOT NULL
 )
+CREATE TABLE ProductLibrary (
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	ProductID int NOT NULL,
+	UserID int NOT NULL,
+	DateAdded DateTime,
+	ProductKey VarChar(50) NOT NULL,
+	)
 
+CREATE TABLE ProductKey (
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	ProductID int NOT NULL,
+	ProductKey VarChar(50) NOT NULL,
+)
 -- STORED PROCEDURES
 
 CREATE PROCEDURE p_GetAllStoreItems_f
