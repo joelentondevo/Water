@@ -9,5 +9,7 @@ namespace Backend.Core.Services.Interfaces
     public interface IServicesFactory
     {
         IJWTService CreateJWTService();
+
+        IProductKeyService CreateProductKeyService();
     }
 }
