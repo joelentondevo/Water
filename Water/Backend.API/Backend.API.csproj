@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Backend.ActivityLayer\Backend.ActivityLayer.csproj" />
     <ProjectReference Include="..\Backend.Core\Backend.Core.csproj" />
     <ProjectReference Include="..\Frontend\Frontend.csproj" />
   </ItemGroup>

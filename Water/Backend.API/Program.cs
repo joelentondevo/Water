@@ -8,6 +8,8 @@ using Backend.Core.Services.Interfaces;
 using Backend.Core.Services;
 using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.BusinessObjects;
+using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.ActivityLayer.ActitvityHandlers;
 
 
 
@@ -63,6 +65,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDOFactory, DOFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
+builder.Services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
+builder.Services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
 builder.Services.AddScoped<ISecurityBO, SecurityBO>();
 builder.Services.AddScoped<IBasketBO,  BasketBO>();
 builder.Services.AddScoped<IStoreBO, StoreBO>();

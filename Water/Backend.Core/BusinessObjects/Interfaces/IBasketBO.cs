@@ -16,7 +16,6 @@ namespace Backend.Core.BusinessObjects.Interfaces
 
         bool RemoveItemFromBasket(int userId, int itemId);
 
-
         bool ClearUserBasket(int userId);
 
         List<BasketItemEO> GetBasketItems(int userId);

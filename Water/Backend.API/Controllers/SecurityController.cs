@@ -1,14 +1,11 @@
-﻿using Backend.Core.BusinessObjects;
-using Backend.Core.EntityObjects;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Backend.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Backend.Core.DatabaseObjects.Interfaces;
-using Backend.Core.DatabaseObjects;
 using Backend.Core.Services;
 using Backend.Core.Services.Interfaces;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -17,9 +14,11 @@ namespace Backend.API.Controllers
     public class SecurityController : Controller
     {
         private readonly ISecurityBO _securityBO;
-        public SecurityController(ISecurityBO securityBO)
+        private readonly ISecurityActivityHandler _securityActivityHandler;
+        public SecurityController(ISecurityBO securityBO, ISecurityActivityHandler securityActivityHandler)
         {
             _securityBO = securityBO;
+            _securityActivityHandler = securityActivityHandler;
         }
 
 

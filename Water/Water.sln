@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Core", "Backend.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{E3098A51-6278-4851-95AA-FA8F6EBB5703}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.ActivityLayer", "Backend.ActivityLayer\Backend.ActivityLayer.csproj", "{313A6F76-ED64-4C98-A93F-437301A2CB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{E3098A51-6278-4851-95AA-FA8F6EBB5703}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3098A51-6278-4851-95AA-FA8F6EBB5703}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3098A51-6278-4851-95AA-FA8F6EBB5703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24418891-585B-4B9F-8E46-0111220EC41B}
 	EndGlobalSection
 EndGlobal

@@ -6,6 +6,7 @@ using Backend.Core.BusinessObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.DatabaseObjects;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -15,9 +16,11 @@ namespace Backend.API.Controllers
     public class StoreController : Controller
     {
         private readonly IStoreBO _storeBO;
-        public StoreController(IStoreBO storeBO)
+        private readonly IStoreActivityHandler _storeActivityHandler;
+        public StoreController(IStoreBO storeBO, IStoreActivityHandler storeActivityHandler)
         {
             _storeBO = storeBO;
+            _storeActivityHandler = storeActivityHandler;
         }
 
         [HttpGet(Name = "GetGames")]
