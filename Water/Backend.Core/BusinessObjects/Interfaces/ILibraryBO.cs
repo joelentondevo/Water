@@ -9,8 +9,8 @@ namespace Backend.Core.BusinessObjects.Interfaces
 {
     public interface ILibraryBO
     {
-        bool AddProductToUserLibrary(int userID, int productID);
+        bool AddProductToUserLibrary(int userID, int productID, string productKey);
         bool RemoveProductFromUserLibrary(int userID, int productID);
-        List<ProductEO> GetLibraryProductsByUserId(int userID);
+        List<LibraryProductEO> GetLibraryProductsByUserId(int userID);
     }
 }

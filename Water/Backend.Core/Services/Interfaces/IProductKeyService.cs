@@ -8,11 +8,11 @@ namespace Backend.Core.Services.Interfaces
 {
     public interface IProductKeyService
     {
-        bool ValidateProductKey(string productKey,int productId, string userId);
+        bool ValidateProductKey(string productKey,int productId);
 
-        string GenerateProductKey(string productKey, int productKeyLength, int intervalLength);
+        string GenerateProductKey(int productKeyLength, int intervalLength);
 
-        bool RegisterProductKey(string productKey, int productId, string userId);
+        bool RegisterProductKey(string productKey, int productId);
 
 
     }

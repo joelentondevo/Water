@@ -5,17 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.EntityObjects;
 
 
 namespace Backend.Core.DatabaseObjects
 {
     internal class LibraryDO : BaseDO, ILibraryDO
     {
-        public bool AddProductToUserLibrary(int userID, int productID)
+        public bool AddProductToUserLibrary(int userID, int productID, string productKey)
         {
             return RUNSP_Bool("p_AddProductToUser_f",
                 ("@UserID", userID),
-                ("@ProductID", productID));
+                ("@ProductID", productID),
+                ("@ProductKey", productKey));
         }
         public bool RemoveProductFromUserLibrary(int userID, int productID)
         {
@@ -23,19 +25,27 @@ namespace Backend.Core.DatabaseObjects
                 ("@UserID", userID),
                 ("@ProductID", productID));
         }
-        public DataSet GetLibraryProductsByUserId(int userID)
+        public List<LibraryProductEO> GetLibraryProductsByUserId(int userID)
         {
-            return RunSP_DS("p_GetLibraryProductsByUserId_f",
+            List<LibraryProductEO> libraryProductList = new List<LibraryProductEO>();
+            DataSet dataSet = RunSP_DS("p_GetLibraryProductsByUserId_f",
                 ("@UserID", userID));
-        }
-        public bool ValidateProductKey(string productKey, int userID)
-        {
-            return false;
-        }
 
-        public bool RegisterProductKey(string productKey, int userID)
-        {
-            return false;
+            if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in dataSet.Tables[0].Rows)
+                {
+                    libraryProductList.Add(new LibraryProductEO(
+                        new ProductEO(
+                            row.Field<int>("ProductID"),
+                            row.Field<string>("Name"),
+                            row.Field<int>("Type")),
+                        row.Field<string>("ProductKey"),
+                        row.Field<DateTime>("DateAdded")));
+                }
+            }
+            return libraryProductList;
+
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Backend.Core.BusinessObjects.Interfaces;
+﻿using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.DatabaseObjects.Interfaces;
-using Backend.Core.DatabaseObjects;
 using Backend.Core.EntityObjects;
+using Backend.Core.Services.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace Backend.Core.BusinessObjects
 {
@@ -14,18 +11,26 @@ namespace Backend.Core.BusinessObjects
     {
         private readonly IDOFactory _dOFactory;
         private readonly ILibraryDO _libraryDO;
+        private readonly IServicesFactory _servicesFactory;
+        private readonly IProductKeyService _productKeyService;
 
-        public LibraryBO(IDOFactory dOFactory)
+        public LibraryBO(IDOFactory dOFactory, IServicesFactory servicesFactory)
         {
             _dOFactory = dOFactory;
+            _servicesFactory = servicesFactory;
             _libraryDO = _dOFactory.CreateLibraryDO();
+            _productKeyService = _servicesFactory.CreateProductKeyService();
         }
 
-        public bool AddProductToUserLibrary(int userID, int productID)
+        public bool AddProductToUserLibrary(int userId, int productId, string productKey = null)
         {
             try
             {
-                _libraryDO.AddProductToUserLibrary(userID, productID);
+                if (productKey == null)
+                {
+                    productKey = _productKeyService.GenerateProductKey(16, 4);
+                }
+                _libraryDO.AddProductToUserLibrary(userId, productId, productKey);
                 return true;
             }
             catch (Exception ex)
@@ -35,13 +40,13 @@ namespace Backend.Core.BusinessObjects
             }
         }
 
-        public bool RemoveProductFromUserLibrary(int userID, int productID)
+        public bool RemoveProductFromUserLibrary(int userId, int productId)
         {
-            return false;
+            return _libraryDO.RemoveProductFromUserLibrary(userId, productId);
         }
-        public List<ProductEO> GetLibraryProductsByUserId(int userID)
+        public List<LibraryProductEO> GetLibraryProductsByUserId(int userId)
         {
-            return new List<ProductEO>();
+            return _libraryDO.GetLibraryProductsByUserId(userId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Core.EntityObjects;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,10 +10,8 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface ILibraryDO
     {
-        bool AddProductToUserLibrary(int userID, int productID);
+        bool AddProductToUserLibrary(int userID, int productID, string productKey);
         bool RemoveProductFromUserLibrary(int userID, int productID);
-        DataSet GetLibraryProductsByUserId(int userID);
-        bool ValidateProductKey(string productKey, int userID);
-        bool RegisterProductKey(string productKey, int userID);
+        List<LibraryProductEO> GetLibraryProductsByUserId(int userID);
     }
 }

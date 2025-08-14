@@ -171,3 +171,23 @@ CREATE PROCEDURE p_GetProduct_f
 	AS
 	SELECT * FROM Product
 	WHERE ID = @ProductID;
+
+Alter PROCEDURE p_GetLibraryProductsByUserId_f
+	@UserID int
+	AS 
+	SELECT lp.ProductKey, lp.DateAdded, lp.ProductId, p.Name AS ProductName, p.Type AS ProductType FROM LibraryProduct lp JOIN Product p ON lp.ProductId = p.ProductId WHERE lp.UserId = @UserId
+
+CREATE PROCEDURE p_RemoveProductFromUser_f
+	@UserID int,
+	@ProductID int 
+	AS
+	DELETE From ProductLibrary
+	WHERE UserID = @UserID AND ProductID = @ProductID
+
+CREATE PROCEDURE p_AddProductToUser_f
+	@UserID int, 
+	@ProductID int, 
+	@ProductKey varchar
+	AS
+	INSERT INTO ProductLibrary (UserID, ProductID, ProductKey, DateAdded)
+		VALUES (@UserID, @ProductID, @ProductKey, GETDATE());

@@ -9,8 +9,8 @@ namespace Backend.Core.DatabaseObjects.Interfaces
     public interface IProductKeyDO
     {
 
-        bool RegisterProductKey(string productKey, int productID, string userID);
+        bool RegisterProductKey(string productKey, int productID);
 
-        string GetProductKeyDetails(int productID, string userID); 
+        int GetProductKeyAssociatedProduct(int productID); 
     }
 }

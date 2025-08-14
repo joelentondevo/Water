@@ -21,10 +21,10 @@ namespace Backend.Core.Services
             _productKeyDO = _dOFactory.CreateProductKeyDO();
         }
 
-        public bool ValidateProductKey(string productKey, int productId, string userId)
+        public bool ValidateProductKey(string productKey, int productId)
         {
-            string storedProductKey = _productKeyDO.GetProductKeyDetails(productId, userId);
-            if (storedProductKey == productKey)
+            int associatedProduct = _productKeyDO.GetProductKeyAssociatedProduct(productId);
+            if (associatedProduct == productId)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ namespace Backend.Core.Services
             
         }
 
-        public string GenerateProductKey(string productKey, int keyLength = 16, int intervalLength = 4)
+        public string GenerateProductKey(int keyLength = 16, int intervalLength = 4)
         {
             char[] _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".ToCharArray();
             Random _random = new Random();
@@ -46,12 +46,13 @@ namespace Backend.Core.Services
                     productKeyBuilder.Append("-");
                 }
             }
+            string productKey = productKeyBuilder.ToString();
             return productKey;
         }
 
-        public bool RegisterProductKey(string productKey,int productId, string userId)
+        public bool RegisterProductKey(string productKey,int productId)
         {
-            return _productKeyDO.RegisterProductKey(productKey, productId, userId);
+            return _productKeyDO.RegisterProductKey(productKey, productId);
         }
     }
 }

@@ -10,14 +10,14 @@ namespace Backend.Core.DatabaseObjects
 {
     internal class ProductKeyDO : BaseDO, IProductKeyDO
     {
-        public bool RegisterProductKey(string productKey, int productID, string userID)
+        public bool RegisterProductKey(string productKey, int productID)
         {
             return true;
         }
 
-        public string GetProductKeyDetails(int productID, string userID)
+        public int GetProductKeyAssociatedProduct(int productID)
         {
-            return null;
+            return 0;
         }
 
     }
