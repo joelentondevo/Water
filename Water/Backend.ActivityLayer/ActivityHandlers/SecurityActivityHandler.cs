@@ -17,5 +17,15 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         {
             _securityBO = securityBO;
         }
+
+        public string UserLoginAttempt(string username, string password)
+        {
+            return _securityBO.ValidateAuthenticationDetails(username, password);
+        }
+
+        public bool UserRegistration(string username, string password)
+        {
+            return _securityBO.AddAuthenticationDetails(username, password);
+        }
     }
 }

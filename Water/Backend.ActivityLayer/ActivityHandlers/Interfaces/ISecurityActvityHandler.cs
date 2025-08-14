@@ -8,5 +8,8 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 {
     public interface ISecurityActivityHandler
     {
+        string UserLoginAttempt(string username, string password);
+
+        bool UserRegistration(string username, string password);
     }
 }

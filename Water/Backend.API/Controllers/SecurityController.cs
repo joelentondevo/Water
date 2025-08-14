@@ -13,11 +13,9 @@ namespace Backend.API.Controllers
     [ApiController]
     public class SecurityController : Controller
     {
-        private readonly ISecurityBO _securityBO;
         private readonly ISecurityActivityHandler _securityActivityHandler;
-        public SecurityController(ISecurityBO securityBO, ISecurityActivityHandler securityActivityHandler)
+        public SecurityController(ISecurityActivityHandler securityActivityHandler)
         {
-            _securityBO = securityBO;
             _securityActivityHandler = securityActivityHandler;
         }
 
@@ -26,7 +24,7 @@ namespace Backend.API.Controllers
             
             public IActionResult AuthenticationAttempt(AuthenticationDetailsModel authenticationDetailsModel)
         {
-            string AuthenticationResponse = _securityBO.ValidateAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            string AuthenticationResponse = _securityActivityHandler.UserLoginAttempt(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticationResponse != null)
             {
                 return Ok(AuthenticationResponse);
@@ -39,7 +37,7 @@ namespace Backend.API.Controllers
         [HttpPost("RegisterUser")]
         public IActionResult RegisterAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel) 
         { 
-            bool AuthenticationDetailsAdded = _securityBO.AddAuthenticationDetails(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            bool AuthenticationDetailsAdded = _securityActivityHandler.UserRegistration(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
             if (AuthenticationDetailsAdded)
             {
                 return Ok("User registered successfully");
