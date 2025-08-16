@@ -12,6 +12,5 @@ namespace Backend.Core.DatabaseObjects.Interfaces
         ISecurityDO CreateSecurityDO();
         IBasketDO CreateBasketDO();
         ILibraryDO CreateLibraryDO();
-        IProductKeyDO CreateProductKeyDO();
     }
 }

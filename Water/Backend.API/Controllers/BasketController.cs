@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Backend.Core.EntityObjects;
 using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 
 namespace Backend.API.Controllers
 {
@@ -13,11 +14,11 @@ namespace Backend.API.Controllers
     [ApiController]
     public class BasketController : Controller
     {
-        private readonly IBasketBO _basketBO;
+        private readonly IStoreActivityHandler _storeActivityHandler;
 
-        public BasketController(IBasketBO basketBO)
+        public BasketController(IStoreActivityHandler storeActivityHandler)
         {
-            _basketBO = basketBO;
+            _storeActivityHandler = storeActivityHandler;
         }
 
         [Authorize]
@@ -25,7 +26,7 @@ namespace Backend.API.Controllers
         public List<BasketItemEO> GetBasket()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var response = _basketBO.GetBasketItems(int.Parse(userId));
+            var response = _storeActivityHandler.GetBasketItemsByUserId(int.Parse(userId));
             return response;
         }
         [Authorize]
@@ -33,7 +34,7 @@ namespace Backend.API.Controllers
         public IActionResult AddToBasket(int productId, int quantity)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var success = _basketBO.AddProductToBasket(int.Parse(userId), productId, quantity);
+            var success = _storeActivityHandler.AddProductToUserBasket(int.Parse(userId), productId, quantity);
             if (success)
             {
                 return Ok($"Product with ID {productId} added to the basket with quantity {quantity}.");
@@ -48,7 +49,7 @@ namespace Backend.API.Controllers
         public IActionResult RemoveFromBasket(int productId)
         {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                var success = _basketBO.RemoveItemFromBasket(int.Parse(userId), productId);
+                var success = _storeActivityHandler.RemoveProductFromUserBasket(int.Parse(userId), productId);
             if (success)
             {
                 return Ok($"Product with ID {productId} removed from the basket.");
@@ -65,7 +66,7 @@ namespace Backend.API.Controllers
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             if (userId != null)
             {
-                _basketBO.GenerateUserBasket(userId);
+                _storeActivityHandler.GenerateUserBasket(userId);
                 return Ok("User basket generated successfully.");
             }
             else

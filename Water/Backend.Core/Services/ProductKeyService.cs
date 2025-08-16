@@ -12,24 +12,9 @@ namespace Backend.Core.Services
 {
     internal class ProductKeyService : IProductKeyService
     {
-        IDOFactory _dOFactory;
-        IProductKeyDO _productKeyDO;
 
         public ProductKeyService(IDOFactory dOFactory)
         {
-            _dOFactory = dOFactory;
-            _productKeyDO = _dOFactory.CreateProductKeyDO();
-        }
-
-        public bool ValidateProductKey(string productKey, int productId)
-        {
-            int associatedProduct = _productKeyDO.GetProductKeyAssociatedProduct(productId);
-            if (associatedProduct == productId)
-            {
-                return true;
-            }
-            return false;
-            
         }
 
         public string GenerateProductKey(int keyLength = 16, int intervalLength = 4)
@@ -48,11 +33,6 @@ namespace Backend.Core.Services
             }
             string productKey = productKeyBuilder.ToString();
             return productKey;
-        }
-
-        public bool RegisterProductKey(string productKey,int productId)
-        {
-            return _productKeyDO.RegisterProductKey(productKey, productId);
         }
     }
 }

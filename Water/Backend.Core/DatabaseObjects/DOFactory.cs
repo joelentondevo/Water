@@ -26,11 +26,6 @@ namespace Backend.Core.DatabaseObjects
             return new LibraryDO();
         }
 
-        public IProductKeyDO CreateProductKeyDO()
-        {
-            return new ProductKeyDO(); 
-        }
-
     }
  }
 
