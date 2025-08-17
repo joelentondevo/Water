@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.ActivityLayer", "Backend.ActivityLayer\Backend.ActivityLayer.csproj", "{313A6F76-ED64-4C98-A93F-437301A2CB0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.ServiceBroker", "Backend.ServiceBroker\Backend.ServiceBroker.csproj", "{14F23A68-8B69-480F-9BBA-64425D88C3F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313A6F76-ED64-4C98-A93F-437301A2CB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14F23A68-8B69-480F-9BBA-64425D88C3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F23A68-8B69-480F-9BBA-64425D88C3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14F23A68-8B69-480F-9BBA-64425D88C3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14F23A68-8B69-480F-9BBA-64425D88C3F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
