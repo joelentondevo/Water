@@ -5,27 +5,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.EntityObjects;
+using Backend.ServiceBroker.ServiceBroker.Interfaces;
 
 namespace Backend.ServiceBroker.ServiceBroker
 {
-    internal class Processes
+    internal class Processes : IProcesses
     {
-        internal async Task<List<TaskEO>> GetQueueTasks()
+        public async Task<List<TaskEO>> GetQueueTasks()
         {
             return new List<TaskEO>();
         }
 
-        internal void ExecuteTask(TaskEO task)
+        public void ExecuteTask(TaskEO task)
         {
+            switch (task)
+            { 
+                
+            }
 
         }
 
-        internal bool MarkTaskComplete(TaskEO task)
+        public bool MarkTaskComplete(TaskEO task)
         {
             return false;
         }
 
-        internal bool MarkTaskFailed(TaskEO task)
+        public bool MarkTaskFailed(TaskEO task)
         {
             return false;
         }

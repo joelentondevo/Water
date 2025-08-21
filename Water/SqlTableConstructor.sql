@@ -57,6 +57,34 @@ CREATE TABLE ProductKey (
 	ProductID int NOT NULL,
 	ProductKey VarChar(50) NOT NULL,
 )
+
+CREATE TABLE TaskQueue (
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	TaskType varchar(50) NOT NULL,
+	TaskData varchar(MAX) NOT NULL,
+	DateCreated DateTime NOT NULL,
+	ScheduledStart DateTime NOT NULL,
+	TaskPriority INT NOT NULL,
+)
+
+CREATE TABLE TaskExecutionLog (
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	TaskID int NOT NULL,
+	TaskType varchar(50) NOT NULL,
+	TaskData varchar(MAX),
+	TaskStatus varchar(50) NOT NULL,
+	StartedAt DateTime NOT NULL,
+	CompletedAt DateTime,
+	Duration int,
+	ErrorMessage varchar(MAX),
+	StackTrace varchar(MAX),
+	DateLogCreated DateTime NOT NULL,
+)
+
+
+
+
+
 -- STORED PROCEDURES
 
 CREATE PROCEDURE p_GetAllStoreItems_f

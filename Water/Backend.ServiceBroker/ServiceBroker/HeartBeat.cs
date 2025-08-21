@@ -11,9 +11,8 @@ namespace Backend.ServiceBroker.ServiceBroker
         private readonly TimeSpan tickInterval = TimeSpan.FromSeconds(1);
         Processes processes;
 
-        HeartBeat(TimeSpan tickInterval, Processes processes)
+        public HeartBeat(Processes processes)
         {
-            this.tickInterval = tickInterval;
             this.processes = processes;
         }
 
@@ -21,7 +20,7 @@ namespace Backend.ServiceBroker.ServiceBroker
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                Console.WriteLine("Checking for Tasks");
+                Console.WriteLine("Checking for Tasks at:" + DateTime.Now);
                 var tasks = await processes.GetQueueTasks();
                 foreach (var task in tasks)
                 {

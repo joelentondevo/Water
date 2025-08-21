@@ -8,5 +8,10 @@ namespace Backend.Core.EntityObjects
 {
     public class TaskEO
     {
+        public int Id { get; set; }
+        public string type {  get; set; }
+        public string name { get; set; }
+
+
     }
 }
