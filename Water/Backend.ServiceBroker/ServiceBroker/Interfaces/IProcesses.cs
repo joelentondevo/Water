@@ -9,10 +9,10 @@ namespace Backend.ServiceBroker.ServiceBroker.Interfaces
 {
     public interface IProcesses
     {
-        Task<List<TaskEO>> GetQueueTasks();
+        TaskEO GetNextTask();
 
 
-        void ExecuteTask(TaskEO task);
+        bool ExecuteTask(TaskEO task, CancellationToken cancellationToken);
 
 
         bool MarkTaskComplete(TaskEO task);

@@ -9,9 +9,10 @@ namespace Backend.Core.EntityObjects
     public class TaskEO
     {
         public int Id { get; set; }
-        public string type {  get; set; }
-        public string name { get; set; }
-
+        public string Type {  get; set; }
+        public string Name { get; set; }
+        public string TaskData { get; set; }
+        public int Priority { get; set; }
 
     }
 }

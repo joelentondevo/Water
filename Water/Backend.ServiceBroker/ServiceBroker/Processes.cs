@@ -11,17 +11,14 @@ namespace Backend.ServiceBroker.ServiceBroker
 {
     internal class Processes : IProcesses
     {
-        public async Task<List<TaskEO>> GetQueueTasks()
+        public TaskEO GetNextTask()
         {
-            return new List<TaskEO>();
+            return null;
         }
 
-        public void ExecuteTask(TaskEO task)
+        public bool ExecuteTask(TaskEO task, CancellationToken cancellationToken)
         {
-            switch (task)
-            { 
-                
-            }
+            return false;
 
         }
 

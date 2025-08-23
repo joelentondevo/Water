@@ -10,6 +10,7 @@ var host = Host.CreateDefaultBuilder(args)
 .ConfigureServices((context, services) =>
 {
     services.AddScoped<IProcesses, Processes>();
+    services.AddHostedService<HeartBeat>();
 })
 .ConfigureLogging(logging =>
 {
@@ -18,8 +19,6 @@ var host = Host.CreateDefaultBuilder(args)
 })
 .Build();
 
-Processes processes = new Processes();
-HeartBeat heartBeat = new HeartBeat(processes);
-CancellationToken cancellationToken = new CancellationToken();
+CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-await heartBeat.RunAsync(cancellationToken);
+await host.RunAsync(cancellationTokenSource.Token);
