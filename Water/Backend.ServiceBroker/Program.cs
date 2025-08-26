@@ -21,4 +21,11 @@ var host = Host.CreateDefaultBuilder(args)
 
 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-await host.RunAsync(cancellationTokenSource.Token);
+var heartBeat = host.RunAsync(cancellationTokenSource.Token);
+
+    Console.WriteLine("Press any key to shut down...");
+    Console.ReadKey(true);
+    cancellationTokenSource.Cancel();
+    cancellationTokenSource.Dispose();
+
+await heartBeat;

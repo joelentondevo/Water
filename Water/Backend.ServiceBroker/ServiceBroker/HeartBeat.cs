@@ -59,7 +59,7 @@ namespace Backend.ServiceBroker.ServiceBroker
                         }
                         finally
                         {
-                            threadLimiter.Release(); // Free up the slot
+                            threadLimiter.Release();
                         }
                     }, cancellationToken);
                     runningTasks.Add(execution);
