@@ -12,7 +12,7 @@ namespace Backend.ServiceBroker.ServiceBroker.Interfaces
         TaskEO GetNextTask();
 
 
-        bool ExecuteTask(TaskEO task, CancellationToken cancellationToken);
+        Task ExecuteTask(TaskEO task, CancellationToken cancellationToken);
 
 
         bool MarkTaskComplete(TaskEO task);

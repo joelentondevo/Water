@@ -16,9 +16,14 @@ namespace Backend.ServiceBroker.ServiceBroker
             return null;
         }
 
-        public bool ExecuteTask(TaskEO task, CancellationToken cancellationToken)
+        public async Task ExecuteTask(TaskEO task, CancellationToken cancellationToken)
         {
-            return false;
+            switch(task.Type)
+            {
+                case "Correspondence":
+
+                    break;
+            }
 
         }
 
