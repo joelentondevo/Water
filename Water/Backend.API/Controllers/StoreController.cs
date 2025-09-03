@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 using Backend.Core;
 using Backend.Core.EntityObjects;
-using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
+using System.Security.Claims;
 
 namespace Backend.API.Controllers
 {
@@ -21,6 +24,13 @@ namespace Backend.API.Controllers
         public List<ProductListingEO> GetAllProductListings()
         {
             return _storeActivityHandler.GetFullProductList();
+        }
+        [Authorize]
+        [HttpPost(Name = "Checkout")]
+        public void Checkout()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            _storeActivityHandler.Checkout(userId);
         }
 
     }

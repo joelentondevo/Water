@@ -40,6 +40,11 @@ namespace Backend.Core.BusinessObjects
             }
         }
 
+        public string GenerateProductKey(int length, int intervalLength)
+        {
+            return _productKeyService.GenerateProductKey(length, intervalLength);
+        }
+
         public bool RemoveProductFromUserLibrary(int userId, int productId)
         {
             return _libraryDO.RemoveProductFromUserLibrary(userId, productId);

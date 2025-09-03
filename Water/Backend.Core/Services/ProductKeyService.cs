@@ -25,7 +25,7 @@ namespace Backend.Core.Services
         var productKeyBuilder = new StringBuilder();
             for (int i = 0; i< keyLength; i++)
             {
-                productKeyBuilder.Append(_chars[_random.Next()]);
+                productKeyBuilder.Append(_chars[_random.Next(_chars.Length)]);
                 if (i % intervalLength == 0)
                 {
                     productKeyBuilder.Append("-");

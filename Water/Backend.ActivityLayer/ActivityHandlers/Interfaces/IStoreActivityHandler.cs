@@ -24,5 +24,7 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 
         ProductListingEO GetProductListing(int productId);
 
+        void Checkout(int userId);
+
     }
 }

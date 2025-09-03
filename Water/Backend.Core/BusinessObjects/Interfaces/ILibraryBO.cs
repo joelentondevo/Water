@@ -11,6 +11,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
     {
         bool AddProductToUserLibrary(int userID, int productID, string productKey);
         bool RemoveProductFromUserLibrary(int userID, int productID);
+        string GenerateProductKey(int length, int intervalLength);
         List<LibraryProductEO> GetLibraryProductsByUserId(int userID);
     }
 }

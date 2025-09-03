@@ -58,5 +58,17 @@ namespace Backend.ActivityLayer.ActitvityHandlers
             return _storeBO.GetProductListing(productId);
         }
 
+        public void Checkout(int userId)
+        {
+            List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userId);
+            if (checkoutBasket != null) {
+                foreach (var item in checkoutBasket)
+                {
+                    string productKey = _libraryBO.GenerateProductKey(16, 4);
+                    _libraryBO.AddProductToUserLibrary(userId, item.ProductListing.Id, productKey);
+                }
+            }
+        }
+
     }
 }
