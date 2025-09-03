@@ -8,5 +8,6 @@ namespace Backend.ActivityLayer.Services.Interfaces
 {
     public interface ITaskCreationService
     {
+        bool CreateTask(string taskData, int taskType, string taskName);
     }
 }
