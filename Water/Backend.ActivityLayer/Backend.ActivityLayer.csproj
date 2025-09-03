@@ -64,6 +64,8 @@
     <Compile Include="ActivityHandlers\SecurityActivityHandler.cs" />
     <Compile Include="ActivityHandlers\StoreActivityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\ITaskCreationService.cs" />
+    <Compile Include="Services\TaskCreationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Backend.Core\Backend.Core.csproj">

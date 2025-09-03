@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.ActivityLayer.Services.Interfaces;
 using Backend.Core.BusinessObjects;
 using Backend.Core.BusinessObjects.Interfaces;
 
@@ -13,9 +14,11 @@ namespace Backend.ActivityLayer.ActitvityHandlers
     public class SecurityActivityHandler : ISecurityActivityHandler
     {
         ISecurityBO _securityBO;
-        public SecurityActivityHandler(ISecurityBO securityBO)
+        ITaskCreationService _taskCreationService;
+        public SecurityActivityHandler(ISecurityBO securityBO, ITaskCreationService taskCreationService)
         {
             _securityBO = securityBO;
+            _taskCreationService = taskCreationService;
         }
 
         public string UserLoginAttempt(string username, string password)
