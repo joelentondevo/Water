@@ -220,16 +220,18 @@ CREATE PROCEDURE p_AddProductToUser_f
 	INSERT INTO ProductLibrary (UserID, ProductID, ProductKey, DateAdded)
 		VALUES (@UserID, @ProductID, @ProductKey, GETDATE());
 
-CREATE PROCEDURE p_QueueTask_i
-	@TaskType varchar,
-	@TaskData varchar,
-	@TaskName varchar,
-	@ScheduledStart DateTime,
-	@TaskPriority int
+ALTER PROCEDURE p_QueueTask_i
+	@TaskType varchar(50),
+	@TaskData varchar(MAX),
+	@TaskName varchar(50),
+	@ScheduledStart DATETIME,
+	@TaskPriority INT
 
 	AS
+	BEGIN
 	INSERT INTO TaskQueue (TaskType, TaskData, TaskName, DateCreated, ScheduledStart, TaskPriority)
-		VALUES (@TaskType, @TaskData, @TaskName, GETDATE(), @ScheduledStart, @TaskPriority)
+		VALUES (@TaskType, @TaskData, @TaskName, GETDATE(), @ScheduledStart, @TaskPriority);
+	END
 
 CREATE PROCEDURE p_GetNextTaskByPriority_f
 	AS

@@ -15,5 +15,14 @@ namespace Backend.Core.EntityObjects
         public DateTime ScheduledStart { get; set; }
         public int TaskPriority { get; set; }
 
+        public TaskEO(string taskType, string taskName, string taskData, DateTime scheduledStart, int taskPriority, int id = 0)
+        {
+            Id = id;
+            TaskType = taskType;
+            TaskName = taskName;
+            TaskData = taskData;
+            ScheduledStart = scheduledStart;
+            TaskPriority = taskPriority;
+        }
     }
 }

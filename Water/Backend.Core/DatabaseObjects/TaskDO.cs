@@ -1,5 +1,6 @@
 ﻿using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.EntityObjects;
+using BCrypt.Net;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,7 +20,7 @@ namespace Backend.Core.DatabaseObjects
                 ("@TaskName", task.TaskName),
                 ("@TaskData", task.TaskData),
                 ("@ScheduledStart", task.ScheduledStart),
-                ("@Priority", task.TaskPriority));
+                ("@TaskPriority", task.TaskPriority));
         }
 
         public TaskEO GetNextTaskByPriority()
@@ -28,15 +29,13 @@ namespace Backend.Core.DatabaseObjects
             if (taskData != null)
             {
                 DataRow row = taskData.Tables[0].Rows[0];
-                TaskEO task = new TaskEO
-                {
-                    Id = row.Field<int>("ID"),
-                    TaskType = row.Field<string>("TaskType"),
-                    TaskName = row.Field<string>("TaskName"),
-                    TaskData = row.Field<string>("TaskData"),
-                    ScheduledStart = row.Field<DateTime>("ScheduledStart"),
-                    TaskPriority = row.Field<int>("TaskPriority"),
-                };
+                TaskEO task = new TaskEO(
+                    row.Field<string>("TaskType"),
+                    row.Field<string>("TaskName"),
+                    row.Field<string>("TaskData"),
+                    row.Field<DateTime>("ScheduledStart"),
+                    row.Field<int>("TaskPriority"), 
+                    row.Field<int>("ID"));
                 return task;
             }
             return null;

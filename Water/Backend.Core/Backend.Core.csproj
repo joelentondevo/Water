@@ -142,6 +142,7 @@
     <Compile Include="DatabaseObjects\Interfaces\ITaskDO.cs" />
     <Compile Include="DatabaseObjects\LibraryDO.cs" />
     <Compile Include="DatabaseObjects\TaskDO.cs" />
+    <Compile Include="EntityObjects\AddProductToLibraryEO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />

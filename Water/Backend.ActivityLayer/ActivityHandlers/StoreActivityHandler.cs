@@ -1,12 +1,13 @@
 ﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.EntityObjects;
+using Backend.Core.Services;
+using Backend.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Backend.Core.Services.Interfaces;
 
 namespace Backend.ActivityLayer.ActitvityHandlers
 {
@@ -15,14 +16,14 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         IStoreBO _storeBO;
         IBasketBO _basketBO;
         ILibraryBO _libraryBO;
-        ITaskService _taskCreationService;
+        ITaskService _taskService;
 
-        public StoreActivityHandler(IStoreBO storeBO, IBasketBO basketBO, ILibraryBO libraryBO, ITaskService taskCreationService)
+        public StoreActivityHandler(IStoreBO storeBO, IBasketBO basketBO, ILibraryBO libraryBO, ITaskService taskService)
         {
             _storeBO = storeBO;
             _basketBO = basketBO;
             _libraryBO = libraryBO;
-            _taskCreationService = taskCreationService;
+            _taskService = taskService;
         }
 
         public void GenerateUserBasket(int userId)
@@ -68,7 +69,10 @@ namespace Backend.ActivityLayer.ActitvityHandlers
                 foreach (var item in checkoutBasket)
                 {
                     string productKey = _libraryBO.GenerateProductKey(16, 4);
-                    _libraryBO.AddProductToUserLibrary(userId, item.ProductListing.Id, productKey);
+                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, productKey);
+                    string taskdata = _taskService.SerializeTaskData(addProductToLibraryEO);
+                    TaskEO newTask = new TaskEO("Library", "AddProductToLibrary", taskdata, DateTime.Now, 5);
+                    _taskService.QueueTask(newTask);
                 }
             }
         }

@@ -24,10 +24,10 @@ namespace Backend.Core.Services
 
         public bool QueueTask(TaskEO task) 
         {
-            return false;
+            return _taskDO.QueueTask(task);
         }
 
-        public string serializeTaskData(object taskData)
+        public string SerializeTaskData(object taskData)
         {
             return JsonSerializer.Serialize(taskData);
         }
