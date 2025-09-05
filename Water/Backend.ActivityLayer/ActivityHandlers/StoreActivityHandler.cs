@@ -1,5 +1,4 @@
 ﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
-using Backend.ActivityLayer.Services.Interfaces;
 using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.EntityObjects;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Backend.Core.Services.Interfaces;
 
 namespace Backend.ActivityLayer.ActitvityHandlers
 {
@@ -15,9 +15,9 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         IStoreBO _storeBO;
         IBasketBO _basketBO;
         ILibraryBO _libraryBO;
-        ITaskCreationService _taskCreationService;
+        ITaskService _taskCreationService;
 
-        public StoreActivityHandler(IStoreBO storeBO, IBasketBO basketBO, ILibraryBO libraryBO, ITaskCreationService taskCreationService)
+        public StoreActivityHandler(IStoreBO storeBO, IBasketBO basketBO, ILibraryBO libraryBO, ITaskService taskCreationService)
         {
             _storeBO = storeBO;
             _basketBO = basketBO;

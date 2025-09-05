@@ -33,11 +33,12 @@ namespace Backend.ServiceBroker.ServiceBroker
                 if (task != null)
                 {
                     taskQueue.Enqueue(task);
-                    Console.WriteLine("Queued task: " + task.Name);
+                    Console.WriteLine("Queued task: " + task.TaskName);
                 }
                 else
                 {
                     Console.WriteLine("No new task found at:" + DateTime.Now);
+                    await Task.Delay(tickInterval, cancellationToken);
                 }
 
                 while (taskQueue.TryDequeue(out var queueTask))
@@ -48,7 +49,7 @@ namespace Backend.ServiceBroker.ServiceBroker
                     {
                         try
                         {
-                            Console.WriteLine("Executing task " + queueTask.Name + " at:" + DateTime.Now);
+                            Console.WriteLine("Executing task " + queueTask.TaskName + " at:" + DateTime.Now);
                             await processes.ExecuteTask(queueTask, cancellationToken);
                             processes.MarkTaskComplete(queueTask);
                         }
@@ -65,7 +66,6 @@ namespace Backend.ServiceBroker.ServiceBroker
                     runningTasks.Add(execution);
                 }
                 runningTasks.RemoveAll(task => task.IsCompleted);
-                await Task.Delay(tickInterval, cancellationToken);
             }
             await Task.WhenAll(runningTasks);
         }

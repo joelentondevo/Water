@@ -26,6 +26,11 @@ namespace Backend.Core.DatabaseObjects
             return new LibraryDO();
         }
 
+        public ITaskDO CreateTaskDO()
+        {
+            return new TaskDO();
+        }
+
     }
  }
 

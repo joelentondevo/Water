@@ -10,8 +10,6 @@ using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.BusinessObjects;
 using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 using Backend.ActivityLayer.ActitvityHandlers;
-using Backend.ActivityLayer.Services.Interfaces;
-using Backend.ActivityLayer.Services;
 
 
 
@@ -73,7 +71,7 @@ builder.Services.AddScoped<ISecurityBO, SecurityBO>();
 builder.Services.AddScoped<IBasketBO,  BasketBO>();
 builder.Services.AddScoped<IStoreBO, StoreBO>();
 builder.Services.AddScoped<ILibraryBO, LibraryBO>();
-builder.Services.AddScoped<ITaskCreationService, TaskCreationService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.ActivityLayer.ActivityHandlers.Interfaces;
-using Backend.ActivityLayer.Services.Interfaces;
 using Backend.Core.BusinessObjects;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.Services.Interfaces;
 
 namespace Backend.ActivityLayer.ActitvityHandlers
 {
@@ -14,11 +14,11 @@ namespace Backend.ActivityLayer.ActitvityHandlers
     public class SecurityActivityHandler : ISecurityActivityHandler
     {
         ISecurityBO _securityBO;
-        ITaskCreationService _taskCreationService;
-        public SecurityActivityHandler(ISecurityBO securityBO, ITaskCreationService taskCreationService)
+        ITaskService _taskService;
+        public SecurityActivityHandler(ISecurityBO securityBO, ITaskService taskCreationService)
         {
             _securityBO = securityBO;
-            _taskCreationService = taskCreationService;
+            _taskService = taskCreationService;
         }
 
         public string UserLoginAttempt(string username, string password)

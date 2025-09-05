@@ -18,7 +18,7 @@ namespace Backend.ServiceBroker.ServiceBroker
 
         public async Task ExecuteTask(TaskEO task, CancellationToken cancellationToken)
         {
-            switch(task.Type)
+            switch(task.TaskType)
             {
                 case "Correspondence":
 

@@ -219,3 +219,22 @@ CREATE PROCEDURE p_AddProductToUser_f
 	AS
 	INSERT INTO ProductLibrary (UserID, ProductID, ProductKey, DateAdded)
 		VALUES (@UserID, @ProductID, @ProductKey, GETDATE());
+
+CREATE PROCEDURE p_QueueTask_i
+	@TaskType varchar,
+	@TaskData varchar,
+	@TaskName varchar,
+	@ScheduledStart DateTime,
+	@TaskPriority int
+
+	AS
+	INSERT INTO TaskQueue (TaskType, TaskData, TaskName, DateCreated, ScheduledStart, TaskPriority)
+		VALUES (@TaskType, @TaskData, @TaskName, GETDATE(), @ScheduledStart, @TaskPriority)
+
+CREATE PROCEDURE p_GetNextTaskByPriority_f
+	AS
+	BEGIN
+		SELECT TOP 1 * FROM TaskQueue 
+		WHERE GETDATE() > ScheduledStart 
+		ORDER BY TaskPriority DESC
+	END
