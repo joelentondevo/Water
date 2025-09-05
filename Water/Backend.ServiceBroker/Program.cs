@@ -1,15 +1,33 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.Core.DatabaseObjects;
 using Backend.Core.Services;
+using Backend.Core.Services.Interfaces;
 using Backend.ServiceBroker.ServiceBroker;
 using Backend.ServiceBroker.ServiceBroker.Interfaces;
 using Microsoft.Extensions.DependencyInjection; 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Backend.ServiceBroker.TaskExecutors.Interfaces;
+using Backend.ServiceBroker.TaskExecutors;
+using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.ActivityLayer.ActitvityHandlers;
+using Backend.Core.BusinessObjects;
+using Backend.Core.BusinessObjects.Interfaces;
 
 var host = Host.CreateDefaultBuilder(args)
 .ConfigureServices((context, services) =>
 {
     services.AddScoped<IProcesses, Processes>();
+    services.AddScoped<ITaskService,  TaskService>();
+    services.AddScoped<IDOFactory, DOFactory>();
+    services.AddScoped<ILibraryExecutor, LibraryExecutor>();
+    services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
+    services.AddScoped<ISecurityBO, SecurityBO>();
+    services.AddScoped<IBasketBO, BasketBO>();
+    services.AddScoped<IStoreBO, StoreBO>();
+    services.AddScoped<ILibraryBO, LibraryBO>();
+    services.AddScoped<IServicesFactory, ServicesFactory>();
     services.AddHostedService<HeartBeat>();
 })
 .ConfigureLogging(logging =>

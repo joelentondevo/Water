@@ -51,6 +51,10 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         {
             return _basketBO.ClearUserBasket(userId);
         }
+        public bool AddProductToUserLibrary(int userId, int productId, string ProductKey)
+        {
+            return _libraryBO.AddProductToUserLibrary(userId, productId, ProductKey);
+        }
 
         public List<ProductListingEO> GetFullProductList()
         {
