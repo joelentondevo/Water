@@ -20,6 +20,9 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 
         bool ClearUserBasket(int userId);
 
+        bool AddProductToUserLibrary(int userId, int productId, string ProductKey);
+        
+
         List<ProductListingEO> GetFullProductList();
 
         ProductListingEO GetProductListing(int productId);

@@ -32,6 +32,11 @@ namespace Backend.Core.Services
             return JsonSerializer.Serialize(taskData);
         }
 
+        public object DeserializeTaskData(string taskData, Type objectType)
+        {
+            return JsonSerializer.Deserialize(taskData, objectType);
+        }
+
         public TaskEO GetNextTask()
         {
             return _taskDO.GetNextTaskByPriority();

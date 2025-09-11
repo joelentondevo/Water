@@ -12,6 +12,7 @@ namespace Backend.Core.Services.Interfaces
         bool QueueTask(TaskEO task);
 
         string SerializeTaskData(object task);
+        object DeserializeTaskData(string taskData, Type taskType);
 
         TaskEO GetNextTask();
     }

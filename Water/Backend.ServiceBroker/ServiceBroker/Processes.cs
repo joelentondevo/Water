@@ -6,23 +6,43 @@ using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.EntityObjects;
 using Backend.ServiceBroker.ServiceBroker.Interfaces;
+using Backend.Core.Services.Interfaces;
+using Backend.Core.DatabaseObjects.Interfaces;
+using Backend.ServiceBroker.TaskExecutors.Interfaces;
 
 namespace Backend.ServiceBroker.ServiceBroker
 {
     internal class Processes : IProcesses
     {
+        ITaskService _taskService;
+        IDOFactory _dOFactory;
+        ITaskDO _taskDO;
+        ILibraryExecutor _libraryExecutor;
+
+        public Processes(ITaskService taskService, IDOFactory dOFactory, ILibraryExecutor libraryExecutor)
+        {
+            _taskService = taskService;
+            _dOFactory = dOFactory;
+            _taskDO = _dOFactory.CreateTaskDO();
+            _libraryExecutor = libraryExecutor;
+        }
         public TaskEO GetNextTask()
         {
-            return null;
+            return _taskDO.GetNextTaskByPriority();
         }
 
-        public async Task ExecuteTask(TaskEO task, CancellationToken cancellationToken)
+        public async Task SendTaskForExecution(TaskEO task, CancellationToken cancellationToken)
         {
             switch(task.TaskType)
             {
                 case "Correspondence":
 
                     break;
+                case "Library":
+                    _libraryExecutor.ExecuteTask(task);
+
+                    break;
+
             }
 
         }

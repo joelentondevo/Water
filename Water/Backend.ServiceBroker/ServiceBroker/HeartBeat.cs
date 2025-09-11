@@ -50,7 +50,7 @@ namespace Backend.ServiceBroker.ServiceBroker
                         try
                         {
                             Console.WriteLine("Executing task " + queueTask.TaskName + " at:" + DateTime.Now);
-                            await processes.ExecuteTask(queueTask, cancellationToken);
+                            await processes.SendTaskForExecution(queueTask, cancellationToken);
                             processes.MarkTaskComplete(queueTask);
                         }
                         catch (Exception ex)
