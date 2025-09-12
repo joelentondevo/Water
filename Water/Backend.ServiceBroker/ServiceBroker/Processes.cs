@@ -18,13 +18,15 @@ namespace Backend.ServiceBroker.ServiceBroker
         IDOFactory _dOFactory;
         ITaskDO _taskDO;
         ILibraryExecutor _libraryExecutor;
+        IBasketExecutor _basketExecutor;
 
-        public Processes(ITaskService taskService, IDOFactory dOFactory, ILibraryExecutor libraryExecutor)
+        public Processes(ITaskService taskService, IDOFactory dOFactory, ILibraryExecutor libraryExecutor, IBasketExecutor basketExecutor)
         {
             _taskService = taskService;
             _dOFactory = dOFactory;
             _taskDO = _dOFactory.CreateTaskDO();
             _libraryExecutor = libraryExecutor;
+            _basketExecutor = basketExecutor;
         }
         public TaskEO GetNextTask()
         {
@@ -41,6 +43,9 @@ namespace Backend.ServiceBroker.ServiceBroker
                 case "Library":
                     _libraryExecutor.ExecuteTask(task);
 
+                    break;
+                case "Basket":
+                    _basketExecutor.ExecuteTask(task);
                     break;
 
             }
