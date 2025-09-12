@@ -22,6 +22,7 @@ var host = Host.CreateDefaultBuilder(args)
     services.AddScoped<ITaskService,  TaskService>();
     services.AddScoped<IDOFactory, DOFactory>();
     services.AddScoped<ILibraryExecutor, LibraryExecutor>();
+    services.AddScoped<IBasketExecutor, BasketExecutor>();
     services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
     services.AddScoped<ISecurityBO, SecurityBO>();
     services.AddScoped<IBasketBO, BasketBO>();

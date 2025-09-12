@@ -145,6 +145,7 @@
     <Compile Include="EntityObjects\AddProductToLibraryEO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
+    <Compile Include="EntityObjects\GenerateUserBasketEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />
     <Compile Include="EntityObjects\TaskEO.cs" />
