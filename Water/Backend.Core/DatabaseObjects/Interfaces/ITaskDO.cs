@@ -10,7 +10,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface ITaskDO
     {
-        bool QueueTask(TaskEO task);
+        bool ScheduleTask(TaskEO task);
 
         TaskEO GetNextTaskByPriority();
     }

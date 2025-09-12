@@ -1,14 +1,8 @@
-﻿using Backend.Core.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Backend.Core.DatabaseObjects.Interfaces;
-using System.Text.Json;
+﻿using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.EntityObjects;
-using System.Runtime.Serialization.Formatters;
-using System.Data;
+using Backend.Core.Services.Interfaces;
+using System;
+using System.Text.Json;
 
 namespace Backend.Core.Services
 {
@@ -22,9 +16,9 @@ namespace Backend.Core.Services
             _taskDO = dOfactory.CreateTaskDO();
         }
 
-        public bool QueueTask(TaskEO task) 
+        public bool ScheduleTask(TaskEO task) 
         {
-            return _taskDO.QueueTask(task);
+            return _taskDO.ScheduleTask(task);
         }
 
         public string SerializeTaskData(object taskData)

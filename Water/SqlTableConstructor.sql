@@ -109,14 +109,13 @@ CREATE PROCEDURE p_GenerateUserBasket_f
     @UserID INT
 AS
 BEGIN
-    -- Check if a basket already exists
+BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM Basket WHERE UserID = @UserID
     )
     BEGIN
-        -- Insert new basket only if none exists
         INSERT INTO Basket (UserID, BasketType)
-        VALUES (@UserID, 1); -- Assuming 1 is the default basket type
+        VALUES (@UserID, 1);
     END
 END;
 
@@ -200,7 +199,7 @@ CREATE PROCEDURE p_GetProduct_f
 	SELECT * FROM Product
 	WHERE ID = @ProductID;
 
-Alter PROCEDURE p_GetLibraryProductsByUserId_f
+CREATE PROCEDURE p_GetLibraryProductsByUserId_f
 	@UserID int
 	AS 
 	SELECT lp.ProductKey, lp.DateAdded, lp.ProductId, p.Name AS ProductName, p.Type AS ProductType FROM LibraryProduct lp JOIN Product p ON lp.ProductId = p.ProductId WHERE lp.UserId = @UserId
@@ -220,7 +219,7 @@ CREATE PROCEDURE p_AddProductToUser_f
 	INSERT INTO ProductLibrary (UserID, ProductID, ProductKey, DateAdded)
 		VALUES (@UserID, @ProductID, @ProductKey, GETDATE());
 
-ALTER PROCEDURE p_QueueTask_i
+CREATE PROCEDURE p_ScheduleTask_i
 	@TaskType varchar(50),
 	@TaskData varchar(MAX),
 	@TaskName varchar(50),
@@ -229,14 +228,33 @@ ALTER PROCEDURE p_QueueTask_i
 
 	AS
 	BEGIN
-	INSERT INTO TaskQueue (TaskType, TaskData, TaskName, DateCreated, ScheduledStart, TaskPriority)
-		VALUES (@TaskType, @TaskData, @TaskName, GETDATE(), @ScheduledStart, @TaskPriority);
+	INSERT INTO TaskQueue (TaskType, TaskData, TaskName, DateCreated, ScheduledStart, TaskPriority, TaskStatus)
+		VALUES (@TaskType, @TaskData, @TaskName, GETDATE(), @ScheduledStart, @TaskPriority, 'Scheduled');
 	END
 
 CREATE PROCEDURE p_GetNextTaskByPriority_f
-	AS
+	AS 
 	BEGIN
-		SELECT TOP 1 * FROM TaskQueue 
-		WHERE GETDATE() > ScheduledStart 
-		ORDER BY TaskPriority DESC
-	END
+		SET NOCOUNT ON;
+		DECLARE @TaskID int
+	
+		BEGIN TRY
+			BEGIN TRANSACTION
+				SELECT TOP 1 @TaskID = ID FROM TaskQueue 
+				WHERE GETDATE() > ScheduledStart AND TaskStatus = 'Scheduled'
+				ORDER BY TaskPriority DESC
+				IF @TaskID IS NOT NULL
+				BEGIN
+					UPDATE TaskQueue
+					SET TaskStatus = 'Queued' 
+					WHERE ID = @TaskID
+				END
+				SELECT * FROM TaskQueue 
+				WHERE ID = @TaskID;
+			COMMIT;
+		END TRY
+		BEGIN CATCH
+		ROLLBACK;
+		SELECT ERROR_NUMBER() AS ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+		END CATCH
+	END;
