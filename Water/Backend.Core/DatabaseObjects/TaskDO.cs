@@ -13,9 +13,9 @@ namespace Backend.Core.DatabaseObjects
 {
     internal class TaskDO : BaseDO, ITaskDO
     {
-        public bool QueueTask(TaskEO task)
+        public bool ScheduleTask(TaskEO task)
         {
-            return RUNSP_Bool("p_QueueTask_i", 
+            return RUNSP_Bool("p_ScheduleTask_i",
                 ("@TaskType", task.TaskType),
                 ("@TaskName", task.TaskName),
                 ("@TaskData", task.TaskData),
@@ -26,7 +26,7 @@ namespace Backend.Core.DatabaseObjects
         public TaskEO GetNextTaskByPriority()
         {
             DataSet taskData = RunSP_DS("p_GetNextTaskByPriority_f");
-            if (taskData != null)
+            if (taskData != null && taskData.Tables.Count > 0 && taskData.Tables[0].Rows.Count > 0)
             {
                 DataRow row = taskData.Tables[0].Rows[0];
                 TaskEO task = new TaskEO(
@@ -34,11 +34,21 @@ namespace Backend.Core.DatabaseObjects
                     row.Field<string>("TaskName"),
                     row.Field<string>("TaskData"),
                     row.Field<DateTime>("ScheduledStart"),
-                    row.Field<int>("TaskPriority"), 
+                    row.Field<int>("TaskPriority"),
                     row.Field<int>("ID"));
                 return task;
             }
             return null;
+        }
+
+        public bool UpdateTaskStatus(TaskEO task, string status)
+        {
+            return RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", status));
+        }
+
+        public bool UpdateTaskLog(TaskEO task, object executionDetails)
+        {
+            throw new NotImplementedException();
         }
     }
 }

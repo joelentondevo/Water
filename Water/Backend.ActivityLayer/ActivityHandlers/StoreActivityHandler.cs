@@ -76,7 +76,7 @@ namespace Backend.ActivityLayer.ActitvityHandlers
                     AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, productKey);
                     string taskdata = _taskService.SerializeTaskData(addProductToLibraryEO);
                     TaskEO newTask = new TaskEO("Library", "AddProductToLibrary", taskdata, DateTime.Now, 5);
-                    _taskService.QueueTask(newTask);
+                    _taskService.ScheduleTask(newTask);
                 }
             }
         }

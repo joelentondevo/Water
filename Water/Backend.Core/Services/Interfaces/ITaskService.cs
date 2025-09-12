@@ -9,7 +9,7 @@ namespace Backend.Core.Services.Interfaces
 {
     public interface ITaskService
     {
-        bool QueueTask(TaskEO task);
+        bool ScheduleTask(TaskEO task);
 
         string SerializeTaskData(object task);
         object DeserializeTaskData(string taskData, Type taskType);
