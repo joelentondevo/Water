@@ -10,5 +10,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
     {
         string ValidateAuthenticationDetails(string inputUsername, string inputPassword);
         bool AddAuthenticationDetails(string inputUsername, string inputPassword);
+
+        int GetUserIDFromAuthenticationDetails(string inputUsername, string inputPassword);
     }
 }

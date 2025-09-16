@@ -16,7 +16,7 @@ namespace Backend.Core.ConfigurationObjects
         internal BackendCoreConfiguration()
         {
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile("C:\\Users\\joele\\source\\repos\\Water\\Backend.Core\\AppSettings.json");
+            configurationBuilder.AddJsonFile("C:\\Users\\jlenton\\source\\repos\\Water\\Water\\Backend.Core\\AppSettings.json");
             IConfiguration configuration = configurationBuilder.Build();
             _configurationvalue = configuration;
         }

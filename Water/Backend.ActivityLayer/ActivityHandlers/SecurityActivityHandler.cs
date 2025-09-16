@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.Core.BusinessObjects;
+using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.EntityObjects;
+using Backend.Core.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Backend.ActivityLayer.ActivityHandlers.Interfaces;
-using Backend.Core.BusinessObjects;
-using Backend.Core.BusinessObjects.Interfaces;
-using Backend.Core.Services.Interfaces;
 
 namespace Backend.ActivityLayer.ActitvityHandlers
 {
@@ -29,6 +30,10 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         public bool UserRegistration(string username, string password)
         {
             return _securityBO.AddAuthenticationDetails(username, password);
+            int userID = _securityBO.GetUserIDFromAuthenticationDetails(username, password);
+            string taskdata = _taskService.SerializeTaskData(userID);
+            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
+            _taskService.ScheduleTask(newTask);
         }
     }
 }

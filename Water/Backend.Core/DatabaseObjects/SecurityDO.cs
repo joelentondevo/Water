@@ -47,6 +47,20 @@ namespace Backend.Core.DatabaseObjects
             return false;
         }
 
+        public int GetUserIDFromAuthenticationDetails(string username, string password)
+        {
+            DataSet dataSet = RunSP_DS("p_FetchUserIDFromAuthenticationDetails",
+                ("@Username", username),
+                ("@Password", password));
 
+            if (dataSet.Tables.Count == 1 && dataSet.Tables[0].Rows.Count == 1)
+            {
+                return (int)dataSet.Tables[0].Rows[0]["ID"];
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

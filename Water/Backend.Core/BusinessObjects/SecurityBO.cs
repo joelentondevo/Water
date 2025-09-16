@@ -62,5 +62,10 @@ namespace Backend.Core.BusinessObjects
             }
             
         }
+
+        public int GetUserIDFromAuthenticationDetails(string inputUsername, string inputPassword)
+        {
+            return _securityDO.GetUserIDFromAuthenticationDetails(inputUsername, inputPassword);
+        }
     }
 }
