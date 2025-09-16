@@ -9,6 +9,7 @@ using Backend.Core.DatabaseObjects;
 using System.IdentityModel.Tokens.Jwt;
 using Backend.Core.Services.Interfaces;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.EntityObjects;
 
 namespace Backend.Core.BusinessObjects
 {
@@ -63,9 +64,10 @@ namespace Backend.Core.BusinessObjects
             
         }
 
-        public int GetUserIDFromAuthenticationDetails(string inputUsername, string inputPassword)
+        public int GetUserIDFromAuthenticationDetails(string inputUsername)
         {
-            return _securityDO.GetUserIDFromAuthenticationDetails(inputUsername, inputPassword);
+            AuthenticationDetailsEO authenticationDetailsEO = _securityDO.FetchAuthenticationDetails(inputUsername);
+            return authenticationDetailsEO.UserID;
         }
     }
 }

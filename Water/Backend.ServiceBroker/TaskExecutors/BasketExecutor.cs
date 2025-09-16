@@ -25,8 +25,8 @@ namespace Backend.ServiceBroker.TaskExecutors
             {
                 case "GenerateUserBasket":
                     Console.WriteLine("Started Execution on " + task.TaskName);
-                    var taskData = (GenerateUserBasketEO)_taskService.DeserializeTaskData(task.TaskData, typeof(GenerateUserBasketEO));
-                    _activityHandler.GenerateUserBasket(taskData.UserID);
+                    var taskData = (int)_taskService.DeserializeTaskData(task.TaskData, typeof(int));
+                    _activityHandler.GenerateUserBasket(taskData);
                     break;
             }
         }

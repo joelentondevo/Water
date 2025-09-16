@@ -14,7 +14,5 @@ namespace Backend.Core.DatabaseObjects.Interfaces
         bool AddAuthenticationDetails(string username, string password);
 
         bool ChangePassword(string username, string oldPassword, string newPassword);
-
-        int GetUserIDFromAuthenticationDetails(string username, string password);
     }
 }

@@ -29,11 +29,12 @@ namespace Backend.ActivityLayer.ActitvityHandlers
 
         public bool UserRegistration(string username, string password)
         {
-            return _securityBO.AddAuthenticationDetails(username, password);
-            int userID = _securityBO.GetUserIDFromAuthenticationDetails(username, password);
+            bool result =  _securityBO.AddAuthenticationDetails(username, password);
+            int userID = _securityBO.GetUserIDFromAuthenticationDetails(username);
             string taskdata = _taskService.SerializeTaskData(userID);
             TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
             _taskService.ScheduleTask(newTask);
+            return result;
         }
     }
 }
