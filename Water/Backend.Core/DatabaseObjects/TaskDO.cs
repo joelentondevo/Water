@@ -50,5 +50,49 @@ namespace Backend.Core.DatabaseObjects
         {
             throw new NotImplementedException();
         }
+
+        public bool MarkTaskComplete(TaskEO task, DateTime startTime, DateTime endTime)
+        {
+            bool LogTask = RUNSP_Bool("p_LogTaskComplete_i",
+                ("@TaskID", task.Id),
+                ("@TaskType", task.TaskType),
+                ("@TaskData", task.TaskData),
+                ("@TaskStatus", "Complete"),
+                ("@StartedAt", startTime),
+                ("@CompletedAt", endTime),
+                ("@Duration", (endTime - startTime).TotalMilliseconds),
+                ("@DateLogCreated", DateTime.Now));
+
+            bool UpdateQueueStatus = RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Completed"));
+
+            if (LogTask && UpdateQueueStatus)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime endTime, Exception ex)
+        {
+            bool LogTask = RUNSP_Bool("p_LogTaskFailed_i",
+               ("@TaskID", task.Id),
+               ("@TaskType", task.TaskType),
+               ("@TaskData", task.TaskData),
+               ("@TaskStatus", "Failed"),
+               ("@StartedAt", startTime),
+               ("@CompletedAt", endTime),
+               ("@Duration", (endTime - startTime).TotalMilliseconds),
+               ("@ErrorMessage", ex.Message),
+               ("@DateLogCreated", DateTime.Now));
+
+            bool UpdateQueueStatus = RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Failed"));
+
+            if (LogTask && UpdateQueueStatus)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

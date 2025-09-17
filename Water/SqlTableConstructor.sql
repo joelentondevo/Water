@@ -75,9 +75,8 @@ CREATE TABLE TaskExecutionLog (
 	TaskStatus varchar(50) NOT NULL,
 	StartedAt DateTime NOT NULL,
 	CompletedAt DateTime,
-	Duration int,
+	Duration float,
 	ErrorMessage varchar(MAX),
-	StackTrace varchar(MAX),
 	DateLogCreated DateTime NOT NULL,
 )
 
@@ -258,3 +257,30 @@ CREATE PROCEDURE p_GetNextTaskByPriority_f
 		SELECT ERROR_NUMBER() AS ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
 		END CATCH
 	END;
+
+CREATE PROCEDURE p_LogTaskComplete_i
+	@TaskID int, 
+	@TaskType varchar(50), 
+	@TaskData varchar(max), 
+	@TaskStatus varchar(50),
+	@StartedAt DateTime,
+	@CompletedAt DateTime,
+	@Duration Float,
+	@DateLogCreated DateTime
+	AS
+	INSERT INTO TaskExecutionLog (TaskID, TaskType, TaskData, TaskStatus, StartedAt, CompletedAt, Duration, DateLogCreated)
+		VALUES (@TaskID, @TaskType, @TaskData, @TaskStatus, @StartedAt, @CompletedAt, @Duration, @DateLogCreated);
+
+CREATE PROCEDURE p_LogTaskFailed_i
+	@TaskID int, 
+	@TaskType varchar(50), 
+	@TaskData varchar(max), 
+	@TaskStatus varchar(50),
+	@StartedAt DateTime,
+	@CompletedAt DateTime,
+	@Duration Float,
+	@ErrorMessage varchar(max),
+	@DateLogCreated DateTime
+	AS
+	INSERT INTO TaskExecutionLog (TaskID, TaskType, TaskData, TaskStatus, StartedAt, CompletedAt, Duration, ErrorMessage, DateLogCreated)
+		VALUES (@TaskID, @TaskType, @TaskData, @TaskStatus, @StartedAt, @CompletedAt, @Duration, @ErrorMessage, @DateLogCreated);

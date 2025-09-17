@@ -25,10 +25,9 @@ namespace Backend.ServiceBroker.ServiceBroker
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             var runningTasks = new List<Task>();
-
+            Console.WriteLine("Checking for Tasks at:" + DateTime.Now);
             while (!cancellationToken.IsCancellationRequested)
             {
-                Console.WriteLine("Checking for Tasks at:" + DateTime.Now);
                 var task = processes.GetNextTask();
                 if (task != null)
                 {
@@ -37,7 +36,6 @@ namespace Backend.ServiceBroker.ServiceBroker
                 }
                 else
                 {
-                    Console.WriteLine("No new task found at:" + DateTime.Now);
                     await Task.Delay(tickInterval, cancellationToken);
                 }
 
@@ -47,16 +45,19 @@ namespace Backend.ServiceBroker.ServiceBroker
 
                     var execution = Task.Run(async () =>
                     {
+                        DateTime startTime = DateTime.Now;
                         try
                         {
-                            Console.WriteLine("Executing task " + queueTask.TaskName + " at:" + DateTime.Now);
+                            Console.WriteLine("Executing task " + queueTask.TaskName + " at:" + startTime);
                             await processes.SendTaskForExecution(queueTask, cancellationToken);
-                            processes.MarkTaskComplete(queueTask);
+                            DateTime endTime = DateTime.Now;
+                            processes.MarkTaskComplete(queueTask, startTime, endTime);
                         }
                         catch (Exception ex)
                         {
+                            DateTime endTime = DateTime.Now;
                             Console.WriteLine(ex.ToString());
-                            processes.MarkTaskFailed(queueTask);
+                            processes.MarkTaskFailed(queueTask, startTime, endTime,  ex);
                         }
                         finally
                         {

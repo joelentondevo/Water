@@ -52,14 +52,15 @@ namespace Backend.ServiceBroker.ServiceBroker
 
         }
 
-        public bool MarkTaskComplete(TaskEO task)
+        public bool MarkTaskComplete(TaskEO task, DateTime startTime, DateTime endTime)
         {
-            return false;
+            return _taskDO.MarkTaskComplete(task, startTime, endTime);
         }
 
-        public bool MarkTaskFailed(TaskEO task)
+        public bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime endTime, Exception ex)
         {
             return false;
+            return _taskDO.MarkTaskFailed(task, startTime, endTime, ex);
         }
     }
 }

@@ -13,5 +13,9 @@ namespace Backend.Core.DatabaseObjects.Interfaces
         bool ScheduleTask(TaskEO task);
 
         TaskEO GetNextTaskByPriority();
+
+        bool MarkTaskComplete(TaskEO task, DateTime startTime, DateTime endTime);
+
+        bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime endTime, Exception ex);
     }
 }

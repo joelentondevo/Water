@@ -15,10 +15,10 @@ namespace Backend.ServiceBroker.ServiceBroker.Interfaces
         Task SendTaskForExecution(TaskEO task, CancellationToken cancellationToken);
 
 
-        bool MarkTaskComplete(TaskEO task);
+        bool MarkTaskComplete(TaskEO task, DateTime startTime, DateTime endTime);
 
 
-        bool MarkTaskFailed(TaskEO task);
+        bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime failTime, Exception ex);
         
     }
 }
