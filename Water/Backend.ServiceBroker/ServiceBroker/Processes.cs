@@ -19,14 +19,16 @@ namespace Backend.ServiceBroker.ServiceBroker
         ITaskDO _taskDO;
         ILibraryExecutor _libraryExecutor;
         IBasketExecutor _basketExecutor;
+        ICorrespondenceExecutor _correspondenceExecutor;
 
-        public Processes(ITaskService taskService, IDOFactory dOFactory, ILibraryExecutor libraryExecutor, IBasketExecutor basketExecutor)
+        public Processes(ITaskService taskService, IDOFactory dOFactory, ILibraryExecutor libraryExecutor, IBasketExecutor basketExecutor, ICorrespondenceExecutor correspondenceExecutor)
         {
             _taskService = taskService;
             _dOFactory = dOFactory;
             _taskDO = _dOFactory.CreateTaskDO();
             _libraryExecutor = libraryExecutor;
             _basketExecutor = basketExecutor;
+            _correspondenceExecutor = correspondenceExecutor;
         }
         public TaskEO GetNextTask()
         {
@@ -38,7 +40,7 @@ namespace Backend.ServiceBroker.ServiceBroker
             switch(task.TaskType)
             {
                 case "Correspondence":
-
+                    _correspondenceExecutor.ExecuteTask(task);
                     break;
                 case "Library":
                     _libraryExecutor.ExecuteTask(task);
@@ -59,7 +61,6 @@ namespace Backend.ServiceBroker.ServiceBroker
 
         public bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime endTime, Exception ex)
         {
-            return false;
             return _taskDO.MarkTaskFailed(task, startTime, endTime, ex);
         }
     }

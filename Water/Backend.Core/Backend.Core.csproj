@@ -129,9 +129,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessObjects\BaseBO.cs" />
     <Compile Include="BusinessObjects\BasketBO.cs" />
+    <Compile Include="BusinessObjects\CorrespondenceBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IBasketBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\ICorrespondenceBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\ILibraryBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\ISecurityBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IStoreBO.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="EntityObjects\AddProductToLibraryEO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
+    <Compile Include="EntityObjects\ReceiptDataEO.cs" />
     <Compile Include="EntityObjects\GenerateUserBasketEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />

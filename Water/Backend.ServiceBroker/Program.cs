@@ -14,6 +14,7 @@ using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 using Backend.ActivityLayer.ActitvityHandlers;
 using Backend.Core.BusinessObjects;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.ActivityLayer.ActivityHandlers;
 
 var host = Host.CreateDefaultBuilder(args)
 .ConfigureServices((context, services) =>
@@ -23,11 +24,15 @@ var host = Host.CreateDefaultBuilder(args)
     services.AddScoped<IDOFactory, DOFactory>();
     services.AddScoped<ILibraryExecutor, LibraryExecutor>();
     services.AddScoped<IBasketExecutor, BasketExecutor>();
+    services.AddScoped<ICorrespondenceExecutor, CorrespondenceExecutor>();
+    services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
     services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
+    services.AddScoped<ICorrespondenceActivityHandler, CorrespondenceActivityHandler>();
     services.AddScoped<ISecurityBO, SecurityBO>();
     services.AddScoped<IBasketBO, BasketBO>();
     services.AddScoped<IStoreBO, StoreBO>();
     services.AddScoped<ILibraryBO, LibraryBO>();
+    services.AddScoped<ICorrespondenceBO, CorrespondenceBO>();
     services.AddScoped<IServicesFactory, ServicesFactory>();
     services.AddHostedService<HeartBeat>();
 })

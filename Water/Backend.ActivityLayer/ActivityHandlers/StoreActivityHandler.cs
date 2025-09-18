@@ -74,10 +74,14 @@ namespace Backend.ActivityLayer.ActitvityHandlers
                 {
                     string productKey = _libraryBO.GenerateProductKey(16, 4);
                     AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, productKey);
-                    string taskdata = _taskService.SerializeTaskData(addProductToLibraryEO);
-                    TaskEO newTask = new TaskEO("Library", "AddProductToLibrary", taskdata, DateTime.Now, 5);
-                    _taskService.ScheduleTask(newTask);
+                    string libraryTaskData = _taskService.SerializeTaskData(addProductToLibraryEO);
+                    TaskEO libraryTask = new TaskEO("Library", "AddProductToLibrary", libraryTaskData, DateTime.Now, 5);
+                    _taskService.ScheduleTask(libraryTask);
                 }
+                ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, DateTime.Now, "username");
+                string receiptTaskData = _taskService.SerializeTaskData(receiptData);
+                TaskEO receiptTask = new TaskEO("Correspondence", "GenerateOrderReceipt", receiptTaskData, DateTime.Now, 5);
+                _taskService.ScheduleTask(receiptTask);
             }
         }
 

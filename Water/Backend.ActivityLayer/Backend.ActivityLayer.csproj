@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityHandlers\CorrespondenceActivityHandler.cs" />
+    <Compile Include="ActivityHandlers\Interfaces\ICorrespondenceActivityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\ISecurityActvityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\IStoreActivityHandler.cs" />
     <Compile Include="ActivityHandlers\SecurityActivityHandler.cs" />

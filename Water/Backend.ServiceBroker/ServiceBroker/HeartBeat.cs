@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Backend.ServiceBroker.ServiceBroker
 {
-    internal class HeartBeat : BackgroundService
+    public class HeartBeat : BackgroundService
     {
         private readonly TimeSpan tickInterval = TimeSpan.FromSeconds(1);
         private readonly ConcurrentQueue<TaskEO> taskQueue = new ConcurrentQueue<TaskEO>();
@@ -19,6 +19,7 @@ namespace Backend.ServiceBroker.ServiceBroker
 
         public HeartBeat(IProcesses processes)
         {
+            Console.WriteLine("HeartBeat constructor called");
             this.processes = processes;
         }
 
@@ -48,7 +49,6 @@ namespace Backend.ServiceBroker.ServiceBroker
                         DateTime startTime = DateTime.Now;
                         try
                         {
-                            Console.WriteLine("Executing task " + queueTask.TaskName + " at:" + startTime);
                             await processes.SendTaskForExecution(queueTask, cancellationToken);
                             DateTime endTime = DateTime.Now;
                             processes.MarkTaskComplete(queueTask, startTime, endTime);
