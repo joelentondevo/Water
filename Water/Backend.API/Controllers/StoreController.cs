@@ -1,10 +1,7 @@
 ﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
-using Backend.Core;
 using Backend.Core.EntityObjects;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.Design;
 using System.Security.Claims;
 
 namespace Backend.API.Controllers
@@ -20,17 +17,33 @@ namespace Backend.API.Controllers
             _storeActivityHandler = storeActivityHandler;
         }
 
-        [HttpGet(Name = "GetGames")]
+        [HttpGet("GetFullProductsList")]
         public List<ProductListingEO> GetAllProductListings()
         {
             return _storeActivityHandler.GetFullProductList();
         }
-        [Authorize]
-        [HttpPost(Name = "Checkout")]
-        public void Checkout()
+
+        [HttpGet("GetFilteredProductsList")]
+        public List<ProductListingEO> GetFilteredProductListings(string nameSearch)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            _storeActivityHandler.Checkout(userId);
+            return _storeActivityHandler.GetFullProductList();
+        }
+
+        [Authorize]
+        [HttpPost("PlaceOrder")]
+        public IActionResult Checkout()
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                _storeActivityHandler.Checkout(userId);
+                return Ok("Order is being processed");
+            }
+            catch
+            {
+                return BadRequest("Order Processing Failed");
+            }
+
         }
 
     }

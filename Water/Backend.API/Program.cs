@@ -65,15 +65,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IDOFactory, DOFactory>();
+builder.Services.AddScoped<IBOFactory, BOFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
 builder.Services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
 builder.Services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
 builder.Services.AddScoped<ICorrespondenceActivityHandler, CorrespondenceActivityHandler>();
-builder.Services.AddScoped<ISecurityBO, SecurityBO>();
-builder.Services.AddScoped<IBasketBO,  BasketBO>();
-builder.Services.AddScoped<IStoreBO, StoreBO>();
-builder.Services.AddScoped<ILibraryBO, LibraryBO>();
-builder.Services.AddScoped<ICorrespondenceBO, CorrespondenceBO>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 
 

@@ -130,13 +130,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\BasketBO.cs" />
+    <Compile Include="BusinessObjects\BOFactory.cs" />
     <Compile Include="BusinessObjects\CorrespondenceBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IBasketBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\IBOFactory.cs" />
     <Compile Include="BusinessObjects\Interfaces\ICorrespondenceBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\ILibraryBO.cs" />
+    <Compile Include="BusinessObjects\Interfaces\IOrderBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\ISecurityBO.cs" />
     <Compile Include="BusinessObjects\Interfaces\IStoreBO.cs" />
     <Compile Include="BusinessObjects\LibraryBO.cs" />
+    <Compile Include="BusinessObjects\OrderBO.cs" />
     <Compile Include="DatabaseObjects\BasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\ILibraryDO.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="EntityObjects\AddProductToLibraryEO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
+    <Compile Include="EntityObjects\OrderDataEO.cs" />
     <Compile Include="EntityObjects\ReceiptDataEO.cs" />
     <Compile Include="EntityObjects\GenerateUserBasketEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />

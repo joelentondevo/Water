@@ -10,5 +10,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
     public interface ICorrespondenceBO
     {
         void GenerateReceipt(ReceiptDataEO generateRecieptEO);
+
+        void RaiseReceiptTask(ReceiptDataEO receiptDataEO);
     }
 }

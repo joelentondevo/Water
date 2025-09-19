@@ -13,6 +13,7 @@ namespace Backend.Core.BusinessObjects
         private readonly ILibraryDO _libraryDO;
         private readonly IServicesFactory _servicesFactory;
         private readonly IProductKeyService _productKeyService;
+        private readonly ITaskService _taskService;
 
         public LibraryBO(IDOFactory dOFactory, IServicesFactory servicesFactory)
         {
@@ -20,6 +21,7 @@ namespace Backend.Core.BusinessObjects
             _servicesFactory = servicesFactory;
             _libraryDO = _dOFactory.CreateLibraryDO();
             _productKeyService = _servicesFactory.CreateProductKeyService();
+            _taskService = _servicesFactory.CreateTaskService();
         }
 
         public bool AddProductToUserLibrary(int userId, int productId, string productKey = null)
@@ -52,6 +54,13 @@ namespace Backend.Core.BusinessObjects
         public List<LibraryProductEO> GetLibraryProductsByUserId(int userId)
         {
             return _libraryDO.GetLibraryProductsByUserId(userId);
+        }
+
+        public void RaiseAddProductToLibraryTask(AddProductToLibraryEO addProductToLibraryEO)
+        {
+            string libraryTaskData = _taskService.SerializeTaskData(addProductToLibraryEO);
+            TaskEO libraryTask = new TaskEO("Library", "AddProductToLibrary", libraryTaskData, DateTime.Now, 5);
+            _taskService.ScheduleTask(libraryTask);
         }
     }
 }

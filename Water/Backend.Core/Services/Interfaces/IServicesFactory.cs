@@ -11,5 +11,7 @@ namespace Backend.Core.Services.Interfaces
         IJWTService CreateJWTService();
 
         IProductKeyService CreateProductKeyService();
+
+        ITaskService CreateTaskService();
     }
 }

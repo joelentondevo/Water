@@ -28,11 +28,7 @@ var host = Host.CreateDefaultBuilder(args)
     services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
     services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
     services.AddScoped<ICorrespondenceActivityHandler, CorrespondenceActivityHandler>();
-    services.AddScoped<ISecurityBO, SecurityBO>();
-    services.AddScoped<IBasketBO, BasketBO>();
-    services.AddScoped<IStoreBO, StoreBO>();
-    services.AddScoped<ILibraryBO, LibraryBO>();
-    services.AddScoped<ICorrespondenceBO, CorrespondenceBO>();
+    services.AddScoped<IBOFactory, BOFactory>();
     services.AddScoped<IServicesFactory, ServicesFactory>();
     services.AddHostedService<HeartBeat>();
 })

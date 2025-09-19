@@ -14,12 +14,16 @@ namespace Backend.ActivityLayer.ActitvityHandlers
 
     public class SecurityActivityHandler : ISecurityActivityHandler
     {
+        IBOFactory _BOFactory;
+        IServicesFactory _servicesFactory;
         ISecurityBO _securityBO;
         ITaskService _taskService;
-        public SecurityActivityHandler(ISecurityBO securityBO, ITaskService taskCreationService)
+        public SecurityActivityHandler(IBOFactory bOFactory, IServicesFactory servicesFactory)
         {
-            _securityBO = securityBO;
-            _taskService = taskCreationService;
+            _BOFactory = bOFactory;
+            _servicesFactory = servicesFactory;
+            _securityBO = _BOFactory.CreateSecurityBO();
+            _taskService = _servicesFactory.CreateTaskService();
         }
 
         public string UserLoginAttempt(string username, string password)

@@ -80,6 +80,21 @@ CREATE TABLE TaskExecutionLog (
 	DateLogCreated DateTime NOT NULL,
 )
 
+CREATE TABLE ProductOrder (
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	UserID int NOT NULL,
+	OrderDate int NOT NULL,
+	OrderType int NOT NULL
+)
+
+CREATE TABLE ProductOrderDetail(
+	ID int NOT NULL IDENTITY PRIMARY KEY,
+	OrderID int NOT NULL,
+	ProductID int NOT NULL,
+	Price Decimal NOT NULL,
+	Quantity int NOT NULL
+)
+
 
 
 

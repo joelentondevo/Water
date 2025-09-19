@@ -16,8 +16,8 @@ namespace Backend.Core.BusinessObjects
     public class SecurityBO : ISecurityBO 
     {
         IDOFactory _dOFactory;
-        ISecurityDO _securityDO;
         IServicesFactory _servicesFactory;
+        ISecurityDO _securityDO;
         IJWTService _jwtService;
 
         public SecurityBO(IDOFactory dOFactory, IServicesFactory servicesFactory)

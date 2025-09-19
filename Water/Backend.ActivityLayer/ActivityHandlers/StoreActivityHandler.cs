@@ -16,14 +16,22 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         IStoreBO _storeBO;
         IBasketBO _basketBO;
         ILibraryBO _libraryBO;
+        ICorrespondenceBO _correspondenceBO;
+        IBOFactory _bOFactory;
+        IServicesFactory _servicesFactory;
+        IOrderBO _orderBO;
         ITaskService _taskService;
 
-        public StoreActivityHandler(IStoreBO storeBO, IBasketBO basketBO, ILibraryBO libraryBO, ITaskService taskService)
+        public StoreActivityHandler(IBOFactory bOFactory, IServicesFactory servicesFactory)
         {
-            _storeBO = storeBO;
-            _basketBO = basketBO;
-            _libraryBO = libraryBO;
-            _taskService = taskService;
+            _servicesFactory = servicesFactory;
+            _bOFactory = bOFactory;
+            _storeBO = _bOFactory.CreateStoreBO();
+            _basketBO = _bOFactory.CreateBasketBO();
+            _libraryBO = _bOFactory.CreateLibraryBO();
+            _orderBO = _bOFactory.CreateOrderBO();
+            _correspondenceBO = _bOFactory.CreateCorrespondenceBO();
+            _taskService = _servicesFactory.CreateTaskService();
         }
 
         public void GenerateUserBasket(int userId)
@@ -69,21 +77,18 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         public void Checkout(int userId)
         {
             List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userId);
+
+            //order registering logic to go here
+
             if (checkoutBasket != null) {
                 foreach (var item in checkoutBasket)
                 {
-                    string productKey = _libraryBO.GenerateProductKey(16, 4);
-                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, productKey);
-                    string libraryTaskData = _taskService.SerializeTaskData(addProductToLibraryEO);
-                    TaskEO libraryTask = new TaskEO("Library", "AddProductToLibrary", libraryTaskData, DateTime.Now, 5);
-                    _taskService.ScheduleTask(libraryTask);
+                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
+                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
                 }
                 ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, DateTime.Now, "username");
-                string receiptTaskData = _taskService.SerializeTaskData(receiptData);
-                TaskEO receiptTask = new TaskEO("Correspondence", "GenerateOrderReceipt", receiptTaskData, DateTime.Now, 5);
-                _taskService.ScheduleTask(receiptTask);
+                _correspondenceBO.RaiseReceiptTask(receiptData);
             }
         }
-
     }
 }

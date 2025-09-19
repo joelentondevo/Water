@@ -11,10 +11,12 @@ namespace Backend.ActivityLayer.ActivityHandlers
 {
     public class CorrespondenceActivityHandler : ICorrespondenceActivityHandler
     {
+        IBOFactory _bOFactory;
         ICorrespondenceBO _correspondenceBO;
-        public CorrespondenceActivityHandler(ICorrespondenceBO correspondenceBO) 
+        public CorrespondenceActivityHandler(IBOFactory bOFactory) 
         {
-            _correspondenceBO = correspondenceBO;
+            _bOFactory = bOFactory;
+            _correspondenceBO = _bOFactory.CreateCorrespondenceBO();
         }
 
         public void GenerateOrderReceipt(ReceiptDataEO receiptData)
