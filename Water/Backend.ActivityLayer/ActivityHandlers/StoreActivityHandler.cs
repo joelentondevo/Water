@@ -34,31 +34,6 @@ namespace Backend.ActivityLayer.ActitvityHandlers
             _taskService = _servicesFactory.CreateTaskService();
         }
 
-        public void GenerateUserBasket(int userId)
-        {
-            _basketBO.GenerateUserBasket(userId);
-            return;
-        }
-
-        public List<BasketItemEO> GetBasketItemsByUserId(int userId)
-        {
-            return _basketBO.GetBasketItems(userId);
-        }
-
-        public bool AddProductToUserBasket(int userId, int itemId, int quantity)
-        {
-            return _basketBO.AddProductToBasket(userId, itemId, quantity);
-        }
-
-        public bool RemoveProductFromUserBasket(int userId, int itemId)
-        {
-            return _basketBO.RemoveItemFromBasket(userId, itemId);
-        }
-
-        public bool ClearUserBasket(int userId)
-        {
-            return _basketBO.ClearUserBasket(userId);
-        }
         public bool AddProductToUserLibrary(int userId, int productId, string ProductKey)
         {
             return _libraryBO.AddProductToUserLibrary(userId, productId, ProductKey);

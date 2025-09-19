@@ -1,6 +1,0 @@
-=== RECEIPT ===
-Date: 2025-09-19 11:54
-Customer: username
-Items:
-Product: Halo --- Quantity: 6 --- Unit Price: 3
-Total: 18

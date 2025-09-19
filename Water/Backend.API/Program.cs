@@ -67,6 +67,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDOFactory, DOFactory>();
 builder.Services.AddScoped<IBOFactory, BOFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
+builder.Services.AddScoped<IBasketActivityHandler, BasketActivityHandler>();
 builder.Services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
 builder.Services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
 builder.Services.AddScoped<ICorrespondenceActivityHandler, CorrespondenceActivityHandler>();

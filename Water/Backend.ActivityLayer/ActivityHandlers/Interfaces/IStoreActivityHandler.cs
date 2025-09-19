@@ -9,16 +9,6 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 {
     public interface IStoreActivityHandler
     {
-        List<BasketItemEO> GetBasketItemsByUserId(int userId);
-
-        void GenerateUserBasket(int userId);
-
-        bool AddProductToUserBasket(int userId, int itemId, int quantity);
-
-
-        bool RemoveProductFromUserBasket(int userId, int itemId);
-
-        bool ClearUserBasket(int userId);
 
         bool AddProductToUserLibrary(int userId, int productId, string ProductKey);
         
