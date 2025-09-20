@@ -9,15 +9,8 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 {
     public interface IStoreActivityHandler
     {
-
-        bool AddProductToUserLibrary(int userId, int productId, string ProductKey);
-        
-
         List<ProductListingEO> GetFullProductList();
 
         ProductListingEO GetProductListing(int productId);
-
-        void Checkout(int userId);
-
     }
 }

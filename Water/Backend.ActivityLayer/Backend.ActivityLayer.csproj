@@ -78,11 +78,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityHandlers\BasketActivityHandler.cs" />
+    <Compile Include="ActivityHandlers\CheckoutActivityHandler.cs" />
     <Compile Include="ActivityHandlers\CorrespondenceActivityHandler.cs" />
+    <Compile Include="ActivityHandlers\Interfaces\ICheckoutActivityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\IBasketActivityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\ICorrespondenceActivityHandler.cs" />
+    <Compile Include="ActivityHandlers\Interfaces\ILibraryActivityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\ISecurityActvityHandler.cs" />
     <Compile Include="ActivityHandlers\Interfaces\IStoreActivityHandler.cs" />
+    <Compile Include="ActivityHandlers\LibraryActivityHandler.cs" />
     <Compile Include="ActivityHandlers\SecurityActivityHandler.cs" />
     <Compile Include="ActivityHandlers\StoreActivityHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

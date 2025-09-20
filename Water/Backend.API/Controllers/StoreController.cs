@@ -12,6 +12,7 @@ namespace Backend.API.Controllers
     public class StoreController : Controller
     {
         private readonly IStoreActivityHandler _storeActivityHandler;
+        private readonly ICheckoutActivityHandler _checkoutActivityHandler;
         public StoreController(IStoreActivityHandler storeActivityHandler)
         {
             _storeActivityHandler = storeActivityHandler;
@@ -27,23 +28,6 @@ namespace Backend.API.Controllers
         public List<ProductListingEO> GetFilteredProductListings(string nameSearch)
         {
             return _storeActivityHandler.GetFullProductList();
-        }
-
-        [Authorize]
-        [HttpPost("PlaceOrder")]
-        public IActionResult Checkout()
-        {
-            try
-            {
-                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-                _storeActivityHandler.Checkout(userId);
-                return Ok("Order is being processed");
-            }
-            catch
-            {
-                return BadRequest("Order Processing Failed");
-            }
-
         }
 
     }

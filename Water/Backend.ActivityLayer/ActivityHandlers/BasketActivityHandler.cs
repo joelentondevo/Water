@@ -13,13 +13,11 @@ namespace Backend.ActivityLayer.ActivityHandlers
     public class BasketActivityHandler : IBasketActivityHandler
     {
         IBOFactory _bOFactory;
-        IServicesFactory _servicesFactory;
         IBasketBO _basketBO;
 
-        public BasketActivityHandler(IBOFactory bOFactory, IServicesFactory servicesFactory)
+        public BasketActivityHandler(IBOFactory bOFactory)
         {
             _bOFactory = bOFactory;
-            _servicesFactory = servicesFactory;
             _basketBO = _bOFactory.CreateBasketBO();
         }
 

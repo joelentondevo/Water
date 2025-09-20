@@ -13,11 +13,11 @@ namespace Backend.ServiceBroker.TaskExecutors
     public class BasketExecutor : IBasketExecutor
     {
         ITaskService _taskService;
-        IStoreActivityHandler _activityHandler;
-        public BasketExecutor(ITaskService taskService, IStoreActivityHandler storeActivityHandler)
+        IBasketActivityHandler _basketActivityHandler;
+        public BasketExecutor(ITaskService taskService, IBasketActivityHandler basketActivityHandler)
         {
             _taskService = taskService;
-            _activityHandler = storeActivityHandler;
+            _basketActivityHandler = basketActivityHandler;
         }
         public void ExecuteTask(TaskEO task) 
         {
@@ -26,7 +26,7 @@ namespace Backend.ServiceBroker.TaskExecutors
                 case "GenerateUserBasket":
                     Console.WriteLine("Started Execution on " + task.TaskName);
                     var taskData = (int)_taskService.DeserializeTaskData(task.TaskData, typeof(int));
-                    _activityHandler.GenerateUserBasket(taskData);
+                    _basketActivityHandler.GenerateUserBasket(taskData);
                     break;
             }
         }

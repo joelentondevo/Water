@@ -8,11 +8,11 @@ namespace Backend.ServiceBroker.TaskExecutors
     public class LibraryExecutor : ILibraryExecutor
     {
         ITaskService _taskService;
-        IStoreActivityHandler _activityHandler;
-        public LibraryExecutor(ITaskService taskService, IStoreActivityHandler storeActivityHandler) 
+        ILibraryActivityHandler _libraryActivityHandler;
+        public LibraryExecutor(ITaskService taskService, ILibraryActivityHandler libraryActivityHandler) 
         { 
             _taskService = taskService;
-            _activityHandler = storeActivityHandler;
+            _libraryActivityHandler = libraryActivityHandler;
         }
 
         public void ExecuteTask(TaskEO task)
@@ -22,7 +22,7 @@ namespace Backend.ServiceBroker.TaskExecutors
                 case "AddProductToLibrary":
                     Console.WriteLine("Started Execution on " + task.TaskName);
                     var taskData = (AddProductToLibraryEO)_taskService.DeserializeTaskData(task.TaskData, typeof(AddProductToLibraryEO));
-                    _activityHandler.AddProductToUserLibrary(taskData.UserID, taskData.ProductID, taskData.ProductKey);
+                    _libraryActivityHandler.AddProductToUserLibrary(taskData.UserID, taskData.ProductID, taskData.ProductKey);
                     break;
             }
         }
