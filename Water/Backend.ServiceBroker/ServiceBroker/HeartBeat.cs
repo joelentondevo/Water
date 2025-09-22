@@ -19,7 +19,6 @@ namespace Backend.ServiceBroker.ServiceBroker
 
         public HeartBeat(IProcesses processes)
         {
-            Console.WriteLine("HeartBeat constructor called");
             this.processes = processes;
         }
 

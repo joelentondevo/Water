@@ -152,10 +152,10 @@
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\OrderDataEO.cs" />
     <Compile Include="EntityObjects\ReceiptDataEO.cs" />
-    <Compile Include="EntityObjects\GenerateUserBasketEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />
     <Compile Include="EntityObjects\TaskEO.cs" />
+    <Compile Include="EntityObjects\UserDetailsEO.cs" />
     <Compile Include="Services\Interfaces\IJWTService.cs" />
     <Compile Include="Services\Interfaces\IProductKeyService.cs" />
     <Compile Include="Services\Interfaces\IServicesFactory.cs" />

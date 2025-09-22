@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.Core.EntityObjects;
 
 namespace Backend.API.Controllers
 {
@@ -22,8 +23,8 @@ namespace Backend.API.Controllers
         {
             try
             {
-                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-                _checkoutActivityHandler.Checkout(userId);
+                UserDetailsEO userDetails = new UserDetailsEO(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value), (string)(User.FindFirst(ClaimTypes.Name)?.Value));
+                _checkoutActivityHandler.Checkout(userDetails);
                 return Ok("Order is being processed");
             }
             catch

@@ -27,9 +27,9 @@ namespace Backend.ActivityLayer.ActivityHandlers
             _correspondenceBO = _bOFactory.CreateCorrespondenceBO();
         }
 
-        public void Checkout(int userId)
+        public void Checkout(UserDetailsEO userDetails)
         {
-            List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userId);
+            List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userDetails.UserID);
 
             //order registering logic to go here
 
@@ -37,10 +37,10 @@ namespace Backend.ActivityLayer.ActivityHandlers
             {
                 foreach (var item in checkoutBasket)
                 {
-                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userId, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
+                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userDetails.UserID, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
                     _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
                 }
-                ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, DateTime.Now, "username");
+                ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, DateTime.Now, userDetails.UserName);
                 _correspondenceBO.RaiseReceiptTask(receiptData);
             }
         }
