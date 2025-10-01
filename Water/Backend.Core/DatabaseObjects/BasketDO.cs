@@ -33,10 +33,10 @@ namespace Backend.Core.DatabaseObjects
         {
             return RUNSP_Bool("p_ClearUserBasket_f", ("@UserID", userID));
         }
-        public List<EntityObjects.BasketEntryEO> GetBasketItems(int userID)
+        public List<BasketEntryEO> GetBasketItems(int userID)
         {
             DataSet ds = RunSP_DS("p_GetBasketItems_f", ("@UserID", userID));
-            List<EntityObjects.BasketEntryEO> items = new List<EntityObjects.BasketEntryEO>();
+            List<BasketEntryEO> items = new List<BasketEntryEO>();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
