@@ -144,13 +144,17 @@
     <Compile Include="DatabaseObjects\BasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\IBasketDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\ILibraryDO.cs" />
+    <Compile Include="DatabaseObjects\Interfaces\IOrderDO.cs" />
     <Compile Include="DatabaseObjects\Interfaces\ITaskDO.cs" />
     <Compile Include="DatabaseObjects\LibraryDO.cs" />
+    <Compile Include="DatabaseObjects\OrderDO.cs" />
     <Compile Include="DatabaseObjects\TaskDO.cs" />
     <Compile Include="EntityObjects\AddProductToLibraryEO.cs" />
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\OrderDataEO.cs" />
+    <Compile Include="EntityObjects\OrderDetailDataEO.cs" />
+    <Compile Include="EntityObjects\OrderMetaDataEO.cs" />
     <Compile Include="EntityObjects\ReceiptDataEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />

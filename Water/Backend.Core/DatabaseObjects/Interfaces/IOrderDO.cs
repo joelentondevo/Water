@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Core.BusinessObjects.Interfaces
+namespace Backend.Core.DatabaseObjects.Interfaces
 {
-    public interface IOrderBO
+    public interface IOrderDO
     {
-        bool CreateOrder(OrderMetaDataEO orderData);
+        bool AddOrderEntry(OrderMetaDataEO orderDataEO);
     }
 }

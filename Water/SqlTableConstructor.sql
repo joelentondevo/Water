@@ -83,7 +83,7 @@ CREATE TABLE TaskExecutionLog (
 CREATE TABLE ProductOrder (
 	ID int NOT NULL IDENTITY PRIMARY KEY,
 	UserID int NOT NULL,
-	OrderDate int NOT NULL,
+	OrderDate DateTime NOT NULL,
 	OrderType int NOT NULL
 )
 
@@ -299,3 +299,11 @@ CREATE PROCEDURE p_LogTaskFailed_i
 	AS
 	INSERT INTO TaskExecutionLog (TaskID, TaskType, TaskData, TaskStatus, StartedAt, CompletedAt, Duration, ErrorMessage, DateLogCreated)
 		VALUES (@TaskID, @TaskType, @TaskData, @TaskStatus, @StartedAt, @CompletedAt, @Duration, @ErrorMessage, @DateLogCreated);
+
+CREATE PROCEDURE p_AddOrderEntry_i
+	@UserID int,
+	@OrderDate DateTime,
+	@OrderType int
+	AS
+	INSERT INTO ProductOrder (UserID, OrderDate, OrderType)
+		Values (@UserID, @OrderDate, @OrderType);

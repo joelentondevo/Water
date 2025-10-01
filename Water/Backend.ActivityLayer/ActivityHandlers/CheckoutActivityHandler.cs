@@ -29,19 +29,22 @@ namespace Backend.ActivityLayer.ActivityHandlers
 
         public void Checkout(UserDetailsEO userDetails)
         {
+            DateTime orderDate = DateTime.Now;
             List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userDetails.UserID);
-
-            //order registering logic to go here
-
             if (checkoutBasket != null)
             {
-                foreach (var item in checkoutBasket)
+                OrderMetaDataEO metaDataEO = new OrderMetaDataEO(userDetails.UserID, orderDate, 1);
+                bool orderSuccess = _orderBO.CreateOrder(metaDataEO);
+                if (orderSuccess)
                 {
-                    AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userDetails.UserID, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
-                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
+                    foreach (var item in checkoutBasket)
+                    {
+                        AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userDetails.UserID, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
+                        _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
+                    }
+                    ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, orderDate, userDetails.UserName);
+                    _correspondenceBO.RaiseReceiptTask(receiptData);
                 }
-                ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, DateTime.Now, userDetails.UserName);
-                _correspondenceBO.RaiseReceiptTask(receiptData);
             }
         }
     }

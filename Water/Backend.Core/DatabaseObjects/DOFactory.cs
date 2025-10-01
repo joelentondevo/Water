@@ -30,7 +30,10 @@ namespace Backend.Core.DatabaseObjects
         {
             return new TaskDO();
         }
-
+        public IOrderDO CreateOrderDO()
+        {
+            return new OrderDO();
+        }
     }
  }
 
