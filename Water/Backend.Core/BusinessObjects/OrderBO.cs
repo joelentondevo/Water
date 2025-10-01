@@ -20,9 +20,14 @@ namespace Backend.Core.BusinessObjects
             _orderDO = _dOFactory.CreateOrderDO();
             
         }
-        public bool CreateOrder(OrderMetaDataEO orderData)
+        public int CreateOrder(OrderMetaDataEO orderData)
         {
             return _orderDO.AddOrderEntry(orderData);
+        }
+
+        public void CreateOrderDetail(OrderDataEO orderData)
+        {
+            _orderDO.AddOrderDetailEntries(orderData);
         }
     }
 }

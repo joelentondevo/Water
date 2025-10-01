@@ -153,7 +153,6 @@
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\OrderDataEO.cs" />
-    <Compile Include="EntityObjects\OrderDetailDataEO.cs" />
     <Compile Include="EntityObjects\OrderMetaDataEO.cs" />
     <Compile Include="EntityObjects\ReceiptDataEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />

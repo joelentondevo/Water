@@ -8,13 +8,15 @@ namespace Backend.Core.EntityObjects
 {
     public class OrderDataEO
     {
-        public OrderMetaDataEO metaDataEO { get; set; }
-        public OrderDetailDataEO detailDataEO { get; set; }
+        public int OrderID { get; set; }
+        public OrderMetaDataEO MetaData { get; set; }
+        public List<BasketItemEO> OrderBasket { get; set; }
 
-        public OrderDataEO(OrderMetaDataEO metaDataEO, OrderDetailDataEO orderDetailDataEO) 
+        public OrderDataEO(int orderID, OrderMetaDataEO metaDataEO, List<BasketItemEO> basketItems) 
         { 
-            this.metaDataEO = metaDataEO; 
-            this.detailDataEO = orderDetailDataEO;
+            OrderID = orderID;
+            MetaData = metaDataEO; 
+            OrderBasket = basketItems;
         }
     }
 }

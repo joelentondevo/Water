@@ -9,6 +9,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface IOrderDO
     {
-        bool AddOrderEntry(OrderMetaDataEO orderDataEO);
+        int AddOrderEntry(OrderMetaDataEO orderDataEO);
+        bool AddOrderDetailEntries(OrderDataEO orderDataEO);
     }
 }

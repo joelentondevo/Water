@@ -305,5 +305,20 @@ CREATE PROCEDURE p_AddOrderEntry_i
 	@OrderDate DateTime,
 	@OrderType int
 	AS
+	BEGIN
 	INSERT INTO ProductOrder (UserID, OrderDate, OrderType)
 		Values (@UserID, @OrderDate, @OrderType);
+
+	SELECT * FROM ProductOrder WHERE UserID = @UserID AND OrderDate = @OrderDate AND OrderType = @OrderType
+	END
+
+CREATE PROCEDURE p_AddOrderDetailEntry_i
+	@OrderID int, 
+	@ProductID int,
+	@Price decimal,
+	@Quantity int
+	AS
+	BEGIN
+	INSERT INTO ProductOrderDetail (OrderID, ProductID, Price, Quantity)
+		VALUES (@OrderID, @ProductID, @Price, @Quantity)
+	END
