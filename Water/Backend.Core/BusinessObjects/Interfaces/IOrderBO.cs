@@ -9,6 +9,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
 {
     public interface IOrderBO
     {
-        void CreateOrder(OrderDataEO orderData);
+        int CreateOrder(OrderMetaDataEO orderData);
+        void CreateOrderDetail(OrderDataEO orderData);
     }
 }

@@ -32,7 +32,7 @@ namespace Backend.Core.BusinessObjects
         }
         public IOrderBO CreateOrderBO()
         {
-            return new OrderBO();
+            return new OrderBO(_dOFactory);
         }
         public ISecurityBO CreateSecurityBO()
         {

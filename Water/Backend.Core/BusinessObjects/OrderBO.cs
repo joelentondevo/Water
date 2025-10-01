@@ -4,15 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.DatabaseObjects.Interfaces;
 using Backend.Core.EntityObjects;
 
 namespace Backend.Core.BusinessObjects
 {
     public class OrderBO : IOrderBO
     {
-        public void CreateOrder(OrderDataEO orderData)
-        {
+        private readonly IDOFactory _dOFactory;
+        private readonly IOrderDO _orderDO;
 
+        public OrderBO(IDOFactory dOFactory)
+        {
+            _dOFactory = dOFactory;
+            _orderDO = _dOFactory.CreateOrderDO();
+            
+        }
+        public int CreateOrder(OrderMetaDataEO orderData)
+        {
+            return _orderDO.AddOrderEntry(orderData);
+        }
+
+        public void CreateOrderDetail(OrderDataEO orderData)
+        {
+            _orderDO.AddOrderDetailEntries(orderData);
         }
     }
 }
