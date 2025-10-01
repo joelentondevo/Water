@@ -20,5 +20,10 @@ namespace Backend.Core.BusinessObjects.Interfaces
 
         List<BasketItemEO> GetBasketItems(int userId);
 
+        void RaiseGenerateUserBasketTask(int userId);
+
+        void RaiseClearBasketTask(int userId);
+
+
     }
 }

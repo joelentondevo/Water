@@ -183,13 +183,18 @@ BEGIN
     END
 END;
 
-CREATE PROCEDURE p_ClearBasket_f
+CREATE PROCEDURE p_ClearUserBasket_f
 	@UserID INT
 AS
-    BEGIN
-        DELETE FROM BasketItem
-        WHERE BasketID = (SELECT ID FROM Basket WHERE UserID = @UserID)
-    END
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM BasketItem
+    WHERE BasketID IN (
+        SELECT ID FROM Basket WHERE UserID = @UserID
+    );
+END;
+
 
 CREATE PROCEDURE p_GetStoreItem_f
 	@ProductID int

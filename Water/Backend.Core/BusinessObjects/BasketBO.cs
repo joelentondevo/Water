@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.EntityObjects;
 using Backend.Core.BusinessObjects.Interfaces;
+using Backend.Core.Services.Interfaces;
 
 namespace Backend.Core.BusinessObjects
 {
@@ -14,11 +15,15 @@ namespace Backend.Core.BusinessObjects
     {
         IDOFactory _dOFactory;
         IBasketDO _basketDO;
+        IServicesFactory _servicesFactory;
+        ITaskService _taskService;
 
-        public BasketBO(IDOFactory dOFactory)
+        public BasketBO(IDOFactory dOFactory, IServicesFactory servicesFactory)
         {
             _dOFactory = dOFactory;
+            _servicesFactory = servicesFactory;
             _basketDO = _dOFactory.CreateBasketDO();
+            _taskService = _servicesFactory.CreateTaskService();
         }
         public void GenerateUserBasket(int userID)
         {
@@ -57,6 +62,20 @@ namespace Backend.Core.BusinessObjects
                 }
             }
             return list;
+        }
+
+        public void RaiseGenerateUserBasketTask(int userId)
+        {
+            string taskdata = _taskService.SerializeTaskData(userId);
+            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
+            _taskService.ScheduleTask(newTask);
+        }
+
+        public void RaiseClearBasketTask(int userId)
+        {
+            string taskdata = _taskService.SerializeTaskData(userId);
+            TaskEO newTask = new TaskEO("Basket", "ClearUserBasket", taskdata, DateTime.Now, 5);
+            _taskService.ScheduleTask(newTask);
         }
     }
 }

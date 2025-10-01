@@ -44,6 +44,7 @@ namespace Backend.ActivityLayer.ActivityHandlers
                 }
                 ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, orderDate, userDetails.UserName);
                 _correspondenceBO.RaiseReceiptTask(receiptData);
+                _basketBO.RaiseClearBasketTask(userDetails.UserID);
             }
         }
     }

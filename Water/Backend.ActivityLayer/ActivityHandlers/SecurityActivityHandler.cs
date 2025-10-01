@@ -15,15 +15,13 @@ namespace Backend.ActivityLayer.ActitvityHandlers
     public class SecurityActivityHandler : ISecurityActivityHandler
     {
         IBOFactory _BOFactory;
-        IServicesFactory _servicesFactory;
         ISecurityBO _securityBO;
-        ITaskService _taskService;
-        public SecurityActivityHandler(IBOFactory bOFactory, IServicesFactory servicesFactory)
+        IBasketBO _basketBO;
+        public SecurityActivityHandler(IBOFactory bOFactory)
         {
             _BOFactory = bOFactory;
-            _servicesFactory = servicesFactory;
             _securityBO = _BOFactory.CreateSecurityBO();
-            _taskService = _servicesFactory.CreateTaskService();
+            _basketBO = _BOFactory.CreateBasketBO();
         }
 
         public string UserLoginAttempt(string username, string password)
@@ -35,9 +33,7 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         {
             bool result =  _securityBO.AddAuthenticationDetails(username, password);
             int userID = _securityBO.GetUserIDFromAuthenticationDetails(username);
-            string taskdata = _taskService.SerializeTaskData(userID);
-            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
-            _taskService.ScheduleTask(newTask);
+            _basketBO.RaiseGenerateUserBasketTask(userID);
             return result;
         }
     }
