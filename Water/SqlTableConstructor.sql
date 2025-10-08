@@ -95,6 +95,11 @@ CREATE TABLE ProductOrderDetail(
 	Quantity int NOT NULL
 )
 
+CREATE TABLE SystemInfo(
+	ID INT PRIMARY KEY CHECK (ID = 1),
+	SystemDate Date NOT NULL
+);
+
 
 
 

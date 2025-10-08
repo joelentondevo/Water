@@ -34,6 +34,10 @@ namespace Backend.Core.DatabaseObjects
         {
             return new OrderDO();
         }
+        public ISystemDO CreateSystemDO()
+        {
+            return new SystemDO();
+        }
     }
  }
 

@@ -42,5 +42,9 @@ namespace Backend.Core.BusinessObjects
         {
             return new StoreBO(_dOFactory);
         }
+        public ISystemBO CreateSystemBO()
+        {
+            return new SystemBO(_dOFactory);
+        }
     }
 }

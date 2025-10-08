@@ -20,5 +20,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
 
         IStoreBO CreateStoreBO();
 
+        ISystemBO CreateSystemBO();
+
     }
 }
