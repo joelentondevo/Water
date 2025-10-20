@@ -16,7 +16,12 @@ namespace Backend.Core.BusinessObjects
         public SystemBO(IDOFactory dOFactory)
         {
             _dOFactory = dOFactory;
-            _systemDO = dOFactory.CreateSystemDO();
+            _systemDO = _dOFactory.CreateSystemDO();
+        }
+
+        public DateTime GetSystemDate()
+        {
+            return _systemDO.GetSystemDate();
         }
     }
 }

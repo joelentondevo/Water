@@ -332,3 +332,9 @@ CREATE PROCEDURE p_AddOrderDetailEntry_i
 	INSERT INTO ProductOrderDetail (OrderID, ProductID, Price, Quantity)
 		VALUES (@OrderID, @ProductID, @Price, @Quantity)
 	END
+
+CREATE PROCEDURE p_GetSystemInfo_f
+	AS
+	BEGIN
+	SELECT * FROM SystemInfo
+	END

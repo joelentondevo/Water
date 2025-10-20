@@ -8,5 +8,6 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 {
     public interface ISystemDO
     {
+        DateTime GetSystemDate();
     }
 }

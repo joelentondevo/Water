@@ -8,5 +8,6 @@ namespace Backend.Core.BusinessObjects.Interfaces
 {
     public interface ISystemBO
     {
+        DateTime GetSystemDate();
     }
 }
