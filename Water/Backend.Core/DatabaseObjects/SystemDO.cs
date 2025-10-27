@@ -12,9 +12,15 @@ namespace Backend.Core.DatabaseObjects
     {
         public DateTime GetSystemDate() 
         { 
-            DataSet dataSet = RunSP_DS("p_GetSystemInfo_f"); 
-            DateTime SystemDate = (DateTime)dataSet.Tables[0].Rows[0]["SystemDate"];
-            return SystemDate;
+            DataSet dataSet = RunSP_DS("p_GetSystemInfo_f");
+            if (dataSet == null)
+            {
+                throw new Exception("Null Dataset");
+            } else {
+                DateTime SystemDate = (DateTime)dataSet.Tables[0].Rows[0]["SystemDate"];
+                return SystemDate;
+            }
+            
         }
     }
 }
