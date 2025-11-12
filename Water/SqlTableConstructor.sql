@@ -95,6 +95,11 @@ CREATE TABLE ProductOrderDetail(
 	Quantity int NOT NULL
 )
 
+CREATE TABLE SystemInfo(
+	ID INT PRIMARY KEY CHECK (ID = 1),
+	SystemDate Date NOT NULL
+);
+
 
 
 
@@ -256,11 +261,13 @@ CREATE PROCEDURE p_GetNextTaskByPriority_f
 	BEGIN
 		SET NOCOUNT ON;
 		DECLARE @TaskID int
+		DECLARE @SystemDate DateTime
 	
 		BEGIN TRY
 			BEGIN TRANSACTION
+				SELECT TOP 1 @SystemDate = SystemDate FROM SystemInfo
 				SELECT TOP 1 @TaskID = ID FROM TaskQueue 
-				WHERE GETDATE() > ScheduledStart AND TaskStatus = 'Scheduled'
+				WHERE @SystemDate >= ScheduledStart AND TaskStatus = 'Scheduled'
 				ORDER BY TaskPriority DESC
 				IF @TaskID IS NOT NULL
 				BEGIN
@@ -326,4 +333,10 @@ CREATE PROCEDURE p_AddOrderDetailEntry_i
 	BEGIN
 	INSERT INTO ProductOrderDetail (OrderID, ProductID, Price, Quantity)
 		VALUES (@OrderID, @ProductID, @Price, @Quantity)
+	END
+
+CREATE PROCEDURE p_GetSystemInfo_f
+	AS
+	BEGIN
+	SELECT * FROM SystemInfo
 	END

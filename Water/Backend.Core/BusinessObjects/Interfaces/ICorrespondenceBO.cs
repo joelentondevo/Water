@@ -11,6 +11,6 @@ namespace Backend.Core.BusinessObjects.Interfaces
     {
         void GenerateReceipt(ReceiptDataEO generateRecieptEO);
 
-        void RaiseReceiptTask(ReceiptDataEO receiptDataEO);
+        void RaiseReceiptTask(ReceiptDataEO receiptDataEO, DateTime taskStart);
     }
 }

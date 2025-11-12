@@ -64,17 +64,17 @@ namespace Backend.Core.BusinessObjects
             return list;
         }
 
-        public void RaiseGenerateUserBasketTask(int userId)
+        public void RaiseGenerateUserBasketTask(int userId, DateTime taskStart)
         {
             string taskdata = _taskService.SerializeTaskData(userId);
-            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
+            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, taskStart, 5);
             _taskService.ScheduleTask(newTask);
         }
 
-        public void RaiseClearBasketTask(int userId)
+        public void RaiseClearBasketTask(int userId, DateTime taskStart)
         {
             string taskdata = _taskService.SerializeTaskData(userId);
-            TaskEO newTask = new TaskEO("Basket", "ClearUserBasket", taskdata, DateTime.Now, 5);
+            TaskEO newTask = new TaskEO("Basket", "ClearUserBasket", taskdata, taskStart, 5);
             _taskService.ScheduleTask(newTask);
         }
     }

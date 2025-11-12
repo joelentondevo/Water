@@ -13,7 +13,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
         IBasketDO CreateBasketDO();
         ILibraryDO CreateLibraryDO();
         IOrderDO CreateOrderDO();
-
         ITaskDO CreateTaskDO();
+        ISystemDO CreateSystemDO();
     }
 }

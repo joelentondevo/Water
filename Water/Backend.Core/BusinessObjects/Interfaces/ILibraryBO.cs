@@ -13,6 +13,6 @@ namespace Backend.Core.BusinessObjects.Interfaces
         bool RemoveProductFromUserLibrary(int userID, int productID);
         string GenerateProductKey(int length, int intervalLength);
         List<LibraryProductEO> GetLibraryProductsByUserId(int userID);
-        void RaiseAddProductToLibraryTask(AddProductToLibraryEO addProductToLibraryEO);
+        void RaiseAddProductToLibraryTask(AddProductToLibraryEO addProductToLibraryEO, DateTime taskStart);
     }
 }

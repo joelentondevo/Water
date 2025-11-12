@@ -47,10 +47,10 @@ namespace Backend.Core.BusinessObjects
             File.WriteAllText(fullPath, receipt.ToString());
         }
 
-        public void RaiseReceiptTask(ReceiptDataEO receiptData)
+        public void RaiseReceiptTask(ReceiptDataEO receiptData, DateTime taskStart)
         {
             string receiptTaskData = _taskService.SerializeTaskData(receiptData);
-            TaskEO receiptTask = new TaskEO("Correspondence", "GenerateOrderReceipt", receiptTaskData, DateTime.Now, 5);
+            TaskEO receiptTask = new TaskEO("Correspondence", "GenerateOrderReceipt", receiptTaskData, taskStart, 5);
             _taskService.ScheduleTask(receiptTask);
         }
     }

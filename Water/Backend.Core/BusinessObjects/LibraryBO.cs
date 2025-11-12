@@ -56,10 +56,10 @@ namespace Backend.Core.BusinessObjects
             return _libraryDO.GetLibraryProductsByUserId(userId);
         }
 
-        public void RaiseAddProductToLibraryTask(AddProductToLibraryEO addProductToLibraryEO)
+        public void RaiseAddProductToLibraryTask(AddProductToLibraryEO addProductToLibraryEO, DateTime taskStart)
         {
             string libraryTaskData = _taskService.SerializeTaskData(addProductToLibraryEO);
-            TaskEO libraryTask = new TaskEO("Library", "AddProductToLibrary", libraryTaskData, DateTime.Now, 5);
+            TaskEO libraryTask = new TaskEO("Library", "AddProductToLibrary", libraryTaskData, taskStart, 5);
             _taskService.ScheduleTask(libraryTask);
         }
     }

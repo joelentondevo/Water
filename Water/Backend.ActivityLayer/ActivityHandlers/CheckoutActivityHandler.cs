@@ -17,6 +17,7 @@ namespace Backend.ActivityLayer.ActivityHandlers
         ILibraryBO _libraryBO;
         ICorrespondenceBO _correspondenceBO;
         IOrderBO _orderBO;
+        ISystemBO _systemBO;
 
         public CheckoutActivityHandler(IBOFactory bOFactory)
         {
@@ -25,11 +26,12 @@ namespace Backend.ActivityLayer.ActivityHandlers
             _libraryBO = _bOFactory.CreateLibraryBO();
             _orderBO = _bOFactory.CreateOrderBO();
             _correspondenceBO = _bOFactory.CreateCorrespondenceBO();
+            _systemBO = _bOFactory.CreateSystemBO();
         }
 
         public void Checkout(UserDetailsEO userDetails)
         {
-            DateTime orderDate = DateTime.Now;
+            DateTime orderDate = _systemBO.GetSystemDate();
             List<BasketItemEO> checkoutBasket = _basketBO.GetBasketItems(userDetails.UserID);
             if (checkoutBasket != null)
             {
@@ -40,11 +42,11 @@ namespace Backend.ActivityLayer.ActivityHandlers
                 foreach (var item in checkoutBasket)
                 {
                     AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userDetails.UserID, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
-                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
+                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO, orderDate);
                 }
                 ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, orderDate, userDetails.UserName);
-                _correspondenceBO.RaiseReceiptTask(receiptData);
-                _basketBO.RaiseClearBasketTask(userDetails.UserID);
+                _correspondenceBO.RaiseReceiptTask(receiptData, orderDate);
+                _basketBO.RaiseClearBasketTask(userDetails.UserID, orderDate);
             }
         }
     }
