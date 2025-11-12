@@ -42,11 +42,11 @@ namespace Backend.ActivityLayer.ActivityHandlers
                 foreach (var item in checkoutBasket)
                 {
                     AddProductToLibraryEO addProductToLibraryEO = new AddProductToLibraryEO(userDetails.UserID, item.ProductListing.Id, _libraryBO.GenerateProductKey(16, 4));
-                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO);
+                    _libraryBO.RaiseAddProductToLibraryTask(addProductToLibraryEO, orderDate);
                 }
                 ReceiptDataEO receiptData = new ReceiptDataEO(checkoutBasket, orderDate, userDetails.UserName);
-                _correspondenceBO.RaiseReceiptTask(receiptData);
-                _basketBO.RaiseClearBasketTask(userDetails.UserID);
+                _correspondenceBO.RaiseReceiptTask(receiptData, orderDate);
+                _basketBO.RaiseClearBasketTask(userDetails.UserID, orderDate);
             }
         }
     }

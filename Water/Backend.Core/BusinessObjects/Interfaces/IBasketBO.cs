@@ -20,9 +20,9 @@ namespace Backend.Core.BusinessObjects.Interfaces
 
         List<BasketItemEO> GetBasketItems(int userId);
 
-        void RaiseGenerateUserBasketTask(int userId);
+        void RaiseGenerateUserBasketTask(int userId, DateTime taskStart);
 
-        void RaiseClearBasketTask(int userId);
+        void RaiseClearBasketTask(int userId, DateTime taskStart);
 
 
     }

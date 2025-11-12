@@ -261,11 +261,13 @@ CREATE PROCEDURE p_GetNextTaskByPriority_f
 	BEGIN
 		SET NOCOUNT ON;
 		DECLARE @TaskID int
+		DECLARE @SystemDate DateTime
 	
 		BEGIN TRY
 			BEGIN TRANSACTION
+				SELECT TOP 1 @SystemDate = SystemDate FROM SystemInfo
 				SELECT TOP 1 @TaskID = ID FROM TaskQueue 
-				WHERE GETDATE() > ScheduledStart AND TaskStatus = 'Scheduled'
+				WHERE @SystemDate >= ScheduledStart AND TaskStatus = 'Scheduled'
 				ORDER BY TaskPriority DESC
 				IF @TaskID IS NOT NULL
 				BEGIN
