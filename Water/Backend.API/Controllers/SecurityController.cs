@@ -35,9 +35,9 @@ namespace Backend.API.Controllers
             }
         }
         [HttpPost("RegisterUser")]
-        public IActionResult RegisterAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel) 
+        public IActionResult RegisterAuthenticationDetails(AuthenticationDetailsModel authenticationDetailsModel, int role) 
         { 
-            bool AuthenticationDetailsAdded = _securityActivityHandler.UserRegistration(authenticationDetailsModel.Username, authenticationDetailsModel.Password);
+            bool AuthenticationDetailsAdded = _securityActivityHandler.UserRegistration(authenticationDetailsModel.Username, authenticationDetailsModel.Password, role);
             if (AuthenticationDetailsAdded)
             {
                 return Ok("User registered successfully");

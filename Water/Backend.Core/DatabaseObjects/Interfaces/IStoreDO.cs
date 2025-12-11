@@ -11,5 +11,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
     {
         List<ProductListingEO> GetStoreListings();
         ProductListingEO GetProductListing(int productId);
+
+        bool AddProductListing(ProductListingEO productListing);
     }
 }

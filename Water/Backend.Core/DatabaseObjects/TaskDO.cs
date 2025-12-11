@@ -15,7 +15,7 @@ namespace Backend.Core.DatabaseObjects
     {
         public bool ScheduleTask(TaskEO task)
         {
-            return RUNSP_Bool("p_ScheduleTask_i",
+            return RunSP_Bool("p_ScheduleTask_i",
                 ("@TaskType", task.TaskType),
                 ("@TaskName", task.TaskName),
                 ("@TaskData", task.TaskData),
@@ -43,7 +43,7 @@ namespace Backend.Core.DatabaseObjects
 
         public bool UpdateTaskStatus(TaskEO task, string status)
         {
-            return RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", status));
+            return RunSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", status));
         }
 
         public bool UpdateTaskLog(TaskEO task, object executionDetails)
@@ -53,7 +53,7 @@ namespace Backend.Core.DatabaseObjects
 
         public bool MarkTaskComplete(TaskEO task, DateTime startTime, DateTime endTime)
         {
-            bool LogTask = RUNSP_Bool("p_LogTaskComplete_i",
+            bool LogTask = RunSP_Bool("p_LogTaskComplete_i",
                 ("@TaskID", task.Id),
                 ("@TaskType", task.TaskType),
                 ("@TaskData", task.TaskData),
@@ -63,7 +63,7 @@ namespace Backend.Core.DatabaseObjects
                 ("@Duration", (endTime - startTime).TotalMilliseconds),
                 ("@DateLogCreated", DateTime.Now));
 
-            bool UpdateQueueStatus = RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Completed"));
+            bool UpdateQueueStatus = RunSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Completed"));
 
             if (LogTask && UpdateQueueStatus)
             {
@@ -74,7 +74,7 @@ namespace Backend.Core.DatabaseObjects
 
         public bool MarkTaskFailed(TaskEO task, DateTime startTime, DateTime endTime, Exception ex)
         {
-            bool LogTask = RUNSP_Bool("p_LogTaskFailed_i",
+            bool LogTask = RunSP_Bool("p_LogTaskFailed_i",
                ("@TaskID", task.Id),
                ("@TaskType", task.TaskType),
                ("@TaskData", task.TaskData),
@@ -85,7 +85,7 @@ namespace Backend.Core.DatabaseObjects
                ("@ErrorMessage", ex.Message),
                ("@DateLogCreated", DateTime.Now));
 
-            bool UpdateQueueStatus = RUNSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Failed"));
+            bool UpdateQueueStatus = RunSP_Bool("p_UpdateTaskStatus_u", ("@ID", task.Id), ("@TaskStatus", "Failed"));
 
             if (LogTask && UpdateQueueStatus)
             {

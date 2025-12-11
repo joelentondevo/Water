@@ -10,6 +10,6 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
     {
         string UserLoginAttempt(string username, string password);
 
-        bool UserRegistration(string username, string password);
+        bool UserRegistration(string username, string password, int role);
     }
 }

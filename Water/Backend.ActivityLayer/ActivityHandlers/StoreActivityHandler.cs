@@ -15,11 +15,15 @@ namespace Backend.ActivityLayer.ActitvityHandlers
     {
         IStoreBO _storeBO;
         IBOFactory _bOFactory;
+        IServicesFactory _servicesFactory;
+        ITaskService _taskService;
 
-        public StoreActivityHandler(IBOFactory bOFactory)
+        public StoreActivityHandler(IBOFactory bOFactory, IServicesFactory servicesFactory, ITaskService taskService)
         {
             _bOFactory = bOFactory;
             _storeBO = _bOFactory.CreateStoreBO();
+            _servicesFactory = servicesFactory;
+            _taskService = taskService;
         }
 
         public List<ProductListingEO> GetFullProductList()
@@ -30,6 +34,11 @@ namespace Backend.ActivityLayer.ActitvityHandlers
         public ProductListingEO GetProductListing(int productId)
         {
             return _storeBO.GetProductListing(productId);
+        }
+
+        public bool AddProductListing(ProductListingEO productListing)
+        {
+              return _storeBO.AddProductListing(productListing);
         }
     }
 }

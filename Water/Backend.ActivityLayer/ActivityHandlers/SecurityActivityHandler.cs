@@ -31,13 +31,18 @@ namespace Backend.ActivityLayer.ActitvityHandlers
             return _securityBO.ValidateAuthenticationDetails(username, password);
         }
 
-        public bool UserRegistration(string username, string password)
+        public bool UserRegistration(string username, string password, int role)
         {
             bool result =  _securityBO.AddAuthenticationDetails(username, password);
-            int userID = _securityBO.GetUserIDFromAuthenticationDetails(username);
-            string taskdata = _taskService.SerializeTaskData(userID);
-            TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
-            _taskService.ScheduleTask(newTask);
+            if (result)
+            {
+                int userID = _securityBO.GetUserIDFromAuthenticationDetails(username);
+                _securityBO.AddUserRoles(userID, role);
+                string taskdata = _taskService.SerializeTaskData(userID);
+                TaskEO newTask = new TaskEO("Basket", "GenerateUserBasket", taskdata, DateTime.Now, 5);
+                _taskService.ScheduleTask(newTask);
+
+            }
             return result;
         }
     }

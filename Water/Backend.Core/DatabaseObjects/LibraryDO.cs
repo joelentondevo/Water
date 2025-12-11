@@ -14,14 +14,14 @@ namespace Backend.Core.DatabaseObjects
     {
         public bool AddProductToUserLibrary(int userID, int productID, string productKey)
         {
-            return RUNSP_Bool("p_AddProductToUser_f",
+            return RunSP_Bool("p_AddProductToUser_f",
                 ("@UserID", userID),
                 ("@ProductID", productID),
                 ("@ProductKey", productKey));
         }
         public bool RemoveProductFromUserLibrary(int userID, int productID)
         {
-            return RUNSP_Bool("p_RemoveProductFromUser_f",
+            return RunSP_Bool("p_RemoveProductFromUser_f",
                 ("@UserID", userID),
                 ("@ProductID", productID));
         }

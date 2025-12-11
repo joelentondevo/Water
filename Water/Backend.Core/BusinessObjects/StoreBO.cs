@@ -28,5 +28,10 @@ namespace Backend.Core.BusinessObjects
         {  
             return _storeDO.GetProductListing(productId);
         }
+
+        public bool AddProductListing(ProductListingEO productListing)
+        {
+            return _storeDO.AddProductListing(productListing);
+        }
     }
 }

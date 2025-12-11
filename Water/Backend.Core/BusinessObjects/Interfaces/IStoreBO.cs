@@ -12,5 +12,7 @@ namespace Backend.Core.BusinessObjects.Interfaces
         List<ProductListingEO> GetFullProductList();
 
         ProductListingEO GetProductListing(int productId);
+
+        bool AddProductListing(ProductListingEO productListing);
     }
 }

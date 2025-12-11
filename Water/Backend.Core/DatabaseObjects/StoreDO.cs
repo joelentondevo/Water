@@ -65,5 +65,14 @@ namespace Backend.Core.DatabaseObjects
             }
             return product;
         }
+
+        public bool AddProductListing(ProductListingEO productListing)
+        {
+            return RunSP_Bool("p_AddProductListing_i", 
+                ("@ProductID", productListing.Product.Id),
+                ("@Price", productListing.Price),
+                ("@StartTime", productListing.StartTime),
+                ("@EndTime", productListing.EndTime));
+        }
     }
 }

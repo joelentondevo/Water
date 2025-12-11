@@ -52,7 +52,7 @@ namespace Backend.Core.DatabaseObjects
             }
         }
 
-        public bool RUNSP_Bool(string storedProcedure, params (string, object)[] parameters)
+        public bool RunSP_Bool(string storedProcedure, params (string, object)[] parameters)
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))

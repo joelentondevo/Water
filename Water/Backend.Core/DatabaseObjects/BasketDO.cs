@@ -13,25 +13,25 @@ namespace Backend.Core.DatabaseObjects
     {
         public bool GenerateUserBasket(int userID)
         {
-            return RUNSP_Bool("p_GenerateUserBasket_f", ("@UserID", userID));
+            return RunSP_Bool("p_GenerateUserBasket_f", ("@UserID", userID));
         }
 
         public bool AddProductToBasket(int userID, int productID, int quantity)
         {
-            return RUNSP_Bool("p_AddItemToBasket_f",
+            return RunSP_Bool("p_AddItemToBasket_f",
                 ("@UserID", userID),
                 ("@ProductID", productID),
                 ("@Quantity", quantity));
         }
         public bool RemoveProductFromBasket(int userID, int productID)
         {
-            return RUNSP_Bool("p_RemoveItemFromBasket_f",
+            return RunSP_Bool("p_RemoveItemFromBasket_f",
                 ("@UserID", userID),
                 ("@ProductID", productID));
         }
         public bool ClearUserBasket(int userID)
         {
-            return RUNSP_Bool("p_ClearUserBasket_f", ("@UserID", userID));
+            return RunSP_Bool("p_ClearUserBasket_f", ("@UserID", userID));
         }
         public List<EntityObjects.BasketEntryEO> GetBasketItems(int userID)
         {

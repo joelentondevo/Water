@@ -69,5 +69,10 @@ namespace Backend.Core.BusinessObjects
             AuthenticationDetailsEO authenticationDetailsEO = _securityDO.FetchAuthenticationDetails(inputUsername);
             return authenticationDetailsEO.UserID;
         }
+
+        public bool AddUserRoles(int userID, int role)
+        {
+            return _securityDO.AddUserRoles(userID, role);
+        }
     }
 }

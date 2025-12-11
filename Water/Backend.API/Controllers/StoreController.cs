@@ -29,6 +29,19 @@ namespace Backend.API.Controllers
         {
             return _storeActivityHandler.GetFullProductList();
         }
-
+        [Authorize]
+        [HttpPost("AddProductListing")]
+        public IActionResult AddProductListing(ProductListingEO productListing)
+        {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+                if (userRole == "Admin")
+                {
+                    _storeActivityHandler.AddProductListing(productListing);
+                    return Ok("Product Added Successfully");
+                } else 
+                {
+                    return Unauthorized("User does not have correct authorisation");
+                }
+        }
     }
 }

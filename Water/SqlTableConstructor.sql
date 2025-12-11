@@ -299,3 +299,23 @@ CREATE PROCEDURE p_LogTaskFailed_i
 	AS
 	INSERT INTO TaskExecutionLog (TaskID, TaskType, TaskData, TaskStatus, StartedAt, CompletedAt, Duration, ErrorMessage, DateLogCreated)
 		VALUES (@TaskID, @TaskType, @TaskData, @TaskStatus, @StartedAt, @CompletedAt, @Duration, @ErrorMessage, @DateLogCreated);
+
+CREATE PROCEDURE p_FetchUserRoles_f
+	@Username varchar(100)
+AS
+	BEGIN
+	DECLARE @UserID int
+	SELECT TOP 1 @UserID = ID FROM UserAuthentication
+	WHERE Username = @Username
+	SELECT * from UserRole where UserID = @UserID
+	END
+
+CREATE PROCEDURE p_AddUserRoles_i
+	@UserID int,
+	@Role int
+AS
+	BEGIN
+	INSERT into UserRole (UserID, RoleID)
+		VALUES(@UserID, @Role)
+	END
+
