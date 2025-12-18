@@ -301,12 +301,9 @@ CREATE PROCEDURE p_LogTaskFailed_i
 		VALUES (@TaskID, @TaskType, @TaskData, @TaskStatus, @StartedAt, @CompletedAt, @Duration, @ErrorMessage, @DateLogCreated);
 
 CREATE PROCEDURE p_FetchUserRoles_f
-	@Username varchar(100)
+	@UserID int
 AS
 	BEGIN
-	DECLARE @UserID int
-	SELECT TOP 1 @UserID = ID FROM UserAuthentication
-	WHERE Username = @Username
 	SELECT * from UserRole where UserID = @UserID
 	END
 

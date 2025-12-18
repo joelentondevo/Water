@@ -12,7 +12,7 @@ namespace Backend.Core.Services.Interfaces
 {
     public interface IJWTService
     {
-        JwtSecurityToken GenerateJwtToken(AuthenticationDetailsEO authenticationDetails);
+        JwtSecurityToken GenerateJwtToken(AuthenticationDetailsEO authenticationDetails, int role);
 
         string SerializeJwtToken(JwtSecurityToken token);
 

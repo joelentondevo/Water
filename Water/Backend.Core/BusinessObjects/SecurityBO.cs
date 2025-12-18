@@ -39,7 +39,8 @@ namespace Backend.Core.BusinessObjects
             {
                 if(BCrypt.Net.BCrypt.Verify(inputPassword, retrievedAuthenticationDetails.Password))
                 {
-                    JwtSecurityToken jwtToken = _jwtService.GenerateJwtToken(retrievedAuthenticationDetails);
+                    int RoleID = _securityDO.FetchUserRoles(retrievedAuthenticationDetails.UserID);
+                    JwtSecurityToken jwtToken = _jwtService.GenerateJwtToken(retrievedAuthenticationDetails, RoleID);
                     string tokenString = _jwtService.SerializeJwtToken(jwtToken);
                     return tokenString;
                 }

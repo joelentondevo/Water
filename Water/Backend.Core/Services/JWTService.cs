@@ -13,18 +13,22 @@ namespace Backend.Core.Services
 {
     internal class JWTService : IJWTService
     {
-        public JwtSecurityToken GenerateJwtToken(AuthenticationDetailsEO authenticationDetails)
+        public JwtSecurityToken GenerateJwtToken(AuthenticationDetailsEO authenticationDetails, int role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("theforceisstringwithyoumastercodastringindeed"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+            string Role = "User";
+            if (role ==1)
+            {
+                Role = "Admin";
+            }
             var claims = new[]
             {
-        new Claim(ClaimTypes.Name, authenticationDetails.Username),
-        new Claim(ClaimTypes.Role, "User"),
-        new Claim(ClaimTypes.NameIdentifier, authenticationDetails.UserID.ToString()),
-        new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(60).ToString())
-    };
+                new Claim(ClaimTypes.Name, authenticationDetails.Username),
+                new Claim(ClaimTypes.Role, Role),
+                new Claim(ClaimTypes.NameIdentifier, authenticationDetails.UserID.ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(60).ToString())
+            };
 
             return new JwtSecurityToken(
                 issuer: "Water",

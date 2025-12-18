@@ -15,7 +15,7 @@ namespace Backend.Core.DatabaseObjects.Interfaces
 
         bool ChangePassword(string username, string oldPassword, string newPassword);
 
-        int FetchUserRoles(string username);
+        int FetchUserRoles(int userID);
         bool AddUserRoles(int userID, int role);
     }
 }

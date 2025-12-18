@@ -32,10 +32,10 @@ namespace Backend.Core.DatabaseObjects
             }
         }
 
-        public int FetchUserRoles(string username)
+        public int FetchUserRoles(int userID)
         {
             DataSet dataSet = RunSP_DS("p_FetchUserRoles_f",
-                ("@Username", username));
+                ("@UserID", userID));
             if (dataSet.Tables.Count == 1 && dataSet.Tables[0].Rows.Count == 1)
             {
                 int role = (int)dataSet.Tables[0].Rows[0]["Role"];
