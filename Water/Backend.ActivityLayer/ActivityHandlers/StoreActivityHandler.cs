@@ -36,6 +36,11 @@ namespace Backend.ActivityLayer.ActitvityHandlers
             return _storeBO.GetProductListing(productId);
         }
 
+        public bool AddProduct(ProductEntryEO product)
+        {
+            return _storeBO.AddProduct(product);
+        }
+
         public bool AddProductListing(ProductListingEO productListing)
         {
               return _storeBO.AddProductListing(productListing);

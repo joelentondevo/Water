@@ -8,7 +8,7 @@ namespace Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CheckoutController : Controller
+    public class CheckoutController : ControllerBase
     {
         ICheckoutActivityHandler _checkoutActivityHandler;
 

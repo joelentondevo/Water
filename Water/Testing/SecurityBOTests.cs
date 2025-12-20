@@ -1,13 +1,14 @@
-using Backend.Core.Services.Interfaces;
 using Backend.Core.BusinessObjects;
-using NUnit.Framework;
-using System;
 using Backend.Core.BusinessObjects.Interfaces;
 using Backend.Core.DatabaseObjects.Interfaces;
-using Moq;
 using Backend.Core.EntityObjects;
-using System.IdentityModel.Tokens.Jwt;
+using Backend.Core.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
+using Moq;
+using NUnit.Framework;
+using System;
+using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Testing
 {
@@ -40,10 +41,13 @@ namespace Testing
             string password = "securepassword";
             string expectedToken = "abc123";
             AuthenticationDetailsEO authDetails = new AuthenticationDetailsEO(1, username, BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12));
+            int role = 1;
 
             _mockSecurityDO.Setup(s => s.FetchAuthenticationDetails(username))
                            .Returns(authDetails);
-            _mockJWTService.Setup(j => j.GenerateJwtToken(authDetails))
+            _mockSecurityDO.Setup(s => s.FetchUserRoles(authDetails.UserID))
+                .Returns(role);
+            _mockJWTService.Setup(j => j.GenerateJwtToken(authDetails, role))
                            .Returns(new JwtSecurityToken());
             _mockJWTService.Setup(j => j.SerializeJwtToken(It.IsAny<JwtSecurityToken>()))
                .Returns(expectedToken);
@@ -65,10 +69,13 @@ namespace Testing
             string password = "securepassword";
             string expectedToken = "abc123";
             AuthenticationDetailsEO authDetails = new AuthenticationDetailsEO(1, username, BCrypt.Net.BCrypt.HashPassword("blashehas", workFactor: 12));
+            int role = 1;
 
             _mockSecurityDO.Setup(s => s.FetchAuthenticationDetails(username))
                            .Returns(authDetails);
-            _mockJWTService.Setup(j => j.GenerateJwtToken(authDetails))
+            _mockSecurityDO.Setup(s => s.FetchUserRoles(authDetails.UserID))
+                .Returns(role);
+            _mockJWTService.Setup(j => j.GenerateJwtToken(authDetails, role))
                            .Returns(new JwtSecurityToken());
             _mockJWTService.Setup(j => j.SerializeJwtToken(It.IsAny<JwtSecurityToken>()))
                .Returns(expectedToken);

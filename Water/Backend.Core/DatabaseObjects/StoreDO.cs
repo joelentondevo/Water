@@ -66,6 +66,14 @@ namespace Backend.Core.DatabaseObjects
             return product;
         }
 
+        public bool AddProduct(ProductEntryEO product)
+        {
+            return RunSP_Bool("p_AddProduct_i",
+                ("@Name", product.Name),
+                ("@Type", product.Type));
+
+        }
+
         public bool AddProductListing(ProductListingEO productListing)
         {
             return RunSP_Bool("p_AddProductListing_i", 

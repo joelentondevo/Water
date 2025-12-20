@@ -12,11 +12,7 @@ using Backend.ActivityLayer.ActivityHandlers.Interfaces;
 using Backend.ActivityLayer.ActitvityHandlers;
 using Backend.ActivityLayer.ActivityHandlers;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -33,6 +29,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
     builder.Services.AddSwaggerGen(options =>
     {
+        options.SwaggerDoc("v1", new OpenApiInfo { Title = "Backend.API", Version = "v1" });
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             Name = "Authorization",
@@ -62,8 +59,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<IDOFactory, DOFactory>();
 builder.Services.AddScoped<IBOFactory, BOFactory>();
 builder.Services.AddScoped<IServicesFactory, ServicesFactory>();
@@ -74,22 +69,14 @@ builder.Services.AddScoped<ISecurityActivityHandler, SecurityActivityHandler>();
 builder.Services.AddScoped<IStoreActivityHandler, StoreActivityHandler>();
 builder.Services.AddScoped<ICorrespondenceActivityHandler, CorrespondenceActivityHandler>();
 builder.Services.AddScoped<ITaskService, TaskService>();
-
-
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

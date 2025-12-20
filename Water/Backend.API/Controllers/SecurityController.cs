@@ -11,7 +11,7 @@ namespace Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SecurityController : Controller
+    public class SecurityController : ControllerBase
     {
         private readonly ISecurityActivityHandler _securityActivityHandler;
         public SecurityController(ISecurityActivityHandler securityActivityHandler)

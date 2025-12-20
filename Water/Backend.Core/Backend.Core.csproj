@@ -151,6 +151,7 @@
     <Compile Include="EntityObjects\BasketEntryEO.cs" />
     <Compile Include="EntityObjects\BasketItemEO.cs" />
     <Compile Include="EntityObjects\OrderDataEO.cs" />
+    <Compile Include="EntityObjects\ProductEntryEO.cs" />
     <Compile Include="EntityObjects\ReceiptDataEO.cs" />
     <Compile Include="EntityObjects\LibraryProductEO.cs" />
     <Compile Include="EntityObjects\ProductInstanceEO.cs" />

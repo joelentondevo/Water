@@ -38,7 +38,7 @@ namespace Backend.Core.DatabaseObjects
                 ("@UserID", userID));
             if (dataSet.Tables.Count == 1 && dataSet.Tables[0].Rows.Count == 1)
             {
-                int role = (int)dataSet.Tables[0].Rows[0]["Role"];
+                int role = (int)dataSet.Tables[0].Rows[0]["RoleID"];
                 return role;
             }
             else

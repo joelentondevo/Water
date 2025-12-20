@@ -6,7 +6,7 @@ namespace Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LibraryController : Controller
+    public class LibraryController : ControllerBase
     {
         private readonly ILibraryBO _libraryBO;
 

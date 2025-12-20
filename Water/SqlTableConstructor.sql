@@ -316,3 +316,12 @@ AS
 		VALUES(@UserID, @Role)
 	END
 
+CREATE PROCEDURE p_AddProduct_i
+	@Name varchar(100),
+	@Type int
+AS
+	BEGIN
+	INSERT INTO Product (ProductName, ProductType)
+	VALUES (@Name, @Type);
+	END
+

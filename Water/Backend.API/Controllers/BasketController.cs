@@ -12,7 +12,7 @@ namespace Backend.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BasketController : Controller
+    public class BasketController : ControllerBase
     {
         private readonly IBasketActivityHandler _basketActivityHandler;
 

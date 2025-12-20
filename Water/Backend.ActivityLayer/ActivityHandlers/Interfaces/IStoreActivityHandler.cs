@@ -13,6 +13,8 @@ namespace Backend.ActivityLayer.ActivityHandlers.Interfaces
 
         ProductListingEO GetProductListing(int productId);
 
+        bool AddProduct(ProductEntryEO product);
+
         bool AddProductListing(ProductListingEO productListing);
     }
 }

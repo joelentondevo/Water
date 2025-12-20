@@ -1,4 +1,5 @@
 ﻿using Backend.ActivityLayer.ActivityHandlers.Interfaces;
+using Backend.API.Models;
 using Backend.Core.EntityObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,9 @@ namespace Backend.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class StoreController : Controller
+    public class StoreController : ControllerBase
     {
         private readonly IStoreActivityHandler _storeActivityHandler;
-        private readonly ICheckoutActivityHandler _checkoutActivityHandler;
         public StoreController(IStoreActivityHandler storeActivityHandler)
         {
             _storeActivityHandler = storeActivityHandler;
@@ -29,19 +29,37 @@ namespace Backend.API.Controllers
         {
             return _storeActivityHandler.GetFullProductList();
         }
+
         [Authorize]
         [HttpPost("AddProductListing")]
-        public IActionResult AddProductListing(ProductListingEO productListing)
+        public IActionResult AddProductListing(ProductListingEO productListingToAdd)
         {
             var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
                 if (userRole == "Admin")
                 {
-                    _storeActivityHandler.AddProductListing(productListing);
-                    return Ok("Product Added Successfully");
+                    _storeActivityHandler.AddProductListing(productListingToAdd);
+                    return Ok("Product Listing Added Successfully");
                 } else 
                 {
                     return Unauthorized("User does not have correct authorisation");
                 }
+        }
+
+        [Authorize]
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct([FromBody] AddProductModel productToAdd)
+        {
+            var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+            if (userRole == "Admin")
+            {
+                ProductEntryEO product = new ProductEntryEO(productToAdd.Name, productToAdd.Type);
+                _storeActivityHandler.AddProduct(product);
+                return Ok("Product Added Successfully");
+            }
+            else
+            {
+                return Unauthorized("User does not have correct authorisation");
+            }
         }
     }
 }
